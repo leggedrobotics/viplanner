@@ -1,0 +1,13 @@
+<launch>
+    <arg name="config_depth"    default="viz_config_depth_anymal_d"/>
+    <arg name="config_rgb"      default="viz_config_rgb_anymal_d"/>
+
+    <node pkg="viplanner_viz" type="viplanner_viz_node" name="viplannerVizDepth" output="screen">
+        <rosparam command="load" file="$(find viplanner_viz)/config/$(arg config_depth).yaml"/>
+    </node>
+
+    <node pkg="viplanner_viz" type="viplanner_viz_node" name="viplannerVizRGB" output="screen">
+        <rosparam command="load" file="$(find viplanner_viz)/config/$(arg config_rgb).yaml"/>
+    </node>
+
+</launch>

@@ -1,0 +1,138 @@
+###
+# @author     Pascal Roth
+# @email      rothpa@student.ethz.ch
+#
+# @brief      Mapping mesh keywords to VIPlanner semantic classes
+###
+
+road:
+  - Road_Road
+  - Road_Marking
+  - ManholeCover
+  - roadunique
+sidewalk:
+  - Road_Sidewalk
+  - SideWalkCube
+  - Road_Grass  # pedestrian terrain (between building, squares, ...)
+crosswalk:
+  - Road_Crosswalk
+floor:
+  - Pathwalk  # way to the door of a building
+  - PathWay  # wat to the door of a building
+  - curb
+  - iron_plank
+  - Cube
+vehicle:
+  - Van
+  - Vehicle
+  - Car
+building:
+  - NewBlueprint  # roofs, windows, other parts of buildings
+  - CityBuilding
+  - Suburb
+  - House
+  - MergingBuilding
+  - BuildingWall
+  - garage
+  - airConditioner
+  - Office
+  - Block
+  - Apartment
+  - ConstructBuilding
+  - snacksStand
+  - doghouse
+  - streetCounter
+  - fountain
+  - container
+  - pergola
+  - GuardShelter
+  - atm
+  - awning
+  - bus_stop
+  - NewsStand
+  - ironplank
+  - kiosk
+wall:
+  - GardenWall
+  - Wall
+  - RepSpline  # fences or walls to limit residential areas
+  - RepeatedMeshesAlongSpline  # should make the spline go around the building --> not working in isaac
+fence:
+  - urbanFence
+  - chain_barrier
+  - picketFence
+  - fence
+pole:
+  - bollard
+  - Lamppost
+  - Parklight
+  - CityLamp
+  - Traffic_Light_Base
+traffic_sign:
+  - streetBillboard
+  - RoundSign
+  - roadsigns
+traffic_light:
+  - TLights
+  - TL_BotCover
+bench:
+  - bench
+vegetation:
+  - tree
+  - Stone
+  - Cypress
+  - PlantPot
+  - TreePot
+  - Maple
+  - Beech
+  - FanPalm
+  - Sassafras
+  - Pine_Bush
+  - Hedge
+  - Bush
+  - palm
+  - acer
+terrain:
+  - dirtDebris  # roughness in the terrain, street or sidewalk (traversable but more difficult)
+  - GrassLeaf
+  - Grass
+  - LandscapeComponent
+  - Ash
+water_surface:
+  - TileLake
+sky:
+  - terrain2
+  - sky
+dynamic:
+  - Trashbag
+  - advertise
+  - creased_box
+  - garbage
+  - trashcan
+  - clothes_line
+  - barbecue
+  - ConstructionCone
+  - box
+  - droppingasset
+  - barrel
+static:
+  - firehydrant
+  - Gnome
+  - metroMap
+  - Bikeparking
+  - StaticMesh  # gate barrier
+  - trampoline
+  - wheelbarrow
+  - NewspaperBox
+  - swing
+  - bin
+  - big_plane
+  - slide
+  - instancedfoliageactor
+  - roadbillboard
+  - prophitreacting_child  # vending machines
+furniture:
+  - Campingtable
+  - swingcouch
+  - table
+  - chair

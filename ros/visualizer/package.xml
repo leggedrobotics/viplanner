@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>viplanner_viz</name>
+  <version>1.0.0</version>
+  <description>Visualization of the Visual Imperative Planner (VIPlanner) package</description>
+
+  <maintainer email="rothpa@ethz.ch">Pascal Roth</maintainer>
+
+  <license>BSD-3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>image_transport</depend>
+  <depend>python-numpy</depend>
+  <!-- <depend>open3d_catkin</depend> -->
+  <depend>roslib</depend>
+  <depend>tf</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>rosbag</depend>
+  <depend>message_generation</depend>
+  <depend>cv_bridge</depend>
+</package>

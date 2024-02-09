@@ -1,0 +1,77 @@
+cmake_minimum_required(VERSION 3.16)
+project(viplanner_viz)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_compile_options(-O2)
+
+if(POLICY CMP0091)
+    # https://stackoverflow.com/a/56490614
+    cmake_policy(SET CMP0091 NEW)
+endif()
+
+# Color
+if(NOT WIN32)
+  string(ASCII 27 Esc)
+  set(ColourReset "${Esc}[m")
+  set(BoldMagenta "${Esc}[1;35m")
+  set(Magenta     "${Esc}[35m")
+endif()
+
+set(Open3D_DIR ENV{Open3D_DIR})
+find_package(Open3D CONFIG REQUIRED)
+message("${BoldMagenta}INFO: Found manually set path to Open3D. Using version located at $ENV{Open3D_DIR}.${ColourReset}")
+set(Open3D_INCLUDE_DIR_MAN "${Open3D_DIR}/../../../include/")
+message("Open3D include path: ${Open3D_INCLUDE_DIRS} , ${Open3D_INCLUDE_DIR_MAN}")
+message("Open3D libs: ${Open3D_LIBRARIES}")
+
+set(CATKIN_PACKAGE_DEPENDENCIES
+  # open3d_catkin
+  roscpp
+  roslib
+  std_msgs
+  image_transport
+  sensor_msgs
+  geometry_msgs
+  message_generation
+  tf
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  rosbag
+  cv_bridge
+)
+
+# Check whether open3d can be found
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(Eigen3 REQUIRED)
+find_package(OpenCV REQUIRED)
+
+find_package(catkin REQUIRED COMPONENTS
+  ${CATKIN_PACKAGE_DEPENDENCIES}
+)
+
+catkin_package(
+ INCLUDE_DIRS
+  ${Open3D_INCLUDE_DIRS}
+  ${Open3D_INCLUDE_DIR_MAN}
+ CATKIN_DEPENDS
+  ${CATKIN_PACKAGE_DEPENDENCIES}
+ LIBRARIES
+  ${Open3D_LIBRARIES}
+ DEPENDS
+  Open3D
+)
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+)
+
+message(${Open3D_LIBRARIES})
+add_executable(${PROJECT_NAME}_node src/viplannerViz.cpp)
+set_target_properties( ${PROJECT_NAME}_node PROPERTIES GLIBCXX_USE_CXX11_ABI ON)
+target_include_directories(${PROJECT_NAME}_node PUBLIC ${Open3D_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} ${OpenCV_LIBS} Open3D::Open3D)  #  ${PROJECT_NAME}

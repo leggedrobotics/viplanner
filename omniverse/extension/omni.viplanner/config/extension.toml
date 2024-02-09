@@ -1,0 +1,19 @@
+[package]
+version = "0.0.1"
+title = "ViPlanner extension"
+description="Extension containing the novel ViPlanner: Visual Semantic Imperative Learning for Local Navigation"
+authors =["Pascal Roth", "Julian Nubert", "Fan Yang", "Mayank Mittal", "Marco Hutter"]
+repository = "https://github.com/leggedrobotics/viplanner"
+category = "robotics"
+keywords = ["kit", "robotics"]
+readme  = "docs/README.md"
+
+[dependencies]
+"omni.kit.uiapp" = {}
+"omni.isaac.ui" = {}
+"omni.isaac.core" = {}
+"omni.isaac.orbit" = {}
+
+# Main python module this extension provides.
+[[python.module]]
+name = "omni.viplanner"

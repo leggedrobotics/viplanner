@@ -1,0 +1,24 @@
+<launch>
+    <arg name="config_viplanner"      default="anymal_mount"/>
+    <arg name="use_path_follow"       default="true"/>
+    <arg name="enable_visualization"  default="false"/>
+    <arg name="enable_smart_joystick" default="false"/>
+
+    <group if="$(arg use_path_follow)">
+        <include file="$(find path_follower)/launch/path_follower.launch" />
+    </group>
+
+    <group if="$(arg enable_smart_joystick)">
+        <include file="$(find ps3joy)/launch/ps3.launch" />
+    </group>
+
+    <group if="$(arg enable_visualization)">
+        <include file="$(find viplanner_viz)/launch/viplannerViz.launch" />
+    </group>
+
+    <!-- VIPlanner Node to generate waypoints using depth and semantic input information -->
+    <node pkg="viplanner_node" type="viplanner_node.py" name="viplanner_node" output="screen">
+        <rosparam command="load" file="$(find viplanner_node)/config/$(arg config_viplanner).yaml"/>
+    </node>
+
+</launch>

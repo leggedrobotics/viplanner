@@ -1,0 +1,26 @@
+<package>
+  <name>viplanner_pkgs</name>
+  <version>1.0.0</version>
+  <description>Visual Imperative Planner Packages</description>
+  <license>BSD</license>
+
+  <maintainer email="rothpa@ethz.ch">Pascal Roth</maintainer>
+  <author email="rothpa@ethz.ch">Pascal Roth</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>joy</build_depend>
+  <build_depend>ps3joy</build_depend>
+  <build_depend>path_follower</build_depend>
+  <build_depend>viplanner_node</build_depend>
+  <build_depend>viplanner_viz</build_depend>
+  <build_depend>waypoint_rviz_plugin</build_depend>
+
+  <run_depend>joy</run_depend>
+  <run_depend>ps3joy</run_depend>
+  <run_depend>path_follower</run_depend>
+  <run_depend>viplanner_node</run_depend>
+  <run_depend>viplanner_viz</run_depend>
+  <run_depend>waypoint_rviz_plugin</run_depend>
+
+</package>

@@ -1,0 +1,53 @@
+<launch>
+
+  <arg name="odomTopic" default="/state_estimator/pose_in_odom"/>
+  <arg name="commandTopic" default="/local_guidance_path_follower/twist"/>
+  <arg name="baseFrame" default="base"/>
+
+  <arg name="trackingDis" default="0.25"/>
+  <arg name="sensorOffsetX" default="0.4"/>
+  <arg name="sensorOffsetY" default="0"/>
+  <arg name="twoWayDrive" default="false"/>
+  <arg name="maxSpeed" default="1.5"/>
+  <arg name="cameraOffsetZ" default="0"/>
+  <arg name="autonomyMode" default="true"/>
+  <arg name="autonomySpeed" default="1.5"/>
+  <arg name="joyToSpeedDelay" default="2.0"/>
+  <arg name="baseInverted" default="false"/>
+
+  <node pkg="path_follower" type="path_follower_node" name="pathFollower" output="screen" required="true">
+    <param name="sensorOffsetX" value="$(arg sensorOffsetX)" />
+    <param name="sensorOffsetY" value="$(arg sensorOffsetY)" />
+    <param name="pubSkipNum" type="int" value="1" />
+    <param name="twoWayDrive" value="$(arg twoWayDrive)" />
+    <param name="lookAheadDis" type="double" value="$(arg trackingDis)" />
+    <param name="yawRateGain" type="double" value="4.0" />
+    <param name="stopYawRateGain" type="double" value="4.0" />
+    <param name="maxYawRate" type="double" value="90.0" />
+    <param name="maxSpeed" value="$(arg maxSpeed)" />
+    <param name="maxAccel" type="double" value="2.5" />
+    <param name="switchTimeThre" type="double" value="1.0" />
+    <param name="dirDiffThre" type="double" value="0.7" />  <!-- default was 0.2 -->
+    <param name="stopDisThre" type="double" value="0.4" />  <!-- default was 0.2 -->
+    <param name="slowDwnDisThre" type="double" value="0.3" />  <!-- default was 0.7 -->
+    <param name="useInclRateToSlow" type="bool" value="false" />
+    <param name="inclRateThre" type="double" value="120.0" />
+    <param name="slowRate1" type="double" value="0.25" />
+    <param name="slowRate2" type="double" value="0.5" />
+    <param name="slowTime1" type="double" value="2.0" />
+    <param name="slowTime2" type="double" value="2.0" />
+    <param name="useInclToStop" type="bool" value="false" />
+    <param name="inclThre" type="double" value="45.0" />
+    <param name="stopTime" type="double" value="5.0" />
+    <param name="noRotAtStop" type="bool" value="false" />
+    <param name="noRotAtGoal" type="bool" value="true" />
+    <param name="autonomyMode" value="$(arg autonomyMode)" />
+    <param name="autonomySpeed" value="$(arg autonomySpeed)" />
+    <param name="joyToSpeedDelay" value="$(arg joyToSpeedDelay)" />
+    <param name="odomTopic" type="string" value="$(arg odomTopic)" />
+    <param name="commandTopic" type="string" value="$(arg commandTopic)" />
+    <param name="baseFrame" value="$(arg baseFrame)" />
+    <param name="baseInverted" value="$(arg baseInverted)" />
+  </node>
+
+</launch>

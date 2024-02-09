@@ -1,0 +1,553 @@
+# Definition of where people should be added and where to which position they should walk
+# Adjusted for: TOWN01
+
+# each entry has the following format:
+# name:
+#   prim_name:    [str]                   final prim part of the person defined as /World/People/prim_name
+#   translation:  [float, float, float]   initial position of the person
+#   target:       [float, float, float]   optional, target position where the person should walk to
+#   usd_path:     [str]                   optional, path to the usd file that should be loaded for the person
+#                                         if None, "People/Characters/F_Business_02/F_Business_02.usd" will be loaded
+
+person_1:
+  prim_name: "Person_1"
+  translation: [3740.228313568127, 586.8435707315994, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_police_04/male_adult_police_04.usd
+
+person_2:
+  prim_name: "Person_2"
+  translation: [5246.217283123889, 586.843570731599, 0.0]
+  target: [0, 0, 0]
+
+person_3:
+  prim_name: "Person_3"
+  translation: [5415.460881607675, 639.5094053915548, 0.6]
+  target: [0, 0, 0]
+
+person_4:
+  prim_name: "Person_4"
+  translation: [5714.735140961697, 550.4730007356956, 0.7]
+  target: [0, 0, 0]
+
+person_5:
+  prim_name: "Person_5"
+  translation: [7078.016845824465, -568.2695538281929, 0.0]
+  target: [0, 0, 0]
+
+person_6:
+  prim_name: "Person_6"
+  translation: [8120.543989818335, -568.2695538281931, 0.0]
+  target: [0, 0, 0]
+
+person_7:
+  prim_name: "Person_7"
+  translation: [669.3401063595267, 27118.130697694694, 0.7]
+  target: [0, 0, 0]
+
+person_8:
+  prim_name: "Person_8"
+  translation: [12246.122318180935, -545.4147267796062, 0.0]
+  target: [0, 0, 0]
+
+person_9:
+  prim_name: "Person_9"
+  translation: [12454.398076588071, -165.1673637204202, 0.0]
+  target: [0, 0, 0]
+
+person_10:
+  prim_name: "Person_10"
+  translation: [12613.586036894338, 907.0320886276056, 0.]
+  target: [0, 0, 0]
+
+person_11:
+  prim_name: "Person_11"
+  translation: [13368.88728944269, 1408.606986049066, 0.9]
+  target: [0, 0, 0]
+
+person_12:
+  prim_name: "Person_12"
+  translation: [12861.687394639228, 1873.3963671243043, 0.9]
+  target: [0, 0, 0]
+
+person_13:
+  prim_name: "Person_13"
+  translation: [13352.418407603123, 2262.531599879499, 0.]
+  target: [0, 0, 0]
+
+person_14:
+  prim_name: "Person_14"
+  translation: [12589.522051888143, 2629.8556750820458, 0.2]
+  target: [0, 0, 0]
+
+person_15:
+  prim_name: "Person_15"
+  translation: [12848.62562034568, 3750.556652440331, 0.6]
+  target: [0, 0, 0]
+
+person_16:
+  prim_name: "Person_16"
+  translation: [13217.034580605141, 4308.035384643077, 0.5]
+  target: [0, 0, 0]
+
+person_17:
+  prim_name: "Person_17"
+  translation: [13792.626413019212, 5007.6197554025275, 0.9]
+  target: [0, 0, 0]
+
+person_18:
+  prim_name: "Person_18"
+  translation: [13413.62053388464, 5163.241895655993, 0.5]
+  target: [0, 0, 0]
+
+person_19:
+  prim_name: "Person_19"
+  translation: [12674.490992287037, 5588.466017703104, 0.6]
+  target: [0, 0, 0]
+
+person_20:
+  prim_name: "Person_20"
+  translation: [13022.107716879374, 6431.315030491002, 0.8]
+  target: [0, 0, 0]
+
+person_21:
+  prim_name: "Person_21"
+  translation: [13325.604194516001, 6821.7461451991085, 0.8]
+  target: [0, 0, 0]
+
+person_22:
+  prim_name: "Person_22"
+  translation: [12867.694754653112, 7059.330001453522, 0.4]
+  target: [0, 0, 0]
+
+person_23:
+  prim_name: "Person_23"
+  translation: [12645.85107322485, 7315.704436075569, 0.8]
+  target: [0, 0, 0]
+
+person_24:
+  prim_name: "Person_24"
+  translation: [12985.924188935845, 7564.827497346252, 0.2]
+  target: [0, 0, 0]
+
+person_25:
+  prim_name: "Person_25"
+  translation: [12545.791293968454, 8388.067141863512, 0.4]
+  target: [0, 0, 0]
+
+person_26:
+  prim_name: "Person_26"
+  translation: [11970.334229880405, 10064.216006417662, 0.7]
+  target: [0, 0, 0]
+
+person_27:
+  prim_name: "Person_27"
+  translation: [16455.25980024711, 8426.573650093294, 0.2]
+  target: [0, 0, 0]
+
+person_28:
+  prim_name: "Person_28"
+  translation: [19493.479542700436, 8426.573650093298, 0.2]
+  target: [0, 0, 0]
+
+person_29:
+  prim_name: "Person_29"
+  translation: [20526.827464454396, 7798.145489012485, 0.7]
+  target: [0, 0, 0]
+
+person_30:
+  prim_name: "Person_30"
+  translation: [21466.110178370192, 8248.379807773212, 0.7]
+  target: [0, 0, 0]
+
+person_31:
+  prim_name: "Person_31"
+  translation: [20492.699328867577, 10354.416282635397, 0.]
+  target: [0, 0, 0]
+
+person_32:
+  prim_name: "Person_32"
+  translation: [20586.597906936375, 11779.56415544446, 0.9]
+  target: [0, 0, 0]
+
+person_33:
+  prim_name: "Person_33"
+  translation: [20758.345724032693, 13507.94105377282, 0.]
+  target: [0, 0, 0]
+
+person_34:
+  prim_name: "Person_34"
+  translation: [18844.11145852961, 13802.294017785467, 0.3]
+  target: [0, 0, 0]
+
+person_35:
+  prim_name: "Person_35"
+  translation: [20857.845387803143, 15851.986625184061, 0.8]
+  target: [0, 0, 0]
+
+person_36:
+  prim_name: "Person_36"
+  translation: [20629.472766729676, 17882.921568668447, 0.4]
+  target: [0, 0, 0]
+
+person_37:
+  prim_name: "Person_37"
+  translation: [19005.51336634387, 18210.348243135773, 0.5]
+  target: [0, 0, 0]
+
+person_38:
+  prim_name: "Person_38"
+  translation: [23374.868579878137, 16438.840644955762, 0.5]
+  target: [0, 0, 0]
+
+person_39:
+  prim_name: "Person_39"
+  translation: [26968.844230071987, 15807.94332246256, 0.9]
+  target: [0, 0, 0]
+
+person_40:
+  prim_name: "Person_40"
+  translation: [29283.786757962414, 13816.015970719725, 0.3]
+  target: [0, 0, 0]
+
+person_41:
+  prim_name: "Person_41"
+  translation: [29283.786757962414, 17726.67919711671, 0.6]
+  target: [0, 0, 0]
+
+person_42:
+  prim_name: "Person_42"
+  translation: [29184.925736051493, 16185.80334517331, 0.]
+  target: [0, 0, 0]
+
+person_43:
+  prim_name: "Person_43"
+  translation: [27930.09977489682, 16185.803345173312, 0.]
+  target: [0, 0, 0]
+
+person_44:
+  prim_name: "Person_44"
+  translation: [27020.43586667152, 17164.04879540286, 0.9]
+  target: [0, 0, 0]
+
+person_45:
+  prim_name: "Person_45"
+  translation: [26806.54440321764, 18968.794397555444, 0.]
+  target: [0, 0, 0]
+
+person_46:
+  prim_name: "Person_46"
+  translation: [27677.42708073639, 20201.849744256044, 0.1]
+  target: [0, 0, 0]
+
+person_47:
+  prim_name: "Person_47"
+  translation: [29163.542299117173, 20201.849744256047, 0.1]
+  target: [0, 0, 0]
+
+person_48:
+  prim_name: "Person_48"
+  translation: [25767.63098586499, 21065.76414542053, 0.2]
+  target: [0, 0, 0]
+
+person_49:
+  prim_name: "Person_49"
+  translation: [25034.203438218083, 22863.653092037155, 0.3]
+  target: [0, 0, 0]
+
+person_50:
+  prim_name: "Person_50"
+  translation: [25439.504130263675, 24418.94870769878, 0.7]
+  target: [0, 0, 0]
+
+person_51:
+  prim_name: "Person_51"
+  translation: [27348.159291431577, 25579.124584965954, 0.2]
+  target: [0, 0, 0]
+
+person_52:
+  prim_name: "Person_52"
+  translation: [28959.387772557588, 24705.031440789277, 0.1]
+  target: [0, 0, 0]
+
+person_53:
+  prim_name: "Person_53"
+  translation: [31643.27629427197, 24705.031440789277, 0.1]
+  target: [0, 0, 0]
+
+person_54:
+  prim_name: "Person_54"
+  translation: [32234.44677345883, 22249.75349995971, 0.5]
+  target: [0, 0, 0]
+
+person_55:
+  prim_name: "Person_55"
+  translation: [32234.446773458832, 25423.02995967793, 0.6]
+  target: [0, 0, 0]
+
+person_56:
+  prim_name: "Person_56"
+  translation: [33435.151982953554, 27223.591260808997, 0.6]
+  target: [0, 0, 0]
+
+person_57:
+  prim_name: "Person_57"
+  translation: [33435.151982953554, 23616.846603557944, 0.6]
+  target: [0, 0, 0]
+
+person_58:
+  prim_name: "Person_58"
+  translation: [33435.151982953554, 17508.29317521096, 0.]
+  target: [0, 0, 0]
+
+person_59:
+  prim_name: "Person_59"
+  translation: [32386.4715869386, 19199.430950091366, 0.4]
+  target: [0, 0, 0]
+
+person_60:
+  prim_name: "Person_60"
+  translation: [27397.8098531043, 27598.61567839424, 0.8]
+  target: [0, 0, 0]
+
+person_61:
+  prim_name: "Person_61"
+  translation: [27215.64740847075, 28887.31213064116, 0.9]
+  target: [0, 0, 0]
+
+person_62:
+  prim_name: "Person_62"
+  translation: [27914.59251018619, 29575.446673311068, 0.3]
+  target: [0, 0, 0]
+
+person_63:
+  prim_name: "Person_63"
+  translation: [28559.611754879934, 29946.203008516477, 0.5]
+  target: [0, 0, 0]
+
+person_64:
+  prim_name: "Person_64"
+  translation: [27159.84826758545, 30664.6871971984, 0.]
+  target: [0, 0, 0]
+
+person_65:
+  prim_name: "Person_65"
+  translation: [27364.006370124185, 31488.878763581935, 0.0]
+  target: [0, 0, 0]
+
+person_66:
+  prim_name: "Person_66"
+  translation: [27364.006370124185, 33000.39972613324, 0.7]
+  target: [0, 0, 0]
+
+person_67:
+  prim_name: "Person_67"
+  translation: [30318.853757701392, 32704.242178232933, 0.4]
+  target: [0, 0, 0]
+
+person_68:
+  prim_name: "Person_68"
+  translation: [23912.230649149726, 32704.242178232944, 0.4]
+  target: [0, 0, 0]
+
+person_69:
+  prim_name: "Person_69"
+  translation: [21185.295446489567, 33118.704270787915, 0.5]
+  target: [0, 0, 0]
+
+person_70:
+  prim_name: "Person_70"
+  translation: [20958.25256311863, 30360.79199306313, 0.6]
+  target: [0, 0, 0]
+
+person_71:
+  prim_name: "Person_71"
+  translation: [20415.40938302089, 23865.487076097994, 0.]
+  target: [0, 0, 0]
+
+person_72:
+  prim_name: "Person_72"
+  translation: [20768.258224735568, 24457.860121168047, 0.7]
+  target: [0, 0, 0]
+
+person_73:
+  prim_name: "Person_73"
+  translation: [20276.9034763617, 26857.79211892222, 0.3]
+  target: [0, 0, 0]
+
+person_74:
+  prim_name: "Person_74"
+  translation: [18771.30782588506, 26857.79211892222, 0.3]
+  target: [0, 0, 0]
+
+person_75:
+  prim_name: "Person_75"
+  translation: [18771.30782588506, 29451.612371087005, 0.6]
+  target: [0, 0, 0]
+
+person_76:
+  prim_name: "Person_76"
+  translation: [19215.142194720564, 32349.983087295055, 0.2]
+  target: [0, 0, 0]
+
+person_77:
+  prim_name: "Person_77"
+  translation: [13693.71462220456, 32349.983087295055, 0.2]
+  target: [0, 0, 0]
+
+person_78:
+  prim_name: "Person_78"
+  translation: [13839.638955652783, 29943.90189726095, 0.5]
+  target: [0, 0, 0]
+
+person_79:
+  prim_name: "Person_79"
+  translation: [13839.638955652781, 26402.9290316626, 0.3]
+  target: [0, 0, 0]
+
+person_80:
+  prim_name: "Person_80"
+  translation: [12528.438232933597, 26402.929031662607, 0.3]
+  target: [0, 0, 0]
+
+person_81:
+  prim_name: "Person_81"
+  translation: [12528.438232933597, 23693.389492662598, 0.4]
+  target: [0, 0, 0]
+
+person_82:
+  prim_name: "Person_82"
+  translation: [14632.706837288715, 22818.729972244953, 0.3]
+  target: [0, 0, 0]
+
+person_83:
+  prim_name: "Person_83"
+  translation: [15522.927373719667, 22704.509900589725, 0.6]
+  target: [0, 0, 0]
+
+person_84:
+  prim_name: "Person_84"
+  translation: [16811.678329347546, 22313.725497932173, 0.4]
+  target: [0, 0, 0]
+
+person_85:
+  prim_name: "Person_85"
+  translation: [17594.423783999147, 22750.35284842414, 0.6]
+  target: [0, 0, 0]
+
+person_86:
+  prim_name: "Person_86"
+  translation: [12507.983441768796, 18737.82969853814, 0.4]
+  target: [0, 0, 0]
+
+person_87:
+  prim_name: "Person_87"
+  translation: [13702.468187382483, 16232.793598129021, 0.9]
+  target: [0, 0, 0]
+
+person_88:
+  prim_name: "Person_88"
+  translation: [13702.468187382483, 12467.78105864283, 0.3]
+  target: [0, 0, 0]
+
+person_89:
+  prim_name: "Person_89"
+  translation: [12405.19284595733, 13889.846778529223, 0.2]
+  target: [0, 0, 0]
+
+person_90:
+  prim_name: "Person_90"
+  translation: [9340.771938544503, 9756.78115441167, 0.4]
+  target: [0, 0, 0]
+
+person_91:
+  prim_name: "Person_91"
+  translation: [10686.07873701808, 8501.262543001658, 0.1]
+  target: [0, 0, 0]
+
+person_92:
+  prim_name: "Person_92"
+  translation: [5829.459928215348, 8031.938804987546, 0.2]
+  target: [0, 0, 0]
+
+person_93:
+  prim_name: "Person_93"
+  translation: [3527.334094492171, 8460.536849529562, 0.2]
+  target: [0, 0, 0]
+
+person_94:
+  prim_name: "Person_94"
+  translation: [5097.116671532964, 10872.918851535747, 0.8]
+  target: [0, 0, 0]
+
+person_95:
+  prim_name: "Person_95"
+  translation: [5217.790807492532, 13373.640330412796, 0.3]
+  target: [0, 0, 0]
+
+person_96:
+  prim_name: "Person_96"
+  translation: [6363.9988395402015, 13373.640330412796, 0.3]
+  target: [0, 0, 0]
+
+person_97:
+  prim_name: "Person_97"
+  translation: [6363.998839540203, 11613.608571085351, 0.3]
+  target: [0, 0, 0]
+
+person_98:
+  prim_name: "Person_98"
+  translation: [6363.998839540205, 20397.9692173452, 0.7]
+  target: [0, 0, 0]
+
+person_99:
+  prim_name: "Person_99"
+  translation: [5044.1103127644465, 20914.39894895205, 0.5]
+  target: [0, 0, 0]
+
+person_100:
+  prim_name: "Person_100"
+  translation: [5044.110312764447, 24788.278668184572, 0.]
+  target: [0, 0, 0]
+
+person_101:
+  prim_name: "Person_101"
+  translation: [6431.492469622843, 26239.47428713576, 0.7]
+  target: [0, 0, 0]
+
+person_102:
+  prim_name: "Person_102"
+  translation: [5124.4324559690385, 27614.946714461115, 0.8]
+  target: [0, 0, 0]
+
+person_103:
+  prim_name: "Person_103"
+  translation: [6887.443716248569, 30328.582141414503, 0.6]
+  target: [0, 0, 0]
+
+person_104:
+  prim_name: "Person_104"
+  translation: [6887.443716248573, 29338.22343903503, 0.9]
+  target: [0, 0, 0]
+
+person_105:
+  prim_name: "Person_105"
+  translation: [6887.443716248571, 18930.575403546387, 0.]
+  target: [0, 0, 0]
+
+person_106:
+  prim_name: "Person_106"
+  translation: [1511.2858517975667, 31457.703052385103, 0.1]
+  target: [0, 0, 0]
+
+person_107:
+  prim_name: "Person_107"
+  translation: [669.3401063595277, 31837.942704536705, 0.4]
+  target: [0, 0, 0]
+
+person_108:
+  prim_name: "Person_108"
+  translation: [20331.6293020427, 32278.622047147244, 0.4]
+  target: [0, 0, 0]
+
+# EoF

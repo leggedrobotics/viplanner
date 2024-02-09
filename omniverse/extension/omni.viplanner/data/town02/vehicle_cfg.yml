@@ -1,0 +1,47 @@
+# Definition of where additional vehicles should be added
+# Adjusted for: TOWN02
+
+# each entry has the following format:
+# name:
+#   prim_part:    [str]                         part of the prim of the vehicle that should be multiplied (every prim containing this string will be multiplied)
+#   translation:  [[float, float, float]]       list of translations of the vehicle
+
+# NOTE: rotations and scales applied to the mesh are not applied to the translations given here, i.e. they have to be
+#       in the original dataformat of the town file, i.e. y-up and in cm
+
+# NOTE: for Town02, take "Vh_Car_SeatLeon_54" for vehicles along the x axis
+
+town_prim: "Town02"
+
+vehicle_1:
+  prim_part: "Vh_Car_SeatLeon_54"
+  translation:
+  # horizontal road low
+    - [3900,   0,    600]
+    - [3900,   0,   3000]
+    - [3900,   0,   3500]
+    - [3900,   0,   4000]
+    - [3900,   0,   6000]
+    - [3900,   0,  -1500]
+    - [3900,   0,  -4000]
+    - [3900,   0,  -7500]
+    - [3900,   0,  -8000]
+    - [3500,   0, -10000]
+    - [3500,   0,  -7500]
+    - [3500,   0,  -3000]
+    - [3500,   0,   1000]
+    - [3500,   0,   5000]
+    # horizontal road middle
+    - [-10800, 0,   1000]
+    - [-10800, 0,   5000]
+    - [-10800, 0,  -2500]
+    # horizontal road high
+    - [-15800, 0,   2000]
+    - [-15800, 0,   4700]
+    - [-16200, 0,   3400]
+    - [-16200, 0,      0]
+    - [-16200, 0,  -3000]
+    - [-16200, 0,  -6000]
+    - [-16200, 0,  -9000]
+
+# EoF

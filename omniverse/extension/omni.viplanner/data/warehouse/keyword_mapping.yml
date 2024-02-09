@@ -1,0 +1,39 @@
+floor:
+  - SM_Floor1
+  - SM_Floor2
+  - SM_Floor3
+  - SM_Floor4
+  - SM_Floor5
+  - SM_Floor6
+  - groundplane
+
+wall:
+  - FuseBox
+  - SM_PillarA
+  - SM_Sign
+  - SM_Wall
+  - S_Barcode
+
+bench:
+  - Bench
+
+ceiling:
+  - SM_Ceiling
+  - PillarPartA
+  - SM_Beam
+  - SM_Bracket
+
+static:
+  - LampCeiling
+  - SM_FloorDecal
+  - SM_FireExtinguisher
+
+furniture:
+  - SM_Rack
+  - SM_SignCVer
+  - S_AisleSign
+  - SM_Palette
+  - SM_CardBox
+  - SmallKLT
+  - SM_PushCarta
+  - SM_CratePlastic

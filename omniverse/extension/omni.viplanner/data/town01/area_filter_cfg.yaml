@@ -1,0 +1,27 @@
+# Definition of which areas should not be explored and used to sample points
+# Adjusted for: TOWN01
+
+# each entry has the following format:
+# name:
+#   x_low:      [float]           low number of the x axis
+#   x_high:     [float]           high number of the x axis
+#   y_low:      [float]           low number of the y axis
+#   y_high:     [float]           high number of the y axis
+
+area_1:
+  x_low:  208.9
+  x_high: 317.8
+  y_low:  100.5
+  y_high: 325.5
+
+area_2:
+  x_low:  190.3
+  x_high: 315.8
+  y_low:  12.7
+  y_high: 80.6
+
+area_3:
+  x_low:  123.56
+  x_high: 139.37
+  y_low:  10
+  y_high: 80.0

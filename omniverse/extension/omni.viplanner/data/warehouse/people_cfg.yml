@@ -1,0 +1,59 @@
+person_1:
+  prim_name: "Person_1"
+  translation: [4.23985, -2.42198, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_01_new/male_adult_construction_01_new.usd
+
+person_2:
+  prim_name: "Person_2"
+  translation: [2.51653, 7.80822, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_03/male_adult_construction_03.usd
+
+person_3:
+  prim_name: "Person_3"
+  translation: [5.07179, 3.8561, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_05_new/male_adult_construction_05_new.usd
+
+person_4:
+  prim_name: "Person_4"
+  translation: [-3.2015, 11.79695, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/original_male_adult_construction_01/male_adult_construction_01.usd
+
+person_5:
+  prim_name: "Person_5"
+  translation: [-6.70566, 7.58019, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/original_male_adult_construction_02/male_adult_construction_02.usd
+
+person_6:
+  prim_name: "Person_6"
+  translation: [-5.12784, 2.43409, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/original_male_adult_construction_05/male_adult_construction_05.usd
+
+person_7:
+  prim_name: "Person_7"
+  translation: [-6.98476, -9.47249, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_01_new/male_adult_construction_01_new.usd
+
+person_8:
+  prim_name: "Person_8"
+  translation: [-1.63744, -3.43285, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_01_new/male_adult_construction_01_new.usd
+
+person_9:
+  prim_name: "Person_9"
+  translation: [6.15617, -8.3114, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/original_male_adult_construction_05/male_adult_construction_05.usd
+
+person_10:
+  prim_name: "Person_10"
+  translation: [5.34416, -7.47814, 0.0]
+  target: [0, 0, 0]
+  usd_path: People/Characters/male_adult_construction_05_new/male_adult_construction_05_new.usd

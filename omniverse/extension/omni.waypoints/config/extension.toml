@@ -1,0 +1,21 @@
+[package]
+version = "0.0.1"
+title = "Waypoint extension"
+description="Extension to extract waypoints in 3D environments."
+authors =["Pascal Roth"]
+repository = "https://gitlab-master.nvidia.com/mmittal/omni_isaac_orbit"
+category = "robotics"
+keywords = ["kit", "robotics"]
+readme  = "docs/README.md"
+
+[dependencies]
+"omni.kit.uiapp" = {}
+"omni.isaac.ui" = {}
+"omni.isaac.core" = {}
+
+# Main python module this extension provides.
+[[python.module]]
+name = "omni.isaac.waypoints"
+
+[[python.module]]
+name = "omni.isaac.waypoints.scripts"

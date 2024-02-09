@@ -1,0 +1,134 @@
+# Definition of which crosswalks should be repeated how often along which axis
+# Adjusted for: TOWN02
+
+# each entry has the following format:
+# name:
+#   cw_prim:      [str]           prim of the crosswalk in the loaded town file
+#   factor:       [int]           number how often the crosswalk should be repeated
+#   translation:  [float, float]  vector along which the crosswalk should be repeated, defines the position of the first
+#                                 repeated crosswalk, every following crosswalk will be placed at the position of the
+#                                 previous one plus the translation vector
+#   suffix:       [str]           optional, str will be added to the copied prim of the new crosswalk
+
+# NOTE: rotations and scales applied to the mesh are not applied to the translations given here, i.e. they have to be
+#       in the original dataformat of the town file, i.e. y-up and in cm
+
+town_prim: "Town02"
+
+cw_2:
+  cw_prim: "Road_Crosswalk_Town02_8"
+  factor: 4
+  translation: [+1500, 0, 0]
+
+cw_3:
+  cw_prim: "Road_Crosswalk_Town02_10"
+  factor: 2
+  translation: [-1500, 0, 0]
+
+cw_4:
+  cw_prim: "Road_Crosswalk_Town02_9"
+  factor: 4
+  translation: [+1500, 0, 0]
+  suffix: "_neg"
+
+cw_5:
+  cw_prim: "Road_Crosswalk_Town02_11"
+  factor: 4
+  translation: [1500, 0, 0]
+
+cw_6_pos:
+  cw_prim: "Road_Crosswalk_Town02_12"
+  factor: 1
+  translation: [0, 0, 1500]
+
+cw_6_neg:
+  cw_prim: "Road_Crosswalk_Town02_12"
+  factor: 2
+  translation: [0, 0, -1500]
+
+cw_7_neg:
+  cw_prim: "Road_Crosswalk_Town02_7"
+  factor: 1
+  translation: [-1500, 0, 0]
+
+cw_7_pos:
+  cw_prim: "Road_Crosswalk_Town02_7"
+  factor: 1
+  translation: [1500, 0, 0]
+
+cw_8:
+  cw_prim: "Road_Crosswalk_Town02_4"
+  factor: 2
+  translation: [1500, 0, 0]
+
+cw_9:
+  cw_prim: "Road_Crosswalk_Town02_3"
+  factor: 4
+  translation: [1500, 0, 0]
+
+cw_10:
+  cw_prim: "Road_Crosswalk_Town02_6"
+  factor: 2
+  translation: [-1500, 0, 0]
+
+cw_11_neg:
+  cw_prim: "Road_Crosswalk_Town02_1"
+  factor: 4
+  translation: [-1500, 0, 0]
+
+cw_11_pos:
+  cw_prim: "Road_Crosswalk_Town02_1"
+  factor: 2
+  translation: [+1500, 0, 0]
+
+cw_12:
+  cw_prim: "Road_Crosswalk_Town02_2"
+  factor: 4
+  translation: [-1500, 0, 0]
+
+cw_13:
+  cw_prim: "Road_Crosswalk_Town02_13"
+  factor: 2
+  translation: [0, 0, +1500]
+
+cw_14_pos:
+  cw_prim: "Road_Crosswalk_Town02_15"
+  factor: 2
+  translation: [0, 0, +1500]
+
+cw_14_neg:
+  cw_prim: "Road_Crosswalk_Town02_15"
+  factor: 1
+  translation: [0, 0, -1500]
+
+cw_15:
+  cw_prim: "Road_Crosswalk_Town02_16"
+  factor: 2
+  translation: [0, 0, -1500]
+
+cw_16_neg:
+  cw_prim: "Road_Crosswalk_Town02_17"
+  factor: 2
+  translation: [0, 0, -1500]
+
+cw_16_pos:
+  cw_prim: "Road_Crosswalk_Town02_17"
+  factor: 4
+  translation: [0, 0, +1500]
+
+cw_17_neg:
+  cw_prim: "Road_Crosswalk_Town02_19"
+  factor: 4
+  translation: [0, 0, -1500]
+
+cw_17_pos:
+  cw_prim: "Road_Crosswalk_Town02_19"
+  factor: 1
+  translation: [0, 0, +1500]
+
+cw_18:
+  cw_prim: "Road_Crosswalk_Town02_20"
+  factor: 3
+  translation: [0, 0, +1500]
+
+# EoF
