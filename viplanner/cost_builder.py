@@ -1,9 +1,9 @@
-"""
-@author     Pascal Roth
-@email      rothpa@ethz.ch
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-@brief      cost map builder for imperative learning
-"""
 # imperative-cost-map
 from viplanner.config import CostMapConfig
 from viplanner.cost_maps import CostMapPCD, SemCostMap, TsdfCostMap

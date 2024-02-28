@@ -1,9 +1,9 @@
-"""
-@author     Pascal Roth
-@email      rothpa@ethz.ch
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-@brief      Waypoint Follower using the ROS implementation of Smart Joystick of the ANYmal Software Stack
-"""
 from typing import Dict, Optional
 
 # python

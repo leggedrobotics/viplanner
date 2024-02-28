@@ -1,3 +1,9 @@
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 person_1:
   prim_name: "Person_1"
   translation: [4.23985, -2.42198, 0.0]
