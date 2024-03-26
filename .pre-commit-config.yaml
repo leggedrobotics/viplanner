@@ -48,7 +48,7 @@ repos:
     rev: v1.5.1
     hooks:
       - id: insert-license
-        files: \.(py|yml|cpp)$   # This regex includes both .py and .yml files
+        files: \.(py|yml)$   # This regex includes both .py and .yml files
         exclude: ^(ros/joystick_drivers|ros/pathFollower|ros/waypoint_rviz_plugin)/
         args:
           # - --remove-header    # Remove existing license headers. Useful when updating license.
