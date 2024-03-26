@@ -1,3 +1,9 @@
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 import omni.isaac.orbit.sim as sim_utils
 import omni.viplanner.viplanner.mdp as mdp
 from omni.isaac.matterport.config import MatterportImporterCfg

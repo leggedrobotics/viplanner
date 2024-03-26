@@ -18,11 +18,14 @@ Please refer to [Installation Instructions](./INSTALL.md) where details about th
 
 For the legged platform ANYmal, we provide configuration files for the C and D version as well as a more robot independent configuration based on a mounted RGB-D camera. The configuration files are located in the [config](./planner/config/) folder. Before running the planner, make sure to adjust the configuration file to your needs and select the correct one in the `viplanner.launch` file.
 
-Run the VIPlanner without visualization:
+After launching the ANYmal software stack, run the VIPlanner without visualization:
 
 ```bash
 roslaunch viplanner_node viplanner.launch
 ```
+
+By enabling the `WaypointTool` in RViz, you can set waypoints for the planner. The planner will track these waypoints.
+It is recommended to visualize the path and the waypoints in RViz to verify the correct behavior.
 
 ## SmartJoystick
 

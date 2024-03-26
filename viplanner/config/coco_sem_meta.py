@@ -1,3 +1,9 @@
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Modified from https://github.com/google-research/deeplab2/blob/main/data/coco_constants.py
 # File containing the meta info of all classes from the COCO dataset.
 

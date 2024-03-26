@@ -44,18 +44,27 @@ repos:
         exclude: ^ros/joystick_drivers/
         additional_dependencies:
         - tomli
-  # FIXME: Figure out why this is getting stuck under VPN.
-  # - repo: https://github.com/RobertCraigie/pyright-python
-  #   rev: v1.1.315
-  #   hooks:
-  #   - id: pyright
-  # Note: We disable this by default since not all code is compatible with it.
-  # - repo: https://github.com/Lucas-C/pre-commit-hooks
-  #   rev: v1.5.1
-  #   hooks:
-  #     - id: insert-license
-  #       files: \.py$
-  #       args:
-  #         # - --remove-header    # Remove existing license headers. Useful when updating license.
-  #         - --license-filepath
-  #         - .github/LICENSE_HEADER.txt
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.1
+    hooks:
+      - id: insert-license
+        files: \.(py|yml)$   # This regex includes both .py and .yml files
+        exclude: ^(ros/joystick_drivers|ros/pathFollower|ros/waypoint_rviz_plugin)/
+        args:
+          # - --remove-header    # Remove existing license headers. Useful when updating license.
+          - --license-filepath
+          - .github/LICENSE_HEADER.txt
+          - --use-current-year
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.1
+    hooks:
+      - id: insert-license
+        files: \.cpp$   # This regex includes both .py and .yml files
+        exclude: ^(ros/joystick_drivers|ros/pathFollower|ros/waypoint_rviz_plugin)/
+        args:
+          # - --remove-header    # Remove existing license headers. Useful when updating license.
+          - --license-filepath
+          - .github/LICENSE_HEADER.txt
+          - --use-current-year
+          - --comment-style
+          - /*| *| */
