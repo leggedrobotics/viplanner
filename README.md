@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://leggedrobotics.github.io/viplanner.github.io/">Project Page</a> •
   <a href="https://arxiv.org/abs/2310.00982">arXiv</a> •
-  <a href=" https://youtu.be/8KO4NoDw6CM">Video</a> •
+  <a href="https://youtu.be/8KO4NoDw6CM">Video</a> •
   <a href="#citing-viplanner">BibTeX</a>
 
   Click on image for demo video!
