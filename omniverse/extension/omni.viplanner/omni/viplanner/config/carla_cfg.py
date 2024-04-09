@@ -45,7 +45,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "town01", "keyword_mapping.yml"),
         people_config_file=os.path.join(DATA_DIR, "town01", "people_cfg.yml"),
         vehicle_config_file=os.path.join(DATA_DIR, "town01", "vehicle_cfg.yml"),
-        axis_up="Y",
+        axis_up="Z",
     )
 
     # robots
@@ -60,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["/World/Carla"],
+        mesh_prim_paths=["/World/GroundPlane"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights
@@ -106,7 +106,7 @@ class ViPlannerCarlaCfg(ViPlannerBaseCfg):
         """Post initialization."""
         super().__post_init__()
         # adapt viewer
-        self.viewer.eye = (133, 127.5, 8.5)
-        self.viewer.lookat = (125.5, 120, 1.0)
+        self.viewer.eye = (105, -132, 6.5)
+        self.viewer.lookat = (113.5, -132, 1.0)
         # change ANYmal position
-        self.scene.robot.init_state.pos = (125.5, 120, 1.0)
+        self.scene.robot.init_state.pos = (118.0, -126.0, 1.0)

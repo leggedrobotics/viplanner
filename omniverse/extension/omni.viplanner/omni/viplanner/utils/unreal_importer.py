@@ -121,8 +121,10 @@ class UnRealImporter(TerrainImporter):
 
         # add colliders and physics material
         if self.cfg.groundplane:
-            ground_plane_cfg = sim_utils.GroundPlaneCfg(physics_material=self.cfg.physics_material)
-            ground_plane = ground_plane_cfg.func("/World/GroundPlane", ground_plane_cfg)
+            ground_plane_cfg = sim_utils.GroundPlaneCfg(
+                physics_material=self.cfg.physics_material, size=(500, 500), visible=False
+            )
+            ground_plane = ground_plane_cfg.func("/World/GroundPlane", ground_plane_cfg, translation=(0, 0, -0.1))
             ground_plane.visible = False
 
     """ Assign Semantic Labels """

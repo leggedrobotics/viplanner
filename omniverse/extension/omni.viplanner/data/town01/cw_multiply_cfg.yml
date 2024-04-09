@@ -19,7 +19,7 @@
 # NOTE: rotations and scales applied to the mesh are not applied to the translations given here, i.e. they have to be
 #       in the original dataformat of the town file, i.e. y-up and in cm
 
-town_prim: "Town01_Opt"
+town_prim: "Town01_Opt/Town01_Opt"
 
 cw_2:
   cw_prim: "Road_Crosswalk_Town01_2"

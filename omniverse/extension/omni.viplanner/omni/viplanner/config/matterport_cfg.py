@@ -50,7 +50,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     # robots
     robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
     robot.init_state.pos = (8.0, -0.5, 0.6)
-    robot.init_state.rot = (0.5253, 0.0, 0.0, 0.8509)
+    robot.init_state.rot = (0.6126, 0.0327, 0.0136, -0.7896)
 
     # sensors
     height_scanner = MatterportRayCasterCfg(
