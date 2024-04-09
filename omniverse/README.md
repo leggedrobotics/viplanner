@@ -10,24 +10,25 @@ The extension for `Matterport` and `Unreal Engine` meshes with semantic informat
 
 ## Installation
 
-To install the ViPlanner extension for Isaac Sim, follow these steps:
+To install the ViPlanner extension for Isaac Sim version 2023.1.1, follow these steps:
 
 1. Install Isaac Sim using the [Orbit installation guide](https://isaac-orbit.github.io/orbit/source/setup/installation.html).
-2. Clone the orbit repo and link the viplanner extension.
+2. Clone the orbit repo, checkout commit `477cd6b3f` and link the viplanner extension. The specific commit is necessary as Orbit is under active development and the extension is not yet compatible with the latest version.
 
 ```
 git clone git@github.com:NVIDIA-Omniverse/orbit.git
-cd orbit/source/extensions
+cd orbit
+git checkout 477cd6b3f
+cd source/extensions
 ln -s {VIPLANNER_DIR}/omniverse/extension/omni.viplanner .
 ```
 
-3. TEMPORARY: To use Matterport and Unreal Engine Meshes with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest Orbit version. A temporary solution that is sufficient for the demo script is available [here](https://github.com/pascal-roth/orbit_envs). Please also clone and link it into orbit.
+3. TEMPORARY: To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest Orbit version. A temporary solution that is sufficient for the demo script is available [here](https://github.com/pascal-roth/orbit_envs). Please also clone and link it into orbit.
 
 ```
 git clone git@github.com:pascal-roth/orbit_envs.git
 cd orbit/source/extension
 ln -s {ORBIT_ENVS}/extensions/omni.isaac.matterport .
-ln -s {ORBIT_ENVS}/extensions/omni.isaac.carla .
 ```
 
 4. Then run the orbit installer script and additionally install ViPlanner in the Isaac Sim virtual environment.
@@ -69,6 +70,9 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 
 ### Carla
 [Download USD Link](https://drive.google.com/file/d/16OHwmEtSKBf36mh8VUpRFeHSqhbHzQgP/view?usp=sharing)  [Download Texture Link](https://drive.google.com/file/d/1jsvkObiLOwg_zoVTC4vO7JprETSHdb7N/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
+
+:warning: Due to some code changes, the semantics are here not correctly received. We are working on a fix.
+
 ```
 ./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene carla --model_dir {MODEL_DIR}
 ```

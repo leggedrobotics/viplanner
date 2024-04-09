@@ -58,10 +58,10 @@ def main():
     # create environment cfg
     if args_cli.scene == "matterport":
         env_cfg = ViPlannerMatterportCfg()
-        goal_pos = torch.tensor([7.5, -12.5, 1.0])
+        goal_pos = torch.tensor([7.0, -12.5, 1.0])
     elif args_cli.scene == "carla":
         env_cfg = ViPlannerCarlaCfg()
-        goal_pos = torch.tensor([137, 110.0, 1.0])
+        goal_pos = torch.tensor([111.0, -137.0, 1.0])
     elif args_cli.scene == "warehouse":
         env_cfg = ViPlannerWarehouseCfg()
         goal_pos = torch.tensor([3, -4.5, 1.0])
