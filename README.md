@@ -1,12 +1,13 @@
 # ViPlanner: Visual Semantic Imperative Learning for Local Navigation
 
 <p align="center">
+  <a href="https://leggedrobotics.github.io/viplanner.github.io/">Project Page</a> •
   <a href="https://arxiv.org/abs/2310.00982">arXiv</a> •
-  <a href="https://drive.google.com/file/d/1yp500O5tlA1fLLQs0z8a-WxCDsnKwDCl/view?usp=sharing">Demo Video</a> •
+  <a href=" https://youtu.be/8KO4NoDw6CM">Video</a> •
   <a href="#citing-viplanner">BibTeX</a>
 
   Click on image for demo video!
-  [![Demo Video](./assets/crosswalk.jpg)](https://drive.google.com/file/d/1yp500O5tlA1fLLQs0z8a-WxCDsnKwDCl/view?usp=sharing)
+  [![Demo Video](./assets/crosswalk.jpg)](https://youtu.be/8KO4NoDw6CM)
 
 </p>
 
