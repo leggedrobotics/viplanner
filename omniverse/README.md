@@ -69,7 +69,7 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 ```
 
 ### Carla
-[Download USD Link](https://drive.google.com/file/d/16OHwmEtSKBf36mh8VUpRFeHSqhbHzQgP/view?usp=sharing)  [Download Texture Link](https://drive.google.com/file/d/1jsvkObiLOwg_zoVTC4vO7JprETSHdb7N/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
+[Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing)
 
 
 ```
