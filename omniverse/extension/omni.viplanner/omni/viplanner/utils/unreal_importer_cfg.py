@@ -21,9 +21,9 @@ class UnRealImporterCfg(TerrainImporterCfg):
     """
 
     # scale
-    scale: float = 0.01  # 0.01  # carla: 0.01 nomoko: 1  park: 0.01 warehouse: 1.0 # scale the scene to be in meters
+    scale: float = 1.0
     # up axis
-    axis_up: str = "Z"  # carla, nomoko: "Y", park, warehouse: "Z"
+    axis_up: str = "Z"
     # multiply crosswalks
     cw_config_file: str | None = None
     # mesh to semantic class mapping --> only if set, semantic classes will be added to the scene

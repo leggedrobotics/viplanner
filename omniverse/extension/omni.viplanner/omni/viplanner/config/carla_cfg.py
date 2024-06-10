@@ -50,8 +50,6 @@ class TerrainSceneCfg(InteractiveSceneCfg):
 
     # robots
     robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
-    robot.init_state.pos = (8.0, -0.5, 0.6)
-    robot.init_state.rot = (0.5253, 0.0, 0.0, 0.8509)
 
     # sensors
     height_scanner = RayCasterCfg(
@@ -75,7 +73,10 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     depth_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base/depth_camera",
         offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
-        spawn=sim_utils.PinholeCameraCfg(),
+        spawn=sim_utils.PinholeCameraCfg(
+            focal_length=1.93,
+            horizontal_aperture=3.8,
+        ),
         width=848,
         height=480,
         data_types=["distance_to_image_plane"],
@@ -83,7 +84,10 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     semantic_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base/semantic_camera",
         offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
-        spawn=sim_utils.PinholeCameraCfg(),
+        spawn=sim_utils.PinholeCameraCfg(
+            focal_length=1.93,
+            horizontal_aperture=3.8,
+        ),
         width=1280,
         height=720,
         data_types=["semantic_segmentation"],
@@ -106,7 +110,8 @@ class ViPlannerCarlaCfg(ViPlannerBaseCfg):
         """Post initialization."""
         super().__post_init__()
         # adapt viewer
-        self.viewer.eye = (105, -132, 6.5)
-        self.viewer.lookat = (113.5, -132, 1.0)
+        self.viewer.eye = (133, 127.5, 8.5)
+        self.viewer.lookat = (125.5, 120, 1.0)
         # change ANYmal position
-        self.scene.robot.init_state.pos = (118.0, -126.0, 1.0)
+        self.scene.robot.init_state.pos = (125.5, 118.5, 1.2)
+        self.scene.robot.init_state.rot = (0.0, 0.0, 0.0, 1.0)

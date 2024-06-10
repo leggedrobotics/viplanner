@@ -105,14 +105,8 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     # camera
     depth_camera = VIPlannerMatterportRayCasterCameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base",
-        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(
-            pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)
-        ),  # FIXME: currently in ROS convention
-        pattern_cfg=patterns.PinholeCameraPatternCfg(
-            width=848,
-            height=480,
-            # intrinsics=(430.31607, 0.0, 428.28408, 0.0, 430.31607, 244.00695, 0.0, 0.0, 1.0),  # FIXME: intrinsics not supported yet
-        ),
+        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
+        pattern_cfg=patterns.PinholeCameraPatternCfg(width=848, height=480),
         debug_vis=False,
         max_distance=10,
         mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
@@ -120,14 +114,8 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     )
     semantic_camera = VIPlannerMatterportRayCasterCameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base",
-        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(
-            pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)
-        ),  # FIXME: currently in ROS convention
-        pattern_cfg=patterns.PinholeCameraPatternCfg(
-            width=1280,
-            height=720,
-            # intrinsics=(644.15496, 0.0, 639.53125, 0.0, 643.49212, 366.30880, 0.0, 0.0, 1.0),  # FIXME: intrinsics not supported yet
-        ),
+        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
+        pattern_cfg=patterns.PinholeCameraPatternCfg(width=1280, height=720),
         data_types=["semantic_segmentation"],
         debug_vis=False,
         mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],

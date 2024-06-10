@@ -35,7 +35,6 @@ app_launcher = AppLauncher(headless=args_cli.headless)
 simulation_app = app_launcher.app
 
 """Rest everything follows."""
-
 import omni.isaac.core.utils.prims as prim_utils
 import torch
 from omni.isaac.core.objects import VisualCuboid
@@ -46,6 +45,7 @@ from omni.viplanner.config import (
     ViPlannerWarehouseCfg,
 )
 from omni.viplanner.viplanner import VIPlannerAlgo
+from pxr import UsdGeom
 
 """
 Main
@@ -61,15 +61,31 @@ def main():
         goal_pos = torch.tensor([7.0, -12.5, 1.0])
     elif args_cli.scene == "carla":
         env_cfg = ViPlannerCarlaCfg()
-        goal_pos = torch.tensor([111.0, -137.0, 1.0])
+        goal_pos = torch.tensor([137, 111.0, 1.0])
     elif args_cli.scene == "warehouse":
         env_cfg = ViPlannerWarehouseCfg()
         goal_pos = torch.tensor([3, -4.5, 1.0])
     else:
         raise NotImplementedError(f"Scene {args_cli.scene} not yet supported!")
 
+    # create environment
     env = RLTaskEnv(env_cfg)
-    obs = env.reset()[0]
+
+    # adjust the intrinsics of the camera
+    depth_intrinsic = torch.tensor([[430.31607, 0.0, 428.28408], [0.0, 430.31607, 244.00695], [0.0, 0.0, 1.0]])
+    env.scene.sensors["depth_camera"].set_intrinsic_matrices(matrices=depth_intrinsic.repeat(env.num_envs, 1, 1))
+    semantic_intrinsic = torch.tensor([[644.15496, 0.0, 639.53125], [0.0, 643.49212, 366.30880], [0.0, 0.0, 1.0]])
+    env.scene.sensors["semantic_camera"].set_intrinsic_matrices(matrices=semantic_intrinsic.repeat(env.num_envs, 1, 1))
+
+    # Make sure that groundplane is invisible
+    if args_cli.scene == "carla":
+        assert (
+            prim_utils.get_prim_at_path("/World/GroundPlane").GetAttribute("visibility").Set(UsdGeom.Tokens.invisible)
+        )
+
+    # reset the environment
+    with torch.inference_mode():
+        obs = env.reset()[0]
 
     # set goal cube
     VisualCuboid(
@@ -83,7 +99,7 @@ def main():
     goal_pos = prim_utils.get_prim_at_path("/World/goal").GetAttribute("xformOp:translate")
 
     # pause the simulator
-    env.sim.pause()
+    # env.sim.pause()
 
     # load viplanner
     viplanner = VIPlannerAlgo(model_dir=args_cli.model_dir)
@@ -97,12 +113,13 @@ def main():
 
     # Simulate physics
     while simulation_app.is_running():
-        # If simulation is paused, then skip.
-        if not env.sim.is_playing():
-            env.sim.step(render=~args_cli.headless)
-            continue
+        with torch.inference_mode():
+            # If simulation is paused, then skip.
+            if not env.sim.is_playing():
+                env.sim.step(render=~args_cli.headless)
+                continue
 
-        obs = env.step(action=paths.view(paths.shape[0], -1))[0]
+            obs = env.step(action=paths.view(paths.shape[0], -1))[0]
 
         # apply planner
         goals = torch.tensor(goal_pos.Get(), device=env.device).repeat(env.num_envs, 1)
