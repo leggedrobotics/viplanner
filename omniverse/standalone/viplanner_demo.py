@@ -35,11 +35,8 @@ app_launcher = AppLauncher(headless=args_cli.headless)
 simulation_app = app_launcher.app
 
 """Rest everything follows."""
-import torch
-
-from pxr import UsdGeom
-
 import omni.isaac.core.utils.prims as prim_utils
+import torch
 from omni.isaac.core.objects import VisualCuboid
 from omni.isaac.orbit.envs import RLTaskEnv
 from omni.viplanner.config import (
@@ -48,6 +45,7 @@ from omni.viplanner.config import (
     ViPlannerWarehouseCfg,
 )
 from omni.viplanner.viplanner import VIPlannerAlgo
+from pxr import UsdGeom
 
 """
 Main
@@ -69,23 +67,21 @@ def main():
         goal_pos = torch.tensor([3, -4.5, 1.0])
     else:
         raise NotImplementedError(f"Scene {args_cli.scene} not yet supported!")
-   
+
     # create environment
     env = RLTaskEnv(env_cfg)
 
     # adjust the intrinsics of the camera
     depth_intrinsic = torch.tensor([[430.31607, 0.0, 428.28408], [0.0, 430.31607, 244.00695], [0.0, 0.0, 1.0]])
-    env.scene.sensors["depth_camera"].set_intrinsic_matrices(
-        matrices=depth_intrinsic.repeat(env.num_envs, 1, 1)
-    )
+    env.scene.sensors["depth_camera"].set_intrinsic_matrices(matrices=depth_intrinsic.repeat(env.num_envs, 1, 1))
     semantic_intrinsic = torch.tensor([[644.15496, 0.0, 639.53125], [0.0, 643.49212, 366.30880], [0.0, 0.0, 1.0]])
-    env.scene.sensors["semantic_camera"].set_intrinsic_matrices(
-        matrices=semantic_intrinsic.repeat(env.num_envs, 1, 1)
-    )
+    env.scene.sensors["semantic_camera"].set_intrinsic_matrices(matrices=semantic_intrinsic.repeat(env.num_envs, 1, 1))
 
     # Make sure that groundplane is invisible
     if args_cli.scene == "carla":
-        assert prim_utils.get_prim_at_path("/World/GroundPlane").GetAttribute('visibility').Set(UsdGeom.Tokens.invisible)
+        assert (
+            prim_utils.get_prim_at_path("/World/GroundPlane").GetAttribute("visibility").Set(UsdGeom.Tokens.invisible)
+        )
 
     # reset the environment
     with torch.inference_mode():
