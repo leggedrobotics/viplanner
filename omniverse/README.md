@@ -71,7 +71,6 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 ### Carla
 [Download USD Link](https://drive.google.com/file/d/16OHwmEtSKBf36mh8VUpRFeHSqhbHzQgP/view?usp=sharing)  [Download Texture Link](https://drive.google.com/file/d/1jsvkObiLOwg_zoVTC4vO7JprETSHdb7N/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
 
-:warning: Due to some code changes, the semantics are here not correctly received. We are working on a fix.
 
 ```
 ./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene carla --model_dir {MODEL_DIR}
