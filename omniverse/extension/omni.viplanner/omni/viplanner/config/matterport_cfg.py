@@ -15,6 +15,7 @@ from omni.isaac.orbit.managers import SceneEntityCfg
 from omni.isaac.orbit.scene import InteractiveSceneCfg
 from omni.isaac.orbit.sensors import ContactSensorCfg, patterns
 from omni.isaac.orbit.utils import configclass
+from omni.isaac.orbit_assets import ORBIT_ASSETS_DATA_DIR
 from omni.viplanner.utils import VIPlannerMatterportRayCasterCameraCfg
 
 from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
@@ -44,7 +45,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
-        obj_filepath="${USER_PATH_TO_USD}/matterport.usd",
+        obj_filepath=f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/matterport/matterport.usd",
         groundplane=True,
     )
     # robots
@@ -59,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
+        mesh_prim_paths=[f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/matterport/matterport.ply"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights
@@ -109,7 +110,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.PinholeCameraPatternCfg(width=848, height=480),
         debug_vis=False,
         max_distance=10,
-        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
+        mesh_prim_paths=[f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/matterport/matterport.ply"],
         data_types=["distance_to_image_plane"],
     )
     semantic_camera = VIPlannerMatterportRayCasterCameraCfg(
@@ -118,7 +119,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.PinholeCameraPatternCfg(width=1280, height=720),
         data_types=["semantic_segmentation"],
         debug_vis=False,
-        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
+        mesh_prim_paths=[f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/matterport/matterport.ply"],
     )
 
 
