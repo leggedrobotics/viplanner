@@ -85,3 +85,19 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 ## Data Collection and Evaluation
 
 Script for data collection and evaluation are getting updated to the latest Orbit version and will be available soon. If you are interested in the current state, please contact us.
+
+
+## Beat the Planner
+
+Beat the Planner is a game that allows users to compete against the ViPlanner. The goal is to reach the target position faster than the planner. The user can control one robot using a gamepad (e.g., a PlayStation controller connected to the computer).
+However, the player should not get access to the perspective camera view on the entire scene. Instead, the semantic and depth image of the robot are streamed out of the simulation to ROS 1. 
+The ideal setup is, therefore, to have one monitior for the ROS visualization (e.g. rviz) that the player has access to and one monitor for the simulation that the player does not see (but instead other people to see how the player performs).
+The depth image is published under the topic ``/beat_the_planner/depth_image`` and the semantic image under ``/beat_the_planner/sem_image/compressed``. 
+
+
+Before starting the game, make sure a roscore is running. Then the game is started by running the following command:
+
+```
+./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene < warehouse | carla | matterport > --model_dir {MODEL_DIR}  --beat_the_planner
+```
+
