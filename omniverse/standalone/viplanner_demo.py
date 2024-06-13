@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description="This script demonstrates how to us
 parser.add_argument("--headless", action="store_true", default=False, help="Force display off at all times.")
 parser.add_argument("--conv_distance", default=0.2, type=float, help="Distance for a goal considered to be reached.")
 parser.add_argument(
-    "--scene", default="warehouse", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
+    "--scene", default="carla", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
 )
 parser.add_argument("--beat_the_planner", default=True, action="store_true", help="Beat the planner Demo.")
 parser.add_argument("--model_dir", default="/home/pascal/Downloads", type=str, help="Path to model directory.")
@@ -58,8 +58,6 @@ from omni.viplanner.viplanner import VIPlannerAlgo
 from pxr import UsdGeom
 
 if args_cli.beat_the_planner:
-    import time
-
     import cv2
     import numpy as np
     import rospy
@@ -79,6 +77,7 @@ def main():
     if args_cli.scene == "matterport":
         env_cfg = ViPlannerMatterportCfg() if not args_cli.beat_the_planner else BeatThePlannerMatterportCfg()
         goal_pos = torch.tensor([7.0, -12.2, 1.0])
+        env_cfg.commands.vel_command.maxSpeed = 0.75
     elif args_cli.scene == "carla":
         env_cfg = ViPlannerCarlaCfg() if not args_cli.beat_the_planner else BeatThePlannerCarlaCfg()
         goal_pos = torch.tensor([137, 111.0, 1.0])
@@ -201,8 +200,6 @@ def main():
         viplanner.debug_draw(paths, fear, goals)
 
         if args_cli.beat_the_planner:
-            start_time = time.time()
-
             # overlay the goal on the image
             goal_cam_frame = (
                 goals[env_cfg.actions.paths.gamepad_controlled_robot_id]
@@ -223,33 +220,65 @@ def main():
             # mark the goal pixel
             depth_mark_pixel_range: int = 10
             sem_mark_pixel_range: int = 15
+
             sem_image = (
                 obs["planner_image"]["semantic_measurement"][env_cfg.actions.paths.gamepad_controlled_robot_id]
                 .permute(1, 2, 0)
                 .cpu()
                 .numpy()
             )
-            sem_image[
-                goal_sem_pixel_frame[1].long()
-                - sem_mark_pixel_range : goal_sem_pixel_frame[1].long()
-                + sem_mark_pixel_range,
-                goal_sem_pixel_frame[0].long()
-                - sem_mark_pixel_range : goal_sem_pixel_frame[0].long()
-                + sem_mark_pixel_range,
-            ] = [255, 0, 0]
+            range_mask_height = torch.clip(
+                torch.stack(
+                    [
+                        goal_sem_pixel_frame[1].long() - sem_mark_pixel_range,
+                        goal_sem_pixel_frame[1].long() + sem_mark_pixel_range,
+                    ]
+                ),
+                0,
+                sem_image.shape[0],
+            )
+            range_mask_width = torch.clip(
+                torch.stack(
+                    [
+                        goal_sem_pixel_frame[0].long() - sem_mark_pixel_range,
+                        goal_sem_pixel_frame[0].long() + sem_mark_pixel_range,
+                    ]
+                ),
+                0,
+                sem_image.shape[1],
+            )
+            sem_image[range_mask_height[0] : range_mask_height[1], range_mask_width[0] : range_mask_width[1]] = [
+                255,
+                0,
+                0,
+            ]
+
             depth_image = (
                 obs["planner_image"]["depth_measurement"][env_cfg.actions.paths.gamepad_controlled_robot_id, 0]
                 .cpu()
                 .numpy()
             )
-            depth_image[
-                goal_depth_pixel_frame[1].long()
-                - depth_mark_pixel_range : goal_depth_pixel_frame[1].long()
-                + depth_mark_pixel_range,
-                goal_depth_pixel_frame[0].long()
-                - depth_mark_pixel_range : goal_depth_pixel_frame[0].long()
-                + depth_mark_pixel_range,
-            ] = 0
+            range_mask_height = torch.clip(
+                torch.stack(
+                    [
+                        goal_depth_pixel_frame[1].long() - depth_mark_pixel_range,
+                        goal_depth_pixel_frame[1].long() + depth_mark_pixel_range,
+                    ]
+                ),
+                0,
+                depth_image.shape[0],
+            )
+            range_mask_width = torch.clip(
+                torch.stack(
+                    [
+                        goal_depth_pixel_frame[0].long() - depth_mark_pixel_range,
+                        goal_depth_pixel_frame[0].long() + depth_mark_pixel_range,
+                    ]
+                ),
+                0,
+                depth_image.shape[1],
+            )
+            depth_image[range_mask_height[0] : range_mask_height[1], range_mask_width[0] : range_mask_width[1]] = 0
 
             # resize the images
             sem_image = cv2.resize(sem_image, (480, 360))
@@ -271,7 +300,6 @@ def main():
             depth_image = np.uint16(depth_image * 1000)
             depth_msg = cv_bridge.cv2_to_imgmsg(depth_image, "16UC1")
             depth_pub.publish(depth_msg)
-            print(f"Publishing images took {time.time() - start_time} seconds")
 
 
 if __name__ == "__main__":
