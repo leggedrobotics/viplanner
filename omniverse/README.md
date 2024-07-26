@@ -2,7 +2,7 @@
 
 The ViPlanner Omniverse Extension offers a sophisticated testing environment for ViPlanner.
 Within NVIDIA Isaac Sim as a photorealistic simulator, this extension provides an assessment tool for ViPlanner's performance across diverse environments.
-The extension is developed using the [Orbit Framework](https://isaac-orbit.github.io/).
+The extension is developed using the [Orbit Framework](https://isaac-orbit.github.io/) that evolved into [IsaacLab](https://isaac-sim.github.io/IsaacLab/).
 
 **Remark**
 
@@ -12,18 +12,18 @@ The extension for `Matterport` and `Unreal Engine` meshes with semantic informat
 
 To install the ViPlanner extension for Isaac Sim version 2023.1.1, follow these steps:
 
-1. Install Isaac Sim using the [Orbit installation guide](https://isaac-orbit.github.io/orbit/source/setup/installation.html).
-2. Clone the orbit repo, checkout commit `477cd6b3f` and link the viplanner extension. The specific commit is necessary as Orbit is under active development and the extension is not yet compatible with the latest version.
+1. Install Isaac Sim using the [IsaacSim installation guide](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_workstation.html). Make sure to install version 2023.1.1.
+2. Clone the [IsaacLab](https://github.com/isaac-sim/IsaacLab) repo, checkout commit `477cd6b3f` to set the repo back to a previous version and link the viplanner extension. The specific commit is necessary as IsaacLab (prev. Orbit) is under active development and the extension is not compatible with the latest version.
 
 ```
-git clone git@github.com:NVIDIA-Omniverse/orbit.git
-cd orbit
+git clone git@github.com:isaac-sim/IsaacLab.git
+cd IsaacLab
 git checkout 477cd6b3f
 cd source/extensions
 ln -s {VIPLANNER_DIR}/omniverse/extension/omni.viplanner .
 ```
 
-3. TEMPORARY: To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest Orbit version. A temporary solution that is sufficient for the demo script is available [here](https://github.com/pascal-roth/orbit_envs). Please also clone and link it into orbit.
+3. To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest IsaacLab version. A solution that is sufficient for the demo script is available [here](https://github.com/pascal-roth/orbit_envs). Please also clone and link it into orbit.
 
 ```
 git clone git@github.com:pascal-roth/orbit_envs.git
@@ -39,7 +39,7 @@ ln -s {ORBIT_ENVS}/extensions/omni.isaac.matterport .
 ```
 
 **Remark**
-Also in orbit, it is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
+It is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
 - [pip >= 21.3](https://pip.pypa.io/en/stable/news/#v21-3)
 	```
   ./orbit.sh -p -m pip install --upgrade pip
@@ -69,7 +69,7 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 ```
 
 ### Carla
-[Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing)
+[Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
 
 
 ```
