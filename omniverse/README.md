@@ -12,8 +12,8 @@ The extension for `Matterport` and `Unreal Engine` meshes with semantic informat
 
 To install the ViPlanner extension for Isaac Sim version 2023.1.1, follow these steps:
 
-1. Install Isaac Sim using the [IsaacLab installation guide](https://isaac-sim.github.io/IsaacLab/source/setup/installation/binaries_installation.html) (previous Orbit). Make sure to install version 2023.1.1.
-2. Clone the IsaacLab repo, checkout commit `477cd6b3f` to set the repo back to a previous version and link the viplanner extension. The specific commit is necessary as IsaacLab (prev. Orbit) is under active development and the extension is not compatible with the latest version.
+1. Install Isaac Sim using the [IsaacSim installation guide](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_workstation.html). Make sure to install version 2023.1.1.
+2. Clone the [IsaacLab](https://github.com/isaac-sim/IsaacLab) repo, checkout commit `477cd6b3f` to set the repo back to a previous version and link the viplanner extension. The specific commit is necessary as IsaacLab (prev. Orbit) is under active development and the extension is not compatible with the latest version.
 
 ```
 git clone git@github.com:isaac-sim/IsaacLab.git
