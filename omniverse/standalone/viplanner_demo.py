@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description="This script demonstrates how to us
 parser.add_argument("--headless", action="store_true", default=False, help="Force display off at all times.")
 parser.add_argument("--conv_distance", default=0.2, type=float, help="Distance for a goal considered to be reached.")
 parser.add_argument(
-    "--scene", default="carla", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
+    "--scene", default="warehouse", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
 )
 parser.add_argument("--beat_the_planner", default=True, action="store_true", help="Beat the planner Demo.")
 parser.add_argument("--model_dir", default="/home/pascal/Downloads", type=str, help="Path to model directory.")
@@ -77,7 +77,6 @@ def main():
     if args_cli.scene == "matterport":
         env_cfg = ViPlannerMatterportCfg() if not args_cli.beat_the_planner else BeatThePlannerMatterportCfg()
         goal_pos = torch.tensor([7.0, -12.2, 1.0])
-        env_cfg.commands.vel_command.maxSpeed = 0.75
     elif args_cli.scene == "carla":
         env_cfg = ViPlannerCarlaCfg() if not args_cli.beat_the_planner else BeatThePlannerCarlaCfg()
         goal_pos = torch.tensor([137, 111.0, 1.0])

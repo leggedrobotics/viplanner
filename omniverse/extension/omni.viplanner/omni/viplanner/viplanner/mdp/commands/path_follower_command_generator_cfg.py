@@ -36,7 +36,7 @@ class PathFollowerCommandGeneratorCfg(CommandTermCfg):
     """Allow robot to use reverse gear."""
     switch_time_threshold: float = 1.0
     """Time threshold to switch between the forward and backward drive."""
-    maxSpeed: float = 1.0
+    maxSpeed: float = 0.75
     """Maximum speed of the robot."""
     maxAccel: float = 2.5 / 100.0  # 2.5 / 100
     """Maximum acceleration of the robot."""
