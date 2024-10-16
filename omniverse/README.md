@@ -12,30 +12,29 @@ The extension for `Matterport` and `Unreal Engine` meshes with semantic informat
 
 To install the ViPlanner extension for Isaac Sim version 4.2.0, follow these steps:
 
-**Now Using python in your virtual environment**
-
 1. Install Isaac Sim using the [IsaacSim installation guide](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_workstation.html). Make sure to install version 4.2.0.
 2. Clone the [IsaacLab](https://github.com/isaac-sim/IsaacLab) repo.
 
-```
-git clone git@github.com:isaac-sim/IsaacLab.git
-cd IsaacLab
-./isaaclab.sh -i
-```
+    ```
+    git clone git@github.com:isaac-sim/IsaacLab.git
+    cd IsaacLab
+    ./isaaclab.sh -i
+    ```
 
 3. To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest IsaacLab version. A solution that is sufficient for the demo script is available [here](https://github.com/fan-ziqi/isaaclab_envs). Please also clone and link it into IsaacLab.
 
-```
-git clone git@github.com:fan-ziqi/isaaclab_envs.git
-cd isaaclab_envs
-./isaaclab.sh -p -m pip install -e ./extension/omni.isaac.matterport
-```
+    ```
+    git clone git@github.com:fan-ziqi/isaaclab_envs.git
+    cd isaaclab_envs
+    ./isaaclab.sh -p -m pip install -e ./extension/omni.isaac.matterport
+    ```
 
-1. Then install ViPlanner in the Isaac Sim virtual environment.
+4. Then install ViPlanner in the Isaac Sim virtual environment.
 
-```
-./isaaclab.sh -p -m pip install -e ./omniverse/extension/omni.viplanner
-```
+    ```
+    cd viplanner
+    ./isaaclab.sh -p -m pip install -e ./omniverse/extension/omni.viplanner
+    ```
 
 **Remark**
 It is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
@@ -63,9 +62,9 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 2. Fix potential import setting such as Rotation and Scale. (`Property Panel -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`)
 3. Export the scene as USD (`File -> Save as`).
 
-```
-./isaaclab.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
-```
+    ```
+    ./isaaclab.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
+    ```
 
 ### Carla
 [Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
