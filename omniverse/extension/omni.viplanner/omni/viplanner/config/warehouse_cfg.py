@@ -41,7 +41,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
-        usd_path="files/warehouse_new.usd",
+        usd_path="${USER_PATH_TO_USD}/warehouse_new.usd",
         groundplane=True,
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "warehouse", "keyword_mapping.yml"),
         people_config_file=os.path.join(DATA_DIR, "warehouse", "people_cfg.yml"),
