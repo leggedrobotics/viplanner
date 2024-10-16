@@ -10,7 +10,7 @@ if ! command -v pre-commit &>/dev/null; then
     echo "[INFO] Installing pre-commit..."
     pip install pre-commit
 fi
-# always execute inside the Orbit directory
+# always execute inside the IsaacLab directory
 echo "[INFO] Formatting the repository..."
 cd ${VIPLANNER_PATH}
 pre-commit run --all-files

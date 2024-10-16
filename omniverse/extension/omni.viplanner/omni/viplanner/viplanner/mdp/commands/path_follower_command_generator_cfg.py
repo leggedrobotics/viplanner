@@ -9,8 +9,8 @@
 import math
 from dataclasses import MISSING
 
-from omni.isaac.orbit.managers import CommandTermCfg
-from omni.isaac.orbit.utils.configclass import configclass
+from omni.isaac.lab.managers import CommandTermCfg
+from omni.isaac.lab.utils.configclass import configclass
 from typing_extensions import Literal
 
 from .path_follower_command_generator import PathFollowerCommandGenerator

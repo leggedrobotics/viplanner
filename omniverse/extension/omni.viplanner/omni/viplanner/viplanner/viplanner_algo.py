@@ -18,7 +18,7 @@ This script demonstrates how to use the rigid objects class.
 import os
 
 import carb
-import omni.isaac.orbit.utils.math as math_utils
+import omni.isaac.lab.utils.math as math_utils
 import torch
 import torchvision.transforms as transforms
 from omni.isaac.debug_draw import _debug_draw

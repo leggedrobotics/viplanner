@@ -6,18 +6,18 @@
 
 import os
 
-import omni.isaac.orbit.sim as sim_utils
-from omni.isaac.orbit.assets import AssetBaseCfg
-from omni.isaac.orbit.scene import InteractiveSceneCfg
-from omni.isaac.orbit.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.orbit.utils import configclass
+import omni.isaac.lab.sim as sim_utils
+from omni.isaac.lab.assets import AssetBaseCfg
+from omni.isaac.lab.scene import InteractiveSceneCfg
+from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+from omni.isaac.lab.utils import configclass
 from omni.viplanner.utils import UnRealImporterCfg
 
 ##
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
+from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
 from .base_cfg import ViPlannerBaseCfg
 from ..viplanner import DATA_DIR
 
@@ -39,7 +39,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
-        usd_path="${USER_PATH_TO_USD}/carla.usd",
+        usd_path="files/carla_export/carla.usd",
         groundplane=True,
         cw_config_file=os.path.join(DATA_DIR, "town01", "cw_multiply_cfg.yml"),
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "town01", "keyword_mapping.yml"),

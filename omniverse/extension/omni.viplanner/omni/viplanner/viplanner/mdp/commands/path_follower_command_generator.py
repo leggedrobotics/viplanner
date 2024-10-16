@@ -10,17 +10,17 @@ from __future__ import annotations
 import math
 from typing import TYPE_CHECKING, Sequence
 
-import omni.isaac.orbit.utils.math as math_utils
+import omni.isaac.lab.utils.math as math_utils
 import torch
-from omni.isaac.orbit.assets.articulation import Articulation
-from omni.isaac.orbit.envs import RLTaskEnv
-from omni.isaac.orbit.managers import CommandTerm
-from omni.isaac.orbit.markers import VisualizationMarkers
-from omni.isaac.orbit.markers.config import (
+from omni.isaac.lab.assets.articulation import Articulation
+from omni.isaac.lab.envs import ManagerBasedRLEnv
+from omni.isaac.lab.managers import CommandTerm
+from omni.isaac.lab.markers import VisualizationMarkers
+from omni.isaac.lab.markers.config import (
     BLUE_ARROW_X_MARKER_CFG,
     GREEN_ARROW_X_MARKER_CFG,
 )
-from omni.isaac.orbit.sim import SimulationContext
+from omni.isaac.lab.sim import SimulationContext
 
 if TYPE_CHECKING:
     from .path_follower_command_generator_cfg import PathFollowerCommandGeneratorCfg
@@ -39,7 +39,7 @@ class PathFollowerCommandGenerator(CommandTerm):
     cfg: PathFollowerCommandGeneratorCfg
     """The configuration of the command generator."""
 
-    def __init__(self, cfg: PathFollowerCommandGeneratorCfg, env: RLTaskEnv):
+    def __init__(self, cfg: PathFollowerCommandGeneratorCfg, env: ManagerBasedRLEnv):
         """Initialize the command generator.
 
         Args:

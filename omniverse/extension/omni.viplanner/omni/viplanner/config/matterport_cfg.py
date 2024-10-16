@@ -4,17 +4,17 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import omni.isaac.orbit.sim as sim_utils
+import omni.isaac.lab.sim as sim_utils
 import omni.viplanner.viplanner.mdp as mdp
 from omni.isaac.matterport.config import MatterportImporterCfg
 from omni.isaac.matterport.domains import MatterportRayCasterCfg
-from omni.isaac.orbit.assets import AssetBaseCfg
-from omni.isaac.orbit.managers import ObservationGroupCfg as ObsGroup
-from omni.isaac.orbit.managers import ObservationTermCfg as ObsTerm
-from omni.isaac.orbit.managers import SceneEntityCfg
-from omni.isaac.orbit.scene import InteractiveSceneCfg
-from omni.isaac.orbit.sensors import ContactSensorCfg, patterns
-from omni.isaac.orbit.utils import configclass
+from omni.isaac.lab.assets import AssetBaseCfg
+from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
+from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
+from omni.isaac.lab.managers import SceneEntityCfg
+from omni.isaac.lab.scene import InteractiveSceneCfg
+from omni.isaac.lab.sensors import ContactSensorCfg, patterns
+from omni.isaac.lab.utils import configclass
 from omni.viplanner.utils import VIPlannerMatterportRayCasterCameraCfg
 
 from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
@@ -23,7 +23,7 @@ from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
+from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
 
 ##
 # Scene definition

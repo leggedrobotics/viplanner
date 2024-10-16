@@ -7,8 +7,8 @@
 import torch
 import yaml
 from omni.isaac.matterport.domains import MatterportRayCasterCamera
-from omni.isaac.orbit.sensors.ray_caster import RayCasterCameraCfg
-from omni.isaac.orbit.utils.configclass import configclass
+from omni.isaac.lab.sensors.ray_caster import RayCasterCameraCfg
+from omni.isaac.lab.utils.configclass import configclass
 from omni.viplanner.viplanner import DATA_DIR
 
 from viplanner.config.viplanner_sem_meta import VIPlannerSemMetaHandler

@@ -7,14 +7,14 @@
 import os
 
 import omni.viplanner.viplanner.mdp as mdp
-from omni.isaac.orbit.envs import RLTaskEnvCfg
-from omni.isaac.orbit.managers import ObservationGroupCfg as ObsGroup
-from omni.isaac.orbit.managers import ObservationTermCfg as ObsTerm
-from omni.isaac.orbit.managers import RandomizationTermCfg as RandTerm
-from omni.isaac.orbit.managers import SceneEntityCfg
-from omni.isaac.orbit.managers import TerminationTermCfg as DoneTerm
-from omni.isaac.orbit.utils import configclass
-from omni.isaac.orbit.utils.assets import ISAAC_ORBIT_NUCLEUS_DIR
+from omni.isaac.lab.envs import ManagerBasedRLEnvCfg
+from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
+from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
+from omni.isaac.lab.managers import EventTermCfg as EventTerm
+from omni.isaac.lab.managers import SceneEntityCfg
+from omni.isaac.lab.managers import TerminationTermCfg as DoneTerm
+from omni.isaac.lab.utils import configclass
+from omni.isaac.lab.utils.assets import ISAACLAB_NUCLEUS_DIR
 
 ##
 # MDP settings
@@ -36,7 +36,7 @@ class ActionsCfg:
         low_level_action=mdp.JointPositionActionCfg(
             asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True
         ),
-        low_level_policy_file=os.path.join(ISAAC_ORBIT_NUCLEUS_DIR, "Policies", "ANYmal-C", "policy.pt"),
+        low_level_policy_file=os.path.join(ISAACLAB_NUCLEUS_DIR, "Policies", "ANYmal-C", "Blind", "policy.pt"),
     )
 
 
@@ -114,10 +114,10 @@ class TerminationsCfg:
 
 
 @configclass
-class RandomizationCfg:
-    """Configuration for randomization."""
+class EventCfg:
+    """Configuration for events."""
 
-    reset_base = RandTerm(
+    reset_base = EventTerm(
         func=mdp.reset_root_state_uniform,
         mode="reset",
         params={
@@ -134,7 +134,7 @@ class RandomizationCfg:
         },
     )
 
-    reset_robot_joints = RandTerm(
+    reset_robot_joints = EventTerm(
         func=mdp.reset_joints_by_scale,
         mode="reset",
         params={
@@ -162,7 +162,7 @@ class CommandsCfg:
 
 
 @configclass
-class ViPlannerBaseCfg(RLTaskEnvCfg):
+class ViPlannerBaseCfg(ManagerBasedRLEnvCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Basic settings
@@ -171,7 +171,7 @@ class ViPlannerBaseCfg(RLTaskEnvCfg):
     commands: CommandsCfg = CommandsCfg()
     # managers
     terminations: TerminationsCfg = TerminationsCfg()
-    randomization: RandomizationCfg = RandomizationCfg()
+    events: EventCfg = EventCfg()
     rewards: RewardsCfg = RewardsCfg()
 
     def __post_init__(self):
