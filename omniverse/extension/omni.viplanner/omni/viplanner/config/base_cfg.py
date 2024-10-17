@@ -36,7 +36,7 @@ class ActionsCfg:
         low_level_action=mdp.JointPositionActionCfg(
             asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True
         ),
-        low_level_policy_file=os.path.join(ISAACLAB_NUCLEUS_DIR, "Policies", "ANYmal-C", "Blind", "policy.pt"),
+        low_level_policy_file=os.path.join(ISAACLAB_NUCLEUS_DIR, "Policies", "ANYmal-C", "HeightScan", "policy.pt"),
     )
 
 
