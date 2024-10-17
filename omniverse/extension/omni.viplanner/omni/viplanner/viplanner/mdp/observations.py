@@ -52,10 +52,10 @@ def isaac_camera_data(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, data_typ
 
     # return the data
     if data_type == "distance_to_image_plane":
-        output = sensor.output[data_type].clone().unsqueeze(1)
+        output = sensor.output[data_type].clone()
         output[torch.isnan(output)] = 0.0
         output[torch.isinf(output)] = 0.0
-        return output
+        return output.permute(0, 3, 1, 2)
     elif data_type == "semantic_segmentation":
         # retrieve data
         info = [sensor.info[env_id][data_type]["idToLabels"] for env_id in range(env.num_envs)]
@@ -73,14 +73,14 @@ def isaac_camera_data(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, data_typ
         ]
 
         # create recolored images
-        output = torch.zeros((*data.shape, 3), device=env.device, dtype=torch.uint8)
+        output = torch.zeros((*data.shape[:3], 3), device=env.device, dtype=torch.uint8)
 
         for env_id in range(env.num_envs):
             mapping = torch.zeros((max(info[env_id].keys()) + 1, 3), dtype=torch.uint8, device=env.device)
             mapping[list(info[env_id].keys())] = torch.tensor(
                 list(info[env_id].values()), dtype=torch.uint8, device=env.device
             )
-            output[env_id] = mapping[data[env_id].long().reshape(-1)].reshape(data.shape[1:] + (3,))
+            output[env_id] = mapping[data[env_id].long().squeeze(-1)]
 
         return output.permute(0, 3, 1, 2)
     else:
