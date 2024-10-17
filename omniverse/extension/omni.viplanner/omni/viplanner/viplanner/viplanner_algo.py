@@ -87,9 +87,9 @@ class VIPlannerAlgo:
 
         # get model and load weights
         try:
-            model_state_dict, _ = torch.load(os.path.join(model_dir, "model.pt"))
+            model_state_dict, _ = torch.load(os.path.join(model_dir, "model.pt"), weights_only=True)
         except ValueError:
-            model_state_dict = torch.load(os.path.join(model_dir, "model.pt"))
+            model_state_dict = torch.load(os.path.join(model_dir, "model.pt"), weights_only=True)
         self.net.load_state_dict(model_state_dict)
 
         # inference script = no grad for model
