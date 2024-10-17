@@ -12,7 +12,10 @@ The extension for `Matterport` and `Unreal Engine` meshes with semantic informat
 
 To install the ViPlanner extension for Isaac Sim version 4.2.0, follow these steps:
 
+**Now using a python interpreter that have Isaac Lab and Isaacsim installed**
+
 1. Install Isaac Sim using the [IsaacSim installation guide](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_workstation.html). Make sure to install version 4.2.0.
+
 2. Clone the [IsaacLab](https://github.com/isaac-sim/IsaacLab) repo.
 
     ```
@@ -26,26 +29,26 @@ To install the ViPlanner extension for Isaac Sim version 4.2.0, follow these ste
     ```
     git clone git@github.com:fan-ziqi/isaaclab_envs.git
     cd isaaclab_envs
-    ./isaaclab.sh -p -m pip install -e extension/omni.isaac.matterport
-    ./isaaclab.sh -p -m pip install -e extension/omni.isaac.carla
+    python -m pip install -e extension/omni.isaac.matterport
+    python -m pip install -e extension/omni.isaac.carla
     ```
 
 4. Then install ViPlanner in the Isaac Sim virtual environment.
 
     ```
     cd viplanner
-    ./isaaclab.sh -p -m pip install -e omniverse/extension/omni.viplanner
+    python -m pip install -e omniverse/extension/omni.viplanner
     ```
 
 **Remark**
 It is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
 - [pip >= 21.3](https://pip.pypa.io/en/stable/news/#v21-3)
 	```
-  ./isaaclab.sh -p -m pip install --upgrade pip
+  python -m pip install --upgrade pip
   ```
 - [setuptools >= 64.0.0](https://github.com/pypa/setuptools/blob/main/CHANGES.rst#v6400)
 	```
-  ./isaaclab.sh -p -m pip install --upgrade setuptools
+  python -m pip install --upgrade setuptools
   ```
 
 ## Usage
@@ -55,6 +58,8 @@ In each scenario, the goal is represented as a movable cube within the environme
 
 To run the demo, download the model: [[checkpoint](https://drive.google.com/file/d/1PY7XBkyIGESjdh1cMSiJgwwaIT0WaxIc/view?usp=sharing)] [[config](https://drive.google.com/file/d/1r1yhNQAJnjpn9-xpAQWGaQedwma5zokr/view?usp=sharing)] and the environment files. Then adjust the paths (marked as `${USER_PATH_TO_USD}`) in the corresponding config files.
 
+**The following scripts all run in root of viplanner dir**
+
 ### Matterport
 [Config](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)
 
@@ -63,22 +68,23 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 2. Fix potential import setting such as Rotation and Scale. (`Property Panel -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`)
 3. Export the scene as USD (`File -> Save as`).
 
-    ```
-    ./isaaclab.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
-    ```
+```
+python omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
+```
 
 ### Carla
 [Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
 
 
 ```
-./isaaclab.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene carla --model_dir {MODEL_DIR}
+python omniverse/standalone/viplanner_demo.py --scene carla --model_dir {MODEL_DIR}
 ```
 
 ### NVIDIA Warehouse
 [Download USD Link](https://drive.google.com/file/d/1QXxuak-1ZmgKkxhE0EGfDydApVr6LrsF/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/warehouse_cfg.py)
+
 ```
-./isaaclab.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir {MODEL_DIR}
+python omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir {MODEL_DIR}
 ```
 
 ## Data Collection and Evaluation
