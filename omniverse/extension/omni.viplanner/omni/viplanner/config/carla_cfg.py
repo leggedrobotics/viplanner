@@ -91,6 +91,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         width=1280,
         height=720,
         data_types=["semantic_segmentation"],
+        colorize_semantic_segmentation=False,
     )
 
 
