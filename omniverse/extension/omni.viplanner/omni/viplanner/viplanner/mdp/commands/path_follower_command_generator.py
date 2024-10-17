@@ -111,7 +111,7 @@ class PathFollowerCommandGenerator(CommandTerm):
         environments.
         """
         # get paths
-        paths = self._env.action_manager._terms[0]._processed_navigation_velocity_actions.clone()
+        paths = self._env.action_manager._terms["paths"]._processed_navigation_velocity_actions.clone()
         # get number of pases of the paths
         num_envs, N, _ = paths.shape
         assert N > 0, "PathFollowerCommandGenerator: paths must have at least one poses."
