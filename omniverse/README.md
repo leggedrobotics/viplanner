@@ -64,9 +64,12 @@ To run the demo, download the model: [[checkpoint](https://drive.google.com/file
 [Config](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)
 
 To download Matterport datasets, please refer to the [Matterport3D](https://niessner.github.io/Matterport/) website. The dataset should be converted to USD format using Isaac Sim by executing the following steps:
-1. Import the `.obj` file (located under `matterport_mesh`) into Isaac Sim by going to `File -> Import`.
-2. Fix potential import setting such as Rotation and Scale. (`Property Panel -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`)
-3. Export the scene as USD (`File -> Save as`).
+1. Run the `convert_mesh.py` script to convert the `.obj` file (located under `matterport_mesh`) to `USD`.
+   ```
+   # run the converter
+   python IsaacLab/source/standalone/tools/convert_mesh.py matterport_mesh/xxx.obj matterport_mesh/xxx.usd --make-instanceable --collision-approximation convexDecomposition
+   ```
+2. Fix potential import setting such as Rotation and Scale. (`Property -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`) and then save the USD.
 
 ```
 python omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
