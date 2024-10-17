@@ -26,14 +26,15 @@ To install the ViPlanner extension for Isaac Sim version 4.2.0, follow these ste
     ```
     git clone git@github.com:fan-ziqi/isaaclab_envs.git
     cd isaaclab_envs
-    ./isaaclab.sh -p -m pip install -e ./extension/omni.isaac.matterport
+    ./isaaclab.sh -p -m pip install -e extension/omni.isaac.matterport
+    ./isaaclab.sh -p -m pip install -e extension/omni.isaac.carla
     ```
 
 4. Then install ViPlanner in the Isaac Sim virtual environment.
 
     ```
     cd viplanner
-    ./isaaclab.sh -p -m pip install -e ./omniverse/extension/omni.viplanner
+    ./isaaclab.sh -p -m pip install -e omniverse/extension/omni.viplanner
     ```
 
 **Remark**
