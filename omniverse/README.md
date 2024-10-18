@@ -6,7 +6,7 @@ The extension is developed using the [IsaacLab](https://isaac-sim.github.io/Isaa
 
 **Remark**
 
-The extension for `Matterport` and `Unreal Engine` meshes with semantic information is currently getting updated to the latest IsaacLab version and will be available soon. An intermediate solution is given [here](https://github.com/fan-ziqi/isaaclab_envs).
+The extension for `Matterport` and `Unreal Engine` meshes with semantic information is currently getting updated to the latest IsaacLab version and will be available soon. An intermediate solution is given [here](https://github.com/fan-ziqi/viplanner_isaaclab_exts).
 
 ## Installation
 
@@ -24,11 +24,11 @@ To install the ViPlanner extension for Isaac Sim version 4.2.0, follow these ste
     ./isaaclab.sh -i
     ```
 
-3. To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest IsaacLab version. A solution that is sufficient for the demo script is available [here](https://github.com/fan-ziqi/isaaclab_envs). Please also clone and link it into IsaacLab.
+3. To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest IsaacLab version. A solution that is sufficient for the demo script is available [here](https://github.com/fan-ziqi/viplanner_isaaclab_exts). Please also clone and link it into IsaacLab.
 
     ```
-    git clone git@github.com:fan-ziqi/isaaclab_envs.git
-    cd isaaclab_envs
+    git clone git@github.com:fan-ziqi/viplanner_isaaclab_exts.git
+    cd viplanner_isaaclab_exts
     python -m pip install -e extension/omni.isaac.matterport
     python -m pip install -e extension/omni.isaac.carla
     ```
