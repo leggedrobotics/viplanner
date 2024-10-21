@@ -80,6 +80,9 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
    ./isaaclab.sh -p source/standalone/tools/convert_mesh.py matterport_mesh/xxx.obj matterport_mesh/xxx.usd --make-instanceable --collision-approximation convexDecomposition
    ```
 2. Fix potential import setting such as Rotation and Scale. (`Property -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`) and then save the USD.
+3. Check that the converted mesh has colliders enabled. This can be done by starting IsaacSim (`./isaaclab.sh -s`), importing the converted usd mesh and visualizing the colliders (go to the "eye" symbol in the 
+top left corner, select `Show by Type -> Physics -> Colliders` and set the value to `All` ). The colliders should be visible as pink linkes. In the case that no colliders are presented, select the mesh in the stage,
+go the `Property` section and click `Add -> Physics -> Colliders Preset`. Then save the asset. 
 
 The demo uses the **2n8kARJN3HM** scene from the Matterport dataset. A preview is available [here](https://aspis.cmpt.sfu.ca/scene-toolkit/scans/matterport3d/houses).
 
