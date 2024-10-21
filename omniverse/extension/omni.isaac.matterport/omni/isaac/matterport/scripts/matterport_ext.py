@@ -22,7 +22,7 @@ import omni.isaac.core.utils.stage as stage_utils
 
 # isaac-core
 import omni.ui as ui
-from omni.isaac.lab.sensors.ray_caster import RayCasterCfg, patterns
+from omni.isaac.lab.sensors.ray_caster import RayCasterCameraCfg, patterns
 from omni.isaac.lab.sim import SimulationCfg, SimulationContext
 from omni.isaac.matterport.domains import MatterportImporter
 
@@ -448,15 +448,15 @@ class MatterPortExtension(omni.ext.IExt):
             horizontal_aperture=20.955,
             height=camera_height,
             width=camera_width,
-            data_types=data_types,
         )
-        camera_cfg = RayCasterCfg(
+        camera_cfg = RayCasterCameraCfg(
             prim_path=camera_path,
             mesh_prim_paths=[ply_filepath],
             update_period=0,
-            offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.0), rot=(1.0, 0.0, 0.0, 0.0)),
+            offset=RayCasterCameraCfg.OffsetCfg(pos=(0.0, 0.0, 0.0), rot=(1.0, 0.0, 0.0, 0.0)),
             debug_vis=True,
             pattern_cfg=camera_pattern_cfg,
+            data_types=data_types,
         )
 
         if self.domains is None:

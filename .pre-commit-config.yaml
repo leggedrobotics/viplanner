@@ -5,7 +5,7 @@ repos:
       - id: black
         args: ["--line-length", "120"]
   - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 7.0.0
     hooks:
       - id: flake8
         additional_dependencies: [flake8-simplify, flake8-return]
