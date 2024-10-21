@@ -35,7 +35,7 @@ VIPlanner Helpers
 
 
 class VIPlannerAlgo:
-    def __init__(self, model_dir: str, fear_threshold: float = 0.5):
+    def __init__(self, model_dir: str, fear_threshold: float = 0.5, device: str = "cuda"):
         """Apply VIPlanner Algorithm
 
         Args:
@@ -49,6 +49,7 @@ class VIPlannerAlgo:
 
         # params
         self.fear_threshold = fear_threshold
+        self.device = device
 
         # load model
         self.train_config: TrainCfg = None
@@ -96,12 +97,12 @@ class VIPlannerAlgo:
         self.net.eval()
 
         # move to GPU if available
-        if torch.cuda.is_available():
-            self.net = self.net.cuda()
-            self.cuda_avail = True
-        else:
+        if self.device.lower() == "cpu":
             carb.log_warn("CUDA not available, VIPlanner will run on CPU")
             self.cuda_avail = False
+        else:
+            self.net = self.net.cuda()
+            self.cuda_avail = True
         return
 
     ###
