@@ -76,7 +76,10 @@ def isaac_camera_data(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, data_typ
         output = torch.zeros((*data.shape[:3], 3), device=env.device, dtype=torch.uint8)
 
         for env_id in range(env.num_envs):
-            mapping = torch.zeros((max(info[env_id].keys()) + 1, 3), dtype=torch.uint8, device=env.device)
+            # NOTE: the label_ids and the ids in the data might not be the same, label ids might not be continuous and 
+            #       might not start from 0 as well as some data ids might not be present in the label ids
+            unique_data_ids = torch.unique(data[env_id]).sort()[0]
+            mapping = torch.zeros((max(unique_data_ids.max() + 1, max(info[env_id].keys()) + 1), 3), dtype=torch.uint8, device=env.device)
             mapping[list(info[env_id].keys())] = torch.tensor(
                 list(info[env_id].values()), dtype=torch.uint8, device=env.device
             )
