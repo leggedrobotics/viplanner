@@ -27,9 +27,9 @@ To install the ViPlanner extension for Isaac Sim version **4.2.0**, follow these
     ```
 
     and follow the installation steps given [here](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation)
-    to install both IsaacLab and IsaacSim. 
+    to install both IsaacLab and IsaacSim.
 
-    **IMPORTANT**: The extension is tested with IsaacSim 4.2.0 and IsaacLab 1.2.0 (commit: 0bccd886c19a9891c0b6bdd37e13f338eacc0bba). 
+    **IMPORTANT**: The extension is tested with IsaacSim 4.2.0 and IsaacLab 1.2.0 (commit: 0bccd886c19a9891c0b6bdd37e13f338eacc0bba).
     While it may work with newer versions, it is not guaranteed. If you encounter issues, please switch back to the previous versions. Any
     PRs with updated versions are welcome.
 
@@ -85,7 +85,7 @@ The demo uses the **2n8kARJN3HM** scene from the Matterport dataset. A preview i
 
 ```
 cd IsaacLab
-./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir <path-to-model-download-dir> 
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir <path-to-model-download-dir>
 ```
 
 ### Carla
@@ -93,7 +93,7 @@ cd IsaacLab
 
 ```
 cd IsaacLab
-./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene carla --model_dir <path-to-model-download-dir> 
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene carla --model_dir <path-to-model-download-dir>
 ```
 
 ### NVIDIA Warehouse
@@ -101,10 +101,10 @@ No need to adjust the config, as the asset is directly included in the repo.
 
 ```
 cd IsaacLab
-./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir <path-to-model-download-dir> 
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir <path-to-model-download-dir>
 ```
 
 ## Data Collection and Evaluation
 
 The data collection is currently included in a new internal project and will be released with this project in the future.
-If you require the code, please contact the us per mail. 
+If you require the code, please contact the us per mail.

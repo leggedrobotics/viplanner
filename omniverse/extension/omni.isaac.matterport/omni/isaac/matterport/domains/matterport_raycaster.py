@@ -1,8 +1,9 @@
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
 # Author: Pascal Roth
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
+
 
 from __future__ import annotations
 
@@ -12,8 +13,8 @@ from typing import TYPE_CHECKING
 import numpy as np
 import trimesh
 import warp as wp
-from omni.isaac.matterport.domains import DATA_DIR
 from omni.isaac.lab.sensors.ray_caster import RayCaster
+from omni.isaac.matterport.domains import DATA_DIR
 
 if TYPE_CHECKING:
     from .raycaster_cfg import MatterportRayCasterCfg

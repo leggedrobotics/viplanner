@@ -1,8 +1,9 @@
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
 # Author: Pascal Roth
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
+
 
 import asyncio
 import gc
@@ -21,9 +22,9 @@ import omni.isaac.core.utils.stage as stage_utils
 
 # isaac-core
 import omni.ui as ui
-from omni.isaac.matterport.domains import MatterportImporter
 from omni.isaac.lab.sensors.ray_caster import RayCasterCfg, patterns
 from omni.isaac.lab.sim import SimulationCfg, SimulationContext
+from omni.isaac.matterport.domains import MatterportImporter
 
 # omni-isaac-ui
 from omni.isaac.ui.ui_utils import (

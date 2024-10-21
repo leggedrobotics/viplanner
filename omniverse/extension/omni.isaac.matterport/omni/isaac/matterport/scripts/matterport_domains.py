@@ -1,8 +1,9 @@
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
 # Author: Pascal Roth
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
+
 
 from typing import Dict
 
@@ -12,12 +13,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import omni
 import torch
-from omni.isaac.matterport.domains.matterport_raycast_camera import (
-    MatterportRayCasterCamera,
-)
 from omni.isaac.lab.sensors.camera import CameraData
 from omni.isaac.lab.sensors.ray_caster import RayCasterCfg
 from omni.isaac.lab.sim import SimulationContext
+from omni.isaac.matterport.domains.matterport_raycast_camera import (
+    MatterportRayCasterCamera,
+)
 
 from .ext_cfg import MatterportExtConfig
 

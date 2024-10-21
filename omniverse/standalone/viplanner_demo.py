@@ -117,7 +117,7 @@ def main():
             if not env.sim.is_playing():
                 env.sim.step(render=~args_cli.headless)
                 continue
-            
+
             obs = env.step(action=paths.view(paths.shape[0], -1))[0]
 
         # apply planner

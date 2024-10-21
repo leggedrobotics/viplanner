@@ -1,8 +1,9 @@
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
 # Author: Pascal Roth
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
+
 
 from __future__ import annotations
 
@@ -16,9 +17,9 @@ import pandas as pd
 import torch
 import trimesh
 import warp as wp
-from omni.isaac.matterport.domains import DATA_DIR
 from omni.isaac.lab.sensors import RayCasterCamera, RayCasterCameraCfg
 from omni.isaac.lab.utils.warp import raycast_mesh
+from omni.isaac.matterport.domains import DATA_DIR
 from tensordict import TensorDict
 
 
