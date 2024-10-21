@@ -1,0 +1,22 @@
+[package]
+version = "0.0.1"
+title = "Matterport extension"
+description="Extension to include Matterport 3D Datasets into Isaac"
+authors =["Pascal Roth"]
+repository = "https://github.com/leggedrobotics/omni_isaac_orbit"
+category = "robotics"
+keywords = ["kit", "robotics"]
+readme  = "docs/README.md"
+
+[dependencies]
+"omni.kit.uiapp" = {}
+"omni.isaac.ui" = {}
+"omni.isaac.core" = {}
+"omni.isaac.lab" = {}
+
+# Main python module this extension provides.
+[[python.module]]
+name = "omni.isaac.matterport"
+
+[[python.module]]
+name = "omni.isaac.matterport.scripts"
