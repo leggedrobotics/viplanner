@@ -6,7 +6,7 @@
 
 person_1:
   prim_name: "Person_1"
-  translation: [4.23985, -2.42198, 0.0]
+  translation: [4.23985, -1.42198, 0.0]
   target: [0, 0, 0]
   usd_path: People/Characters/male_adult_construction_01_new/male_adult_construction_01_new.usd
 

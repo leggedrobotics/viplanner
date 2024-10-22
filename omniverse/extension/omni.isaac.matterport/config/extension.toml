@@ -1,8 +1,8 @@
 [package]
 version = "0.0.1"
-title = "ViPlanner extension"
-description="Extension containing the novel ViPlanner: Visual Semantic Imperative Learning for Local Navigation"
-authors =["Pascal Roth", "Julian Nubert", "Fan Yang", "Mayank Mittal", "Marco Hutter"]
+title = "Matterport extension"
+description="Extension to include Matterport 3D Datasets into Isaac"
+authors =["Pascal Roth"]
 repository = "https://github.com/leggedrobotics/viplanner"
 category = "robotics"
 keywords = ["kit", "robotics"]
@@ -16,4 +16,7 @@ readme  = "docs/README.md"
 
 # Main python module this extension provides.
 [[python.module]]
-name = "omni.viplanner"
+name = "omni.isaac.matterport"
+
+[[python.module]]
+name = "omni.isaac.matterport.scripts"

@@ -6,18 +6,18 @@
 
 import os
 
-import omni.isaac.orbit.sim as sim_utils
-from omni.isaac.orbit.assets import AssetBaseCfg
-from omni.isaac.orbit.scene import InteractiveSceneCfg
-from omni.isaac.orbit.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.orbit.utils import configclass
+import omni.isaac.lab.sim as sim_utils
+from omni.isaac.lab.assets import AssetBaseCfg
+from omni.isaac.lab.scene import InteractiveSceneCfg
+from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+from omni.isaac.lab.utils import configclass
 from omni.viplanner.utils import UnRealImporterCfg
 
 ##
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
+from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
 from .base_cfg import ViPlannerBaseCfg
 from ..viplanner import DATA_DIR
 
@@ -39,6 +39,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
+        # NOTE: this path should be absolute to load the textures correctly
         usd_path="${USER_PATH_TO_USD}/carla.usd",
         groundplane=True,
         cw_config_file=os.path.join(DATA_DIR, "town01", "cw_multiply_cfg.yml"),
@@ -91,6 +92,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         width=1280,
         height=720,
         data_types=["semantic_segmentation"],
+        colorize_semantic_segmentation=False,
     )
 
 
@@ -113,5 +115,5 @@ class ViPlannerCarlaCfg(ViPlannerBaseCfg):
         self.viewer.eye = (133, 127.5, 8.5)
         self.viewer.lookat = (125.5, 120, 1.0)
         # change ANYmal position
-        self.scene.robot.init_state.pos = (125.5, 118.5, 1.2)
-        self.scene.robot.init_state.rot = (0.0, 0.0, 0.0, 1.0)
+        self.scene.robot.init_state.pos = (125.5, 118.5, 0.8)
+        self.scene.robot.init_state.rot = (0.707, 0.0, 0.0, -0.707)

@@ -4,21 +4,10 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# Copyright (c) 2022, NVIDIA CORPORATION & AFFILIATES, ETH Zurich, and University of Toronto
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
-"""
-This script demonstrates how to use the rigid objects class.
-"""
-
-"""Rest everything follows."""
-
 import os
 
 import carb
-import omni.isaac.orbit.utils.math as math_utils
+import omni.isaac.lab.utils.math as math_utils
 import torch
 import torchvision.transforms as transforms
 from omni.isaac.debug_draw import _debug_draw
@@ -35,7 +24,7 @@ VIPlanner Helpers
 
 
 class VIPlannerAlgo:
-    def __init__(self, model_dir: str, fear_threshold: float = 0.5):
+    def __init__(self, model_dir: str, fear_threshold: float = 0.5, device: str = "cuda"):
         """Apply VIPlanner Algorithm
 
         Args:
@@ -49,6 +38,7 @@ class VIPlannerAlgo:
 
         # params
         self.fear_threshold = fear_threshold
+        self.device = device
 
         # load model
         self.train_config: TrainCfg = None
@@ -87,21 +77,21 @@ class VIPlannerAlgo:
 
         # get model and load weights
         try:
-            model_state_dict, _ = torch.load(os.path.join(model_dir, "model.pt"))
+            model_state_dict, _ = torch.load(os.path.join(model_dir, "model.pt"), weights_only=True)
         except ValueError:
-            model_state_dict = torch.load(os.path.join(model_dir, "model.pt"))
+            model_state_dict = torch.load(os.path.join(model_dir, "model.pt"), weights_only=True)
         self.net.load_state_dict(model_state_dict)
 
         # inference script = no grad for model
         self.net.eval()
 
         # move to GPU if available
-        if torch.cuda.is_available():
-            self.net = self.net.cuda()
-            self.cuda_avail = True
-        else:
+        if self.device.lower() == "cpu":
             carb.log_warn("CUDA not available, VIPlanner will run on CPU")
             self.cuda_avail = False
+        else:
+            self.net = self.net.cuda()
+            self.cuda_avail = True
         return
 
     ###

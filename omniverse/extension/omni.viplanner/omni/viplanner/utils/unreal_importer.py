@@ -13,13 +13,13 @@ import carb
 import numpy as np
 import omni
 import omni.isaac.core.utils.prims as prim_utils
-import omni.isaac.orbit.sim as sim_utils
+import omni.isaac.lab.sim as sim_utils
 import trimesh
 import yaml
 from omni.isaac.core.utils.semantics import add_update_semantics, remove_all_semantics
-from omni.isaac.orbit.terrains import TerrainImporter
-from omni.isaac.orbit.utils.assets import ISAAC_NUCLEUS_DIR
-from omni.isaac.orbit.utils.warp import convert_to_warp_mesh
+from omni.isaac.lab.terrains import TerrainImporter
+from omni.isaac.lab.utils.assets import ISAAC_NUCLEUS_DIR
+from omni.isaac.lab.utils.warp import convert_to_warp_mesh
 from pxr import Gf, Usd, UsdGeom
 
 if TYPE_CHECKING:
