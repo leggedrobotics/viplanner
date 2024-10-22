@@ -1,13 +1,17 @@
+# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+# Author: Pascal Roth
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 from __future__ import annotations
 
-import torch
 from typing import TYPE_CHECKING
 
 import omni.isaac.core.utils.prims as prim_utils
-
+import torch
 from omni.isaac.lab.assets import Articulation
 from omni.isaac.lab.managers import SceneEntityCfg
-
 
 if TYPE_CHECKING:
     from omni.isaac.lab.envs import ManagerBasedRLEnv
