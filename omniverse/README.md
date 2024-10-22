@@ -79,6 +79,8 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
    cd IsaacLab
    ./isaaclab.sh -p source/standalone/tools/convert_mesh.py matterport_mesh/xxx.obj matterport_mesh/xxx.usd --make-instanceable --collision-approximation convexDecomposition
    ```
+   [!CAUTION]
+   The conversion will fail if the asset name starts with a number (e.g., `0c334eaabb844eaaad049cbbb2e0a4f2.obj`), because the USD API prohibits this naming as explained [here](https://openusd.org/release/api/group__group__tf___string.html#gaa129b294af3f68d01477d430b70d40c8). This issue is described in more detail [here](https://forums.developer.nvidia.com/t/cant-create-prims-if-name-starts-with-number/249617).
 2. Fix potential import setting such as Rotation and Scale. (`Property -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`) and then save the USD.
 3. Check that the converted mesh has colliders enabled. This can be done by starting IsaacSim (`./isaaclab.sh -s`), importing the converted usd mesh and visualizing the colliders (go to the "eye" symbol in the
 top left corner, select `Show by Type -> Physics -> Colliders` and set the value to `All` ). The colliders should be visible as pink linkes. In the case that no colliders are presented, select the mesh in the stage,
