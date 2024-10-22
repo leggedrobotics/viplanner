@@ -39,6 +39,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
+        # NOTE: this path should be absolute to load the textures correctly
         usd_path="${USER_PATH_TO_USD}/carla.usd",
         groundplane=True,
         cw_config_file=os.path.join(DATA_DIR, "town01", "cw_multiply_cfg.yml"),
@@ -114,5 +115,5 @@ class ViPlannerCarlaCfg(ViPlannerBaseCfg):
         self.viewer.eye = (133, 127.5, 8.5)
         self.viewer.lookat = (125.5, 120, 1.0)
         # change ANYmal position
-        self.scene.robot.init_state.pos = (125.5, 118.5, 1.2)
-        self.scene.robot.init_state.rot = (0.0, 0.0, 0.0, 1.0)
+        self.scene.robot.init_state.pos = (125.5, 118.5, 0.8)
+        self.scene.robot.init_state.rot = (0.0, 0.0, 0.258819, -0.9659258)

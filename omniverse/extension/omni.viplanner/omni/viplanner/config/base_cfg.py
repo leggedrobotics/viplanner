@@ -111,6 +111,7 @@ class TerminationsCfg:
         func=mdp.illegal_contact,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
     )
+    goal_reached = DoneTerm(func=mdp.at_goal, params={"distance_threshold": 0.3})
 
 
 @configclass
@@ -153,6 +154,7 @@ class CommandsCfg:
         robot_attr="robot",
         lookAheadDistance=1.0,
         debug_vis=True,
+        maxSpeed=1.0,
     )
 
 

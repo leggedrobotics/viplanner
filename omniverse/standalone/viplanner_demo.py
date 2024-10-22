@@ -19,7 +19,7 @@ from omni.isaac.lab.app import AppLauncher
 parser = argparse.ArgumentParser(description="This script demonstrates how to use the camera sensor.")
 parser.add_argument("--conv_distance", default=0.2, type=float, help="Distance for a goal considered to be reached.")
 parser.add_argument(
-    "--scene", default="matterport", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
+    "--scene", default="warehouse", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
 )
 parser.add_argument("--model_dir", default=None, type=str, help="Path to model directory.")
 
@@ -57,7 +57,7 @@ def main():
     # create environment cfg
     if args_cli.scene == "matterport":
         env_cfg = ViPlannerMatterportCfg(seed=1234)
-        goal_pos = torch.tensor([7.0, -12.5, 1.0])
+        goal_pos = torch.tensor([8.0, -13.5, 1.0])
     elif args_cli.scene == "carla":
         env_cfg = ViPlannerCarlaCfg(seed=1234)
         goal_pos = torch.tensor([137, 111.0, 1.0])

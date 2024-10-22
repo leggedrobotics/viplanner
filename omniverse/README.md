@@ -110,4 +110,4 @@ cd IsaacLab
 ## Data Collection and Evaluation
 
 The data collection is currently included in a new internal project and will be released with this project in the future.
-If you require the code, please contact the us per mail.
+If you require the code, please contact us per mail.

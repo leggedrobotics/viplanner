@@ -74,13 +74,25 @@ Note that for an editable install for packages without setup.py, PEP660 has to b
   python3 -m pip install --upgrade setuptools
   ```
 
+
+## Inference and Model Demo
+
+1. Real-World <br>
+
+	ROS-Node is provided to run the planner on the LeggedRobot ANYmal, for details please see [ROS-Node-README](ros/README.md).
+
+2. NVIDIA Isaac-Sim <br>
+
+	The planner can be executed within Nvidia Isaac Sim. It is implemented as part of the [IsaacLab Framework](https://isaac-sim.github.io/IsaacLab/) with an own extension. For details, please see [Omniverse Extension](./omniverse/README.md). This includes a **planner demo** in different environments with the trained model.
+
+
 ## Training
 
 Here an overview of the steps involved in training the policy.
 For more detailed instructions, please refer to [TRAINING.md](TRAINING.md).
 
 0. Training Data Generation <br>
-Training data is generated from the [Matterport 3D](https://github.com/niessner/Matterport), [Carla](https://carla.org/) and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/tutorial_static_assets.html) using developed Isaac Sim Extension, that are open-sourced. Currently, the extensions are updated to the latest `IsaacLab` version and will be available soon, an intermediate solution is given [here](https://github.com/fan-ziqi/viplanner_isaaclab_exts).
+Training data is generated from the [Matterport 3D](https://github.com/niessner/Matterport), [Carla](https://carla.org/) and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/tutorial_static_assets.html) using developed Isaac Sim Extension, the extensions are part of a new internal project (``isaac-nav-suite``) and will be open sourced with that project. In the case that you require an earlier access, please contact us via mail. 
 
 1. Build Cost-Map <br>
 The first step in training the policy is to build a cost-map from the available depth and semantic data. A cost-map is a representation of the environment where each cell is assigned a cost value indicating its traversability. The cost-map guides the optimization, therefore, is required to be differentiable. Cost-maps are built using the [cost-builder](viplanner/cost_builder.py) with configs [here](viplanner/config/costmap_cfg.py), given a pointcloud of the environment with semantic information (either from simultion or real-world information).
@@ -91,16 +103,6 @@ Once the cost-map is constructed, the next step is to train the policy. The poli
 3. Evaluation <br>
 Performance assessment can be performed on simulation and real-world data. The policy will be evaluated regarding multiple metrics such as distance to goal, average and maximum cost, path length. In order to let the policy be executed on anymal in simulation, please refer to [Omniverse Extension](./omniverse/README.md)
 
-
-## Inference
-
-1. Real-World <br>
-
-	ROS-Node is provided to run the planner on the LeggedRobot ANYmal, for details please see [ROS-Node-README](ros/README.md).
-
-2. NVIDIA Isaac-Sim <br>
-
-	The planner can be executed within Nvidia Isaac Sim. It is implemented as part of the [IsaacLab Framework](https://isaac-sim.github.io/IsaacLab/) with an own extension. For details, please see [Omniverse Extension](./omniverse/README.md).
 
 ### Model Download
 The latest model is available to download: [[checkpoint](https://drive.google.com/file/d/1PY7XBkyIGESjdh1cMSiJgwwaIT0WaxIc/view?usp=sharing)] [[config](https://drive.google.com/file/d/1r1yhNQAJnjpn9-xpAQWGaQedwma5zokr/view?usp=sharing)]

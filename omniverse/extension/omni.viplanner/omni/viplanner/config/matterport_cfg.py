@@ -44,12 +44,13 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
+        # NOTE: this path should be absolute to load the textures correctly
         obj_filepath="${USER_PATH_TO_USD}/matterport.usd",
         groundplane=True,
     )
     # robots
     robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
-    robot.init_state.pos = (8.0, -0.5, 0.6)
+    robot.init_state.pos = (8.0, 0.0, 0.6)
     robot.init_state.rot = (0.6126, 0.0327, 0.0136, -0.7896)
 
     # sensors
