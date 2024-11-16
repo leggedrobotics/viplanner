@@ -4,14 +4,8 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
-# Author: Pascal Roth
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 """
-This script demonstrates how to use the rigid objects class.
+Collect Training Data for ViPlanner
 """
 
 """Launch Isaac Sim Simulator first."""

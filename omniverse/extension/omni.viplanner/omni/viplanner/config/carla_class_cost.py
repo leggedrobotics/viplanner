@@ -4,12 +4,6 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# Copyright (c) 2024 ETH Zurich (Robotic Systems Lab)
-# Author: Pascal Roth
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 from omni.isaac.lab.utils import configclass
 
 OBSTACLE_COST = 2.0
