@@ -12,7 +12,7 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
 [![License](https://img.shields.io/badge/license-BSD--3-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-The ViPlanner Omniverse Extension offers a testing environment for ViPlanner.
+The ViPlanner Omniverse Extension offers a testing environment for ViPlanner and includes the data collection pipeline.
 Within NVIDIA Isaac Sim as a photorealistic simulator and using [IsaacLab](https://isaac-sim.github.io/IsaacLab/), this extension provides an assessment tool for ViPlanner's performance across diverse environments.
 
 
@@ -62,16 +62,9 @@ It is necessary to comply with PEP660 for the install. This requires the followi
   ./isaaclab.sh -p -m pip install --upgrade setuptools
   ```
 
-## Usage
-
-A demo script is provided to run the planner in three different environments: [Matterport](https://niessner.github.io/Matterport/), [Carla](https://carla.org//), and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/features/environment_setup/assets/usd_assets_environments.html#warehouse).
-In each scenario, the goal is represented as a movable cube within the environment.
-
-To run the demo, download the model: [[checkpoint](https://drive.google.com/file/d/1PY7XBkyIGESjdh1cMSiJgwwaIT0WaxIc/view?usp=sharing)] [[config](https://drive.google.com/file/d/1r1yhNQAJnjpn9-xpAQWGaQedwma5zokr/view?usp=sharing)] and the environment files. Then adjust the paths (marked as `${USER_PATH_TO_USD}`) in the corresponding config files.
+## Download the Simulation Environments
 
 ### Matterport
-[Config](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)
-
 To download Matterport datasets, please refer to the [Matterport3D](https://niessner.github.io/Matterport/) website. The dataset should be converted to USD format using Isaac Sim by executing the following steps:
 
 1. Run the `convert_mesh.py` script to convert the `.obj` file (located under `matterport_mesh`) to `USD`. With the recent update of the asset converter script, use the resulting `*_non_metric.usd` file.
@@ -92,6 +85,20 @@ To download Matterport datasets, please refer to the [Matterport3D](https://nies
 top left corner, select `Show by Type -> Physics -> Colliders` and set the value to `All` ). The colliders should be visible as pink linkes. In the case that no colliders are presented, select the mesh in the stage,
 go the `Property` section and click `Add -> Physics -> Colliders Preset`. Then save the asset.
 
+### Carla
+We provide an already converted asset of the `Town01` of Carla. It can be downloaded as USD asset: [Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing)
+
+
+## Planer Demo
+
+A demo script is provided to run the planner in three different environments: [Matterport](https://niessner.github.io/Matterport/), [Carla](https://carla.org//), and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/features/environment_setup/assets/usd_assets_environments.html#warehouse).
+In each scenario, the goal is represented as a movable cube within the environment.
+
+To run the demo, download the model: [[checkpoint](https://drive.google.com/file/d/1PY7XBkyIGESjdh1cMSiJgwwaIT0WaxIc/view?usp=sharing)] [[config](https://drive.google.com/file/d/1r1yhNQAJnjpn9-xpAQWGaQedwma5zokr/view?usp=sharing)] and the environment files. Then adjust the paths (marked as `${USER_PATH_TO_USD}`) in the corresponding config files.
+
+### Matterport
+[Config](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)
+
 The demo uses the **2n8kARJN3HM** scene from the Matterport dataset. A preview is available [here](https://aspis.cmpt.sfu.ca/scene-toolkit/scans/matterport3d/houses).
 
 ```
@@ -100,7 +107,7 @@ cd IsaacLab
 ```
 
 ### Carla
-[Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing) | [Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
+[Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
 
 ```
 cd IsaacLab
@@ -115,7 +122,13 @@ cd IsaacLab
 ./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir <path-to-model-download-dir>
 ```
 
-## Data Collection and Evaluation
+## Data Collection
 
-The data collection is currently included in a new internal project and will be released with this project in the future.
-If you require the code, please contact us per mail.
+The training data is generated from different simulation environments. After they have been downloaded and converted to USD, the rendered viewpoints are collected by executing
+
+```
+cd IsaacLab
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene <matterport/carla/warehouse> --num_samples <how-many-viewpoints>
+```
+
+To test that the data has been correctly extracted, please run the 3D reconstruction and see if the results fits to the simulated environment.
