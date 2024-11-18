@@ -14,13 +14,15 @@ import time
 
 import cv2
 import numpy as np
-import omni.isaac.lab.utils.math as math_utils
 import torch
+import omni.isaac.lab.utils.math as math_utils
 from omni.isaac.lab.markers import VisualizationMarkers
 from omni.isaac.lab.markers.config import GREEN_ARROW_X_MARKER_CFG
 from omni.isaac.lab.scene import InteractiveScene
 from omni.isaac.lab.sensors import Camera
 from omni.isaac.lab.sim import SimulationContext
+
+from viplanner.config import VIPlannerSemMetaHandler
 
 from .terrain_analysis import TerrainAnalysis
 from .viewpoint_sampling_cfg import ViewpointSamplingCfg
@@ -38,10 +40,13 @@ class ViewpointSampling:
         # analyse terrains
         self.terrain_analyser = TerrainAnalysis(self.cfg.terrain_analysis, scene=self.scene)
 
+        # initialize viplanner color mapping
+        self.viplanner_sem_meta = VIPlannerSemMetaHandler()
+
     def sample_viewpoints(self, nbr_viewpoints: int, seed: int = 1) -> torch.Tensor:
         """Sample viewpoints for the given number of viewpoints and seed."""
         # the samples are stored in a torch tensor with the structure
-        # [x, y, z, qx, qv, qz, qw]
+        # [x, y, z, qw, qx, qv, qz]
 
         # load viewpoint samples if the exists
         filename = f"viewpoints_seed{seed}_samples{nbr_viewpoints}.pkl"
@@ -73,7 +78,7 @@ class ViewpointSampling:
         while sample_locations_count < nbr_viewpoints:
             # get samples
             sample_idx = self.terrain_analyser.samples[:, 0] == curr_point_idx
-            sample_idx_select = torch.randperm(sample_idx.sum())[:nbr_samples_per_point]
+            sample_idx_select = torch.randperm(sample_idx.sum())[:min(nbr_samples_per_point, nbr_viewpoints - sample_locations_count)]
             sample_locations[
                 sample_locations_count : sample_locations_count + sample_idx_select.shape[0]
             ] = self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
@@ -148,20 +153,19 @@ class ViewpointSampling:
         # save poses
         filedir = self.cfg.save_path if self.cfg.save_path else self._get_save_filedir()
         # create directories
-        for cam, annotator in self.cfg.cameras.items():
-            os.makedirs(os.path.join(filedir, cam, annotator), exist_ok=True)
+        os.makedirs(os.path.join(filedir, "semantics"), exist_ok=True)
+        os.makedirs(os.path.join(filedir, "depth"), exist_ok=True)
 
         # save camera configurations
         print(f"[INFO] Saving camera configurations to {filedir}.")
-        for cam in self.cfg.cameras.keys():
-            np.savetxt(
-                os.path.join(filedir, cam, "intrinsics.txt"),
-                self.scene.sensors[cam].data.intrinsic_matrices[0].cpu().numpy(),
-                delimiter=",",
-            )
+        # NOTE: the intrinsics of the depth camera have to come first
+        intrinsics = np.zeros((len(self.cfg.cameras), 3, 4))  # saved as ROS Projection matrix
+        for cam_idx, cam in enumerate(self.cfg.cameras.keys()):
+            intrinsics[cam_idx][:3, :3] = self.scene.sensors[cam].data.intrinsic_matrices[0].cpu().numpy()
+        np.savetxt(os.path.join(filedir, "intrinsics.txt"), intrinsics.reshape(-1, 12), delimiter=",")
 
-        # save camera poses
-        np.savetxt(os.path.join(filedir, "camera_poses.txt"), samples.cpu().numpy(), delimiter=",")
+        # save camera poses (format: x y z qx qy qz qw instead of x y z qw qx qy qz)
+        np.savetxt(os.path.join(filedir, "camera_extrinsic.txt"), samples[:, [0, 1, 2, 4, 5, 6, 3]].cpu().numpy(), delimiter=",")
 
         # save images
         samples = samples.to(self.scene.device)
@@ -186,9 +190,8 @@ class ViewpointSampling:
             # update scene buffers
             self.scene.update(self.sim.get_physics_dt())
             # render
-            for cam_idx, curr_cam_annotator in enumerate(self.cfg.cameras.items()):
-                cam, annotator = curr_cam_annotator
-                image_data_np = self.scene.sensors[cam].data.output[annotator].cpu().numpy()
+            for cam_idx, (cam, annotator) in enumerate(self.cfg.cameras.items()):
+                image_data_np = self.scene.sensors[cam].data.output[annotator].clone().cpu().numpy()
                 # filter nan
                 image_data_np[np.isnan(image_data_np)] = 0
                 # filter inf
@@ -197,17 +200,41 @@ class ViewpointSampling:
                 # save images
                 for idx in range(samples_idx.shape[0]):
                     # semantic segmentation
-                    if image_data_np.shape[-1] == 3 or image_data_np.shape[-1] == 4:
+                    if annotator == "semantic_segmentation":
+                        if image_data_np.shape[-1] == 1:
+                            # get info data
+                            info = self.scene.sensors[cam].data.info[idx][annotator]["idToLabels"]
+
+                            # assign each key a color from the VIPlanner color space
+                            info = {
+                                int(k): self.viplanner_sem_meta.class_color["static"]
+                                if v["class"] in ("BACKGROUND", "UNLABELLED")
+                                else self.viplanner_sem_meta.class_color[v["class"]]
+                                for k, v in info.items()
+                            }
+
+                            # NOTE: the label_ids and the ids in the data might not be the same, label ids might not be continuous and
+                            #       might not start from 0 as well as some data ids might not be present in the label ids
+                            unique_data_ids = np.unique(image_data_np)
+                            unique_data_ids.sort()
+                            mapping = np.zeros((max(unique_data_ids.max() + 1, max(info.keys()) + 1), 3), dtype=np.uint8)
+                            mapping[list(info.keys())] = np.array(list(info.values()), dtype=np.uint8)
+                            output = mapping[image_data_np[idx].squeeze(-1)]
+                        else:
+                            output = image_data_np[idx]
+                        
                         assert cv2.imwrite(
-                            os.path.join(filedir, cam, annotator, f"{image_idx[cam_idx]}".zfill(4) + ".png"),
-                            cv2.cvtColor(image_data_np[idx].astype(np.uint8), cv2.COLOR_RGB2BGR),
+                            os.path.join(filedir, "semantics", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
+                            cv2.cvtColor(output.astype(np.uint8), cv2.COLOR_RGB2BGR),
                         )
                     # depth
                     else:
                         assert cv2.imwrite(
-                            os.path.join(filedir, cam, annotator, f"{image_idx[cam_idx]}".zfill(4) + ".png"),
+                            os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
                             np.uint16(image_data_np[idx] * self.cfg.depth_scale),
                         )
+                        # save as npy 
+                        np.save(os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".npy"), image_data_np[idx] * self.cfg.depth_scale)
 
                     image_idx[cam_idx] += 1
 

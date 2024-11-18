@@ -62,6 +62,7 @@ class MatterportRayCasterCamera(RayCasterCamera):
         # More Information: https://github.com/niessner/Matterport/blob/master/data_organization.md#house_segmentations
         mapping = pd.read_csv(DATA_DIR + "/mappings/category_mapping.tsv", sep="\t")
         self.mapping_mpcat40 = torch.tensor(mapping["mpcat40index"].to_numpy(), device=self._device, dtype=torch.long)
+        self.classes_mpcat40 = pd.read_csv(DATA_DIR + "/mappings/mpcat40.tsv", sep="\t")["mpcat40"].to_numpy()
         self._color_mapping()
 
     def _color_mapping(self):

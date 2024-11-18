@@ -58,11 +58,13 @@ def main():
 
     # create environment cfg and modify the collector config depending on the environment
     if args_cli.scene == "matterport":
-        scene_cfg = MatterportTerrainSceneCfg(args_cli.num_envs, env_spacing=1.0)
+        # NOTE: only one env possible as the prims for the cameras cannot be initialized with the env regex
+        scene_cfg = MatterportTerrainSceneCfg(1, env_spacing=1.0)
         # overwrite semantic cost mapping and adjust parameters based on larger map
         cfg.terrain_analysis.semantic_cost_mapping = MatterportSemanticCostMapping()
     elif args_cli.scene == "carla":
         scene_cfg = CarlaTerrainSceneCfg(args_cli.num_envs, env_spacing=1.0)
+        scene_cfg.terrain.groundplane = False
         # overwrite semantic cost mapping and adjust parameters based on larger map
         cfg.terrain_analysis.semantic_cost_mapping = CarlaSemanticCostMapping()
         cfg.terrain_analysis.grid_resolution = 1.0
@@ -71,7 +73,10 @@ def main():
         cfg.terrain_analysis.dim_limiter_prim = "Road_Sidewalk"
     elif args_cli.scene == "warehouse":
         scene_cfg = WarehouseTerrainSceneCfg(args_cli.num_envs, env_spacing=1.0)
-        # FIXME: add semantic cost mapping
+        # overwrite semantic cost mapping 
+        cfg.terrain_analysis.semantic_cost_mapping = CarlaSemanticCostMapping()
+        # limit space to be within the road network
+        cfg.terrain_analysis.dim_limiter_prim = "Section"  # name of the meshes of the walls
     else:
         raise NotImplementedError(f"Scene {args_cli.scene} not yet supported!")
 
@@ -81,11 +86,15 @@ def main():
     scene_cfg.contact_forces = None
 
     # change the path to the semantic cameras as the robot base frame does not exist anymore
-    scene_cfg.depth_camera.prim_path = "{ENV_REGEX_NS}/depth_cam"
-    scene_cfg.semantic_camera.prim_path = "{ENV_REGEX_NS}/sem_cam"
+    if args_cli.scene == "warehouse" or args_cli.scene == "carla":
+        scene_cfg.depth_camera.prim_path = "{ENV_REGEX_NS}/depth_cam"
+        scene_cfg.semantic_camera.prim_path = "{ENV_REGEX_NS}/sem_cam"
+    else:
+        scene_cfg.depth_camera.prim_path = "/World/matterport"
+        scene_cfg.semantic_camera.prim_path = "/World/matterport"
     cfg.cameras = {
-        "semantic_camera": "semantic_segmentation",
         "depth_camera": "distance_to_image_plane",
+        "semantic_camera": "semantic_segmentation",
     }
 
     # Load kit helper

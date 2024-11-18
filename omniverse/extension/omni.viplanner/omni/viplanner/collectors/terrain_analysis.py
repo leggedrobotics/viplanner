@@ -127,7 +127,7 @@ class TerrainAnalysis:
 
             # filter points based on semantic cost
             if self.cfg.semantic_cost_mapping is not None:
-                ray_origins = self._point_filter_semantic_cost(ray_origins, heights)
+                ray_origins, heights = self._point_filter_semantic_cost(ray_origins, heights)
 
             # set z height of samples to be at the robot's height above the terrain.
             ray_origins[:, 2] = heights + self.cfg.robot_height
@@ -401,7 +401,7 @@ class TerrainAnalysis:
         heights = heights[without_wall]
         return ray_origins, heights
 
-    def _point_filter_semantic_cost(self, ray_origins: torch.Tensor, heights: torch.Tensor):
+    def _point_filter_semantic_cost(self, ray_origins: torch.Tensor, heights: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         # raycast vertically down and get the corresponding face id
         ray_directions = torch.zeros((ray_origins.shape[0], 3), dtype=torch.float32, device=self.device)
         ray_directions[:, 2] = -1.0
@@ -454,7 +454,7 @@ class TerrainAnalysis:
         # filter points based on cost
         filter_cost = cost < self.cfg.semantic_cost_threshold
         print(f"[DEBUG] filtered {ray_origins.shape[0] - filter_cost.sum().item()} points based on semantic cost")
-        return ray_origins[filter_cost].type(torch.float32)
+        return ray_origins[filter_cost].type(torch.float32), heights[filter_cost]
 
     ###
     # Edge filtering functions

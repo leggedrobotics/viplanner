@@ -18,8 +18,8 @@ class ViewpointSamplingCfg:
 
     # dict of cameras and corresponding annotators
     cameras: dict[str, str] = {
-        "camera_0": "semantic_segmentation",
-        "camera_1": "distance_to_image_plane",
+        "camera_0": "distance_to_image_plane",
+        "camera_1": "semantic_segmentation",
     }
     """Dict of cameras and corresponding annotators to use for the viewpoint sampling."""
     depth_scale: float = 1000.0

@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 floor:
+  - SM_Floor0
   - SM_Floor1
   - SM_Floor2
   - SM_Floor3
@@ -31,6 +32,7 @@ ceiling:
 
 static:
   - LampCeiling
+  - Section
   - SM_FloorDecal
   - SM_FireExtinguisher
 

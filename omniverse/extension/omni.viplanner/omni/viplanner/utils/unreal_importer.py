@@ -110,7 +110,7 @@ class UnRealImporter(TerrainImporter):
             vertices = np.asarray(mesh_prim.GetPointsAttr().Get())
             faces = np.asarray(mesh_prim.GetFaceVertexIndicesAttr().Get())
             # check if both faces and vertices are valid
-            if not vertices or not faces:
+            if vertices[()] is None or faces[()] is None:
                 carb.log_warn(f"Mesh {submesh_name} has no faces or vertices.")
                 continue
             faces = faces.reshape(-1, 3)
@@ -151,9 +151,7 @@ class UnRealImporter(TerrainImporter):
         # assign class to mesh in ISAAC
         def recursive_semUpdate(prim, sem_class_name: str, update_submesh: bool) -> bool:
             # Necessary for Park Mesh
-            if (
-                prim.GetName() == "HierarchicalInstancedStaticMesh"
-            ):  # or "FoliageInstancedStaticMeshComponent" in prim.GetName():
+            if prim.GetName() == "HierarchicalInstancedStaticMesh" or prim.GetTypeName() == "Mesh":  # or "FoliageInstancedStaticMeshComponent" in prim.GetName():
                 add_update_semantics(prim, sem_class_name)
                 update_submesh = True
             children = prim.GetChildren()
