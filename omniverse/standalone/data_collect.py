@@ -73,7 +73,7 @@ def main():
         cfg.terrain_analysis.dim_limiter_prim = "Road_Sidewalk"
     elif args_cli.scene == "warehouse":
         scene_cfg = WarehouseTerrainSceneCfg(args_cli.num_envs, env_spacing=1.0)
-        # overwrite semantic cost mapping 
+        # overwrite semantic cost mapping
         cfg.terrain_analysis.semantic_cost_mapping = CarlaSemanticCostMapping()
         # limit space to be within the road network
         cfg.terrain_analysis.dim_limiter_prim = "Section"  # name of the meshes of the walls

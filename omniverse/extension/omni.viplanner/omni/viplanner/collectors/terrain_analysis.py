@@ -401,7 +401,9 @@ class TerrainAnalysis:
         heights = heights[without_wall]
         return ray_origins, heights
 
-    def _point_filter_semantic_cost(self, ray_origins: torch.Tensor, heights: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    def _point_filter_semantic_cost(
+        self, ray_origins: torch.Tensor, heights: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         # raycast vertically down and get the corresponding face id
         ray_directions = torch.zeros((ray_origins.shape[0], 3), dtype=torch.float32, device=self.device)
         ray_directions[:, 2] = -1.0

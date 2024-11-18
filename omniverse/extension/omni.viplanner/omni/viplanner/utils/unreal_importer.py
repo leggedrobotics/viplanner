@@ -151,7 +151,9 @@ class UnRealImporter(TerrainImporter):
         # assign class to mesh in ISAAC
         def recursive_semUpdate(prim, sem_class_name: str, update_submesh: bool) -> bool:
             # Necessary for Park Mesh
-            if prim.GetName() == "HierarchicalInstancedStaticMesh" or prim.GetTypeName() == "Mesh":  # or "FoliageInstancedStaticMeshComponent" in prim.GetName():
+            if (
+                prim.GetName() == "HierarchicalInstancedStaticMesh" or prim.GetTypeName() == "Mesh"
+            ):  # or "FoliageInstancedStaticMeshComponent" in prim.GetName():
                 add_update_semantics(prim, sem_class_name)
                 update_submesh = True
             children = prim.GetChildren()

@@ -14,8 +14,8 @@ import time
 
 import cv2
 import numpy as np
-import torch
 import omni.isaac.lab.utils.math as math_utils
+import torch
 from omni.isaac.lab.markers import VisualizationMarkers
 from omni.isaac.lab.markers.config import GREEN_ARROW_X_MARKER_CFG
 from omni.isaac.lab.scene import InteractiveScene
@@ -78,7 +78,9 @@ class ViewpointSampling:
         while sample_locations_count < nbr_viewpoints:
             # get samples
             sample_idx = self.terrain_analyser.samples[:, 0] == curr_point_idx
-            sample_idx_select = torch.randperm(sample_idx.sum())[:min(nbr_samples_per_point, nbr_viewpoints - sample_locations_count)]
+            sample_idx_select = torch.randperm(sample_idx.sum())[
+                : min(nbr_samples_per_point, nbr_viewpoints - sample_locations_count)
+            ]
             sample_locations[
                 sample_locations_count : sample_locations_count + sample_idx_select.shape[0]
             ] = self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
@@ -165,7 +167,11 @@ class ViewpointSampling:
         np.savetxt(os.path.join(filedir, "intrinsics.txt"), intrinsics.reshape(-1, 12), delimiter=",")
 
         # save camera poses (format: x y z qx qy qz qw instead of x y z qw qx qy qz)
-        np.savetxt(os.path.join(filedir, "camera_extrinsic.txt"), samples[:, [0, 1, 2, 4, 5, 6, 3]].cpu().numpy(), delimiter=",")
+        np.savetxt(
+            os.path.join(filedir, "camera_extrinsic.txt"),
+            samples[:, [0, 1, 2, 4, 5, 6, 3]].cpu().numpy(),
+            delimiter=",",
+        )
 
         # save images
         samples = samples.to(self.scene.device)
@@ -217,12 +223,14 @@ class ViewpointSampling:
                             #       might not start from 0 as well as some data ids might not be present in the label ids
                             unique_data_ids = np.unique(image_data_np)
                             unique_data_ids.sort()
-                            mapping = np.zeros((max(unique_data_ids.max() + 1, max(info.keys()) + 1), 3), dtype=np.uint8)
+                            mapping = np.zeros(
+                                (max(unique_data_ids.max() + 1, max(info.keys()) + 1), 3), dtype=np.uint8
+                            )
                             mapping[list(info.keys())] = np.array(list(info.values()), dtype=np.uint8)
                             output = mapping[image_data_np[idx].squeeze(-1)]
                         else:
                             output = image_data_np[idx]
-                        
+
                         assert cv2.imwrite(
                             os.path.join(filedir, "semantics", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
                             cv2.cvtColor(output.astype(np.uint8), cv2.COLOR_RGB2BGR),
@@ -233,8 +241,11 @@ class ViewpointSampling:
                             os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
                             np.uint16(image_data_np[idx] * self.cfg.depth_scale),
                         )
-                        # save as npy 
-                        np.save(os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".npy"), image_data_np[idx] * self.cfg.depth_scale)
+                        # save as npy
+                        np.save(
+                            os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".npy"),
+                            image_data_np[idx] * self.cfg.depth_scale,
+                        )
 
                     image_idx[cam_idx] += 1
 

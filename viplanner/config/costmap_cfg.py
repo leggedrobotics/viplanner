@@ -158,13 +158,13 @@ class GeneralCostMapConfig:
     # smoothing parameters
     sigma_smooth: float = 3.0
     # cost map expansion
-    x_min: Optional[float] = None  # -8.05
+    x_min: Optional[float] = None
     # [m] if None, the minimum of the point cloud is used None (carla town01:  -8.05   matterport: None)
-    y_min: Optional[float] = None  # -8.05
+    y_min: Optional[float] = None
     # [m] if None, the minimum of the point cloud is used None (carla town01:  -8.05   matterport: None)
-    x_max: Optional[float] = None  #  346.22
+    x_max: Optional[float] = None
     # [m] if None, the maximum of the point cloud is used None (carla town01:  346.22  matterport: None)
-    y_max: Optional[float] = None  # 336.65
+    y_max: Optional[float] = None
     # [m] if None, the maximum of the point cloud is used None (carla town01:  336.65  matterport: None)
 
 

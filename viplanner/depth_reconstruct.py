@@ -33,7 +33,7 @@ class DepthReconstruction:
         - semantics (optional)
             - xxxx.png  (images should be named with 4 digits, e.g. 0000.png, 0001.png, etc., RGB images)
 
-    In the case that the semantic and depth images have an offset in their position (as typical on some robotic platforms), 
+    In the case that the semantic and depth images have an offset in their position (as typical on some robotic platforms),
     define a sem_suffic and depth_suffix in ReconstructionCfg to differentiate between the two with the following structure:
 
     - env_name
