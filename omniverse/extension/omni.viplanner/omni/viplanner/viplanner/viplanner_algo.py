@@ -10,7 +10,6 @@ import carb
 import omni.isaac.lab.utils.math as math_utils
 import torch
 import torchvision.transforms as transforms
-from omni.isaac.debug_draw import _debug_draw
 
 from viplanner.config import TrainCfg
 
@@ -51,7 +50,12 @@ class VIPlannerAlgo:
         self.traj_generate = TrajOpt()
 
         # setup waypoint display in Isaac
-        self.draw = _debug_draw.acquire_debug_draw_interface()
+        # in headless mode, we cannot visualize the graph and omni.debug.draw is not available
+        try:
+            import omni.isaac.debug_draw._debug_draw as omni_debug_draw
+            self.draw = omni_debug_draw.acquire_debug_draw_interface()
+        except ImportError:
+            print("[WARNING] Graph Visualization is not available in headless mode.")
         self.color_fear = [(1.0, 0.4, 0.1, 1.0)]  # red
         self.color_path = [(0.4, 1.0, 0.1, 1.0)]  # green
         self.size = [5.0]
