@@ -6,8 +6,8 @@
 
 from __future__ import annotations
 
-from omni.viplanner.config import MatterportSemanticCostMapping
 from omni.isaac.lab.utils import configclass
+from omni.viplanner.config import MatterportSemanticCostMapping
 
 
 @configclass
