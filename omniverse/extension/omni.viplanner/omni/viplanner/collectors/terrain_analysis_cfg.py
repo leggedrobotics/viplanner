@@ -6,7 +6,7 @@
 
 from __future__ import annotations
 
-from nav_collectors.configs import MatterportSemanticCostMapping
+from omni.viplanner.config import MatterportSemanticCostMapping
 from omni.isaac.lab.utils import configclass
 
 
