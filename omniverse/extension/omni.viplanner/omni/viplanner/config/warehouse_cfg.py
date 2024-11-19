@@ -42,7 +42,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             dynamic_friction=1.0,
         ),
         usd_path=os.path.join(DATA_DIR, "warehouse", "warehouse_new.usd"),
-        groundplane=False,
+        groundplane=True,
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "warehouse", "keyword_mapping.yml"),
         people_config_file=os.path.join(DATA_DIR, "warehouse", "people_cfg.yml"),
         axis_up="Z",
@@ -60,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["/World/Warehouse"],
+        mesh_prim_paths=["/World/GroundPlane"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights
