@@ -11,6 +11,7 @@ Collect Training Data for ViPlanner
 """Launch Isaac Sim Simulator first."""
 
 import argparse
+import os
 
 from omni.isaac.lab.app import AppLauncher
 
@@ -54,6 +55,7 @@ def main():
     """Main function to start the data collection in different environments."""
     # setup sampling config
     cfg = ViewpointSamplingCfg()
+    cfg.save_path = os.path.join("${USER_SAVE_PATH}", args_cli.scene)
     cfg.terrain_analysis.raycaster_sensor = "depth_camera"
 
     # create environment cfg and modify the collector config depending on the environment
