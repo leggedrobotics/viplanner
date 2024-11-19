@@ -60,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["/World/Warehouse"],
+        mesh_prim_paths=["/World/GroundPlane"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights

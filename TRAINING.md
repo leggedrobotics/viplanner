@@ -2,6 +2,12 @@
 
 Here an overview of the steps involved in training the policy is provided.
 
+
+## Data Generation
+
+For the data generation, please follow the instruction given in [here](omniverse/README.md).
+
+
 ## Cost-Map Building
 
 Cost-Map building is an essential step in guiding optimization and representing the environment.
@@ -28,13 +34,14 @@ If depth and semantic images of the simulation are available, then first 3D reco
         ├── xxxx.png                            # images saved with 4 digits, e.g. 0000.png
     ```
 
-    when both depth and semantic images are available, then define sem_suffic and depth_suffix in ReconstructionCfg to differentiate between the two with the following structure:
+    In the case that the semantic and depth images have an offset in their position (as typical on some robotic platforms),
+    define a `sem_suffic` and `depth_suffix` in `ReconstructionCfg` to differentiate between the two with the following structure:
 
     ``` graphql
     env_name
     ├── camera_extrinsic{depth_suffix}.txt      # format: x y z qx qy qz qw
     ├── camera_extrinsic{sem_suffix}.txt        # format: x y z qx qy qz qw
-    ├── intrinsics.txt                          # P-Matrix for intrinsics of depth and semantic images
+    ├── intrinsics.txt                          # P-Matrix for intrinsics of depth and semantic images (depth first)
     ├── depth                                   # either png and/ or npy, if both npy is used
     |   ├── xxxx{depth_suffix}.png              # images saved with 4 digits, e.g. 0000.png
     |   ├── xxxx{depth_suffix}.npy              # arrays saved with 4 digits, e.g. 0000.npy
@@ -49,7 +56,7 @@ If depth and semantic images of the simulation are available, then first 3D reco
 
 3. **Cost-Building** <br>
 
-    Fully automated, either a geometric or semantic cost map can be generated running the following command:
+    Either a geometric or semantic cost map can be generated running the following command:
 
     ```
     python viplanner/cost_builder.py
@@ -70,7 +77,6 @@ If depth and semantic images of the simulation are available, then first 3D reco
         ├── config_cost_{map_name}.yaml         # CostMapConfig used to generate cost map
 
     ```
-
 
 
 ## Training
