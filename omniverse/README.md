@@ -124,7 +124,8 @@ cd IsaacLab
 
 ## Data Collection
 
-The training data is generated from different simulation environments. After they have been downloaded and converted to USD, the rendered viewpoints are collected by executing
+The training data is generated from different simulation environments. After they have been downloaded and converted to USD, adjust the paths (marked as `${USER_PATH_TO_USD}`) in the corresponding config files ([Carla](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py) and [Matterport](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)).
+The rendered viewpoints are collected by executing
 
 ```
 cd IsaacLab
