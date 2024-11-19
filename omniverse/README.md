@@ -129,7 +129,7 @@ The rendered viewpoints are collected by executing
 
 ```
 cd IsaacLab
-./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene <matterport/carla/warehouse> --num_samples <how-many-viewpoints>
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/data_collect.py --scene <matterport/carla/warehouse> --num_samples <how-many-viewpoints>
 ```
 
 To test that the data has been correctly extracted, please run the 3D reconstruction and see if the results fits to the simulated environment.
