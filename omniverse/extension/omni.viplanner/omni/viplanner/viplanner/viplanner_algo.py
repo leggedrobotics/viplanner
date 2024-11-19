@@ -53,6 +53,7 @@ class VIPlannerAlgo:
         # in headless mode, we cannot visualize the graph and omni.debug.draw is not available
         try:
             import omni.isaac.debug_draw._debug_draw as omni_debug_draw
+
             self.draw = omni_debug_draw.acquire_debug_draw_interface()
         except ImportError:
             print("[WARNING] Graph Visualization is not available in headless mode.")
