@@ -73,10 +73,12 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
   // Create a TransformListener object to receive transforms
   tf2_ros::Buffer tf_buffer;
   tf2_ros::TransformListener tf_listener(tf_buffer);
-
   // Wait for the transform to become available
   try {
-      geometry_msgs::TransformStamped transform = tf_buffer.lookupTransform("map", "base", ros::Time(0));
+      // Allow some time for the listener to get the first transform
+      ros::Duration(1.0).sleep();
+      
+      geometry_msgs::TransformStamped transform = tf_buffer.lookupTransform("map", "odom", ros::Time(0), ros::Duration(1.0));
       geometry_msgs::PointStamped waypoint_map;
       tf2::doTransform(waypoint_odom, waypoint_map, transform);
       waypoint_map.header.frame_id = "map";
@@ -87,8 +89,6 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
                 waypoint_map.point.x, waypoint_map.point.y, waypoint_map.point.z);
 
       pub_.publish(waypoint_map);
-      // usleep(10000);
-      // pub_.publish(waypoint);
   } catch (tf2::TransformException &ex) {
       ROS_WARN("%s", ex.what());
       pub_.publish(waypoint_odom);

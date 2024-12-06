@@ -4,18 +4,17 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import omni.isaac.orbit.sim as sim_utils
+import omni.isaac.lab.sim as sim_utils
 import omni.viplanner.viplanner.mdp as mdp
+from omni.isaac.lab.assets import AssetBaseCfg
+from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
+from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
+from omni.isaac.lab.managers import SceneEntityCfg
+from omni.isaac.lab.scene import InteractiveSceneCfg
+from omni.isaac.lab.sensors import ContactSensorCfg, patterns
+from omni.isaac.lab.utils import configclass
 from omni.isaac.matterport.config import MatterportImporterCfg
 from omni.isaac.matterport.domains import MatterportRayCasterCfg
-from omni.isaac.orbit.assets import AssetBaseCfg
-from omni.isaac.orbit.managers import ObservationGroupCfg as ObsGroup
-from omni.isaac.orbit.managers import ObservationTermCfg as ObsTerm
-from omni.isaac.orbit.managers import SceneEntityCfg
-from omni.isaac.orbit.scene import InteractiveSceneCfg
-from omni.isaac.orbit.sensors import ContactSensorCfg, patterns
-from omni.isaac.orbit.utils import configclass
-from omni.isaac.orbit_assets import ORBIT_ASSETS_DATA_DIR
 from omni.viplanner.utils import VIPlannerMatterportRayCasterCameraCfg
 
 from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
@@ -24,7 +23,7 @@ from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
+from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
 
 ##
 # Scene definition
@@ -45,12 +44,13 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
-        obj_filepath=f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/matterport/matterport.usd",
+        # NOTE: this path should be absolute to load the textures correctly
+        obj_filepath="${USER_PATH_TO_USD}/matterport.usd",
         groundplane=True,
     )
     # robots
     robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
-    robot.init_state.pos = (8.0, -0.5, 0.6)
+    robot.init_state.pos = (8.0, 0.0, 0.6)
     robot.init_state.rot = (0.6126, 0.0327, 0.0136, -0.7896)
 
     # sensors

@@ -6,12 +6,11 @@
 
 import os
 
-import omni.isaac.orbit.sim as sim_utils
-from omni.isaac.orbit.assets import AssetBaseCfg
-from omni.isaac.orbit.scene import InteractiveSceneCfg
-from omni.isaac.orbit.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.orbit.utils import configclass
-from omni.isaac.orbit_assets import ORBIT_ASSETS_DATA_DIR
+import omni.isaac.lab.sim as sim_utils
+from omni.isaac.lab.assets import AssetBaseCfg
+from omni.isaac.lab.scene import InteractiveSceneCfg
+from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+from omni.isaac.lab.utils import configclass
 from omni.viplanner.utils import UnRealImporterCfg
 
 from ..viplanner import DATA_DIR
@@ -21,7 +20,7 @@ from .base_cfg import ViPlannerBaseCfg
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
+from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
 
 
 ##
@@ -42,7 +41,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         ),
-        usd_path=f"{ORBIT_ASSETS_DATA_DIR}/viplanner_demo/warehouse_new.usd",
+        usd_path=os.path.join(DATA_DIR, "warehouse", "warehouse_new.usd"),
         groundplane=True,
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "warehouse", "keyword_mapping.yml"),
         people_config_file=os.path.join(DATA_DIR, "warehouse", "people_cfg.yml"),
@@ -61,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["/World/Warehouse"],
+        mesh_prim_paths=["/World/GroundPlane"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights
@@ -88,6 +87,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         width=1280,
         height=720,
         data_types=["semantic_segmentation"],
+        colorize_semantic_segmentation=False,
     )
 
 

@@ -4,11 +4,6 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# Copyright (c) 2022, NVIDIA CORPORATION & AFFILIATES, ETH Zurich, and University of Toronto
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 """
 This script demonstrates how to use the rigid objects class.
 """
@@ -17,25 +12,29 @@ This script demonstrates how to use the rigid objects class.
 
 import argparse
 
-# omni-isaac-orbit
-from omni.isaac.orbit.app import AppLauncher
+# omni-isaac-lab
+from omni.isaac.lab.app import AppLauncher
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="This script demonstrates how to use the camera sensor.")
-parser.add_argument("--headless", action="store_true", default=False, help="Force display off at all times.")
 parser.add_argument("--conv_distance", default=0.2, type=float, help="Distance for a goal considered to be reached.")
 parser.add_argument(
     "--scene", default="warehouse", choices=["matterport", "carla", "warehouse"], type=str, help="Scene to load."
 )
 parser.add_argument("--beat_the_planner", default=True, action="store_true", help="Beat the planner Demo.")
-parser.add_argument("--model_dir", default="/home/pascal/Downloads", type=str, help="Path to model directory.")
+parser.add_argument("--model_dir", default=None, type=str, help="Path to model directory.")
+
+# add applauncher arguments
+AppLauncher.add_app_launcher_args(parser)
+
 args_cli = parser.parse_args()
+args_cli.enable_cameras = True
 
 # launch omniverse app
 if args_cli.beat_the_planner:
-    app_launcher = AppLauncher(headless=args_cli.headless, ros=1)
-else:
-    app_launcher = AppLauncher(headless=args_cli.headless)
+    args_cli.ros = 1
+     
+app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
 """Rest everything follows."""
@@ -43,7 +42,7 @@ import omni.isaac.core.utils.prims as prim_utils
 import omni.isaac.orbit.utils.math as math_utils
 import torch
 from omni.isaac.core.objects import VisualCuboid
-from omni.isaac.orbit.envs import RLTaskEnv
+from omni.isaac.lab.envs import ManagerBasedRLEnv
 from omni.viplanner.config import (
     ViPlannerCarlaCfg,
     ViPlannerMatterportCfg,
@@ -71,23 +70,23 @@ Main
 
 
 def main():
-    """Imports all legged robots supported in Orbit and applies zero actions."""
+    """Imports all legged robots supported in IsaacLab and applies zero actions."""
 
     # create environment cfg
     if args_cli.scene == "matterport":
-        env_cfg = ViPlannerMatterportCfg() if not args_cli.beat_the_planner else BeatThePlannerMatterportCfg()
-        goal_pos = torch.tensor([7.0, -12.2, 1.0])
+        env_cfg = ViPlannerMatterportCfg(seed=1234)  if not args_cli.beat_the_planner else BeatThePlannerMatterportCfg()
+        goal_pos = torch.tensor([8.0, -13.5, 1.0])
     elif args_cli.scene == "carla":
-        env_cfg = ViPlannerCarlaCfg() if not args_cli.beat_the_planner else BeatThePlannerCarlaCfg()
+        env_cfg = ViPlannerCarlaCfg(seed=1234) if not args_cli.beat_the_planner else BeatThePlannerCarlaCfg()
         goal_pos = torch.tensor([137, 111.0, 1.0])
     elif args_cli.scene == "warehouse":
-        env_cfg = ViPlannerWarehouseCfg() if not args_cli.beat_the_planner else BeatThePlannerWarehouseCfg()
+        env_cfg = ViPlannerWarehouseCfg(seed=1234) if not args_cli.beat_the_planner else BeatThePlannerWarehouseCfg()
         goal_pos = torch.tensor([3, -4.5, 1.0])
     else:
         raise NotImplementedError(f"Scene {args_cli.scene} not yet supported!")
 
     # create environment
-    env = RLTaskEnv(env_cfg)
+    env = ManagerBasedRLEnv(env_cfg)
 
     # adjust the intrinsics of the camera
     depth_intrinsic = torch.tensor([[430.31607, 0.0, 428.28408], [0.0, 430.31607, 244.00695], [0.0, 0.0, 1.0]])
@@ -120,7 +119,7 @@ def main():
     env.sim.pause()
 
     # load viplanner
-    viplanner = VIPlannerAlgo(model_dir=args_cli.model_dir)
+    viplanner = VIPlannerAlgo(model_dir=args_cli.model_dir, device=env.device)
 
     goals = torch.tensor(goal_pos.Get(), device=env.device).repeat(env.num_envs, 1)
 

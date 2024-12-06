@@ -13,13 +13,13 @@ import carb
 import numpy as np
 import omni
 import omni.isaac.core.utils.prims as prim_utils
-import omni.isaac.orbit.sim as sim_utils
+import omni.isaac.lab.sim as sim_utils
 import trimesh
 import yaml
 from omni.isaac.core.utils.semantics import add_update_semantics, remove_all_semantics
-from omni.isaac.orbit.terrains import TerrainImporter
-from omni.isaac.orbit.utils.assets import ISAAC_NUCLEUS_DIR
-from omni.isaac.orbit.utils.warp import convert_to_warp_mesh
+from omni.isaac.lab.terrains import TerrainImporter
+from omni.isaac.lab.utils.assets import ISAAC_NUCLEUS_DIR
+from omni.isaac.lab.utils.warp import convert_to_warp_mesh
 from pxr import Gf, Usd, UsdGeom
 
 if TYPE_CHECKING:
@@ -110,7 +110,7 @@ class UnRealImporter(TerrainImporter):
             vertices = np.asarray(mesh_prim.GetPointsAttr().Get())
             faces = np.asarray(mesh_prim.GetFaceVertexIndicesAttr().Get())
             # check if both faces and vertices are valid
-            if not vertices or not faces:
+            if vertices[()] is None or faces[()] is None:
                 carb.log_warn(f"Mesh {submesh_name} has no faces or vertices.")
                 continue
             faces = faces.reshape(-1, 3)
@@ -152,7 +152,7 @@ class UnRealImporter(TerrainImporter):
         def recursive_semUpdate(prim, sem_class_name: str, update_submesh: bool) -> bool:
             # Necessary for Park Mesh
             if (
-                prim.GetName() == "HierarchicalInstancedStaticMesh"
+                prim.GetName() == "HierarchicalInstancedStaticMesh" or prim.GetTypeName() == "Mesh"
             ):  # or "FoliageInstancedStaticMeshComponent" in prim.GetName():
                 add_update_semantics(prim, sem_class_name)
                 update_submesh = True

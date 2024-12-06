@@ -1,55 +1,95 @@
+<div style="display: flex;">
+    <img src="../docs/example_matterport.png" alt="Matterport Mesh" style="width: 48%; padding: 5px;">
+    <img src="../docs/example_carla.png" alt="Unreal Engine / Carla Mesh" style="width: 48%; padding: 5px;">
+</div>
+
 # ViPlanner Omniverse Extension
 
-The ViPlanner Omniverse Extension offers a sophisticated testing environment for ViPlanner.
-Within NVIDIA Isaac Sim as a photorealistic simulator, this extension provides an assessment tool for ViPlanner's performance across diverse environments.
-The extension is developed using the [Orbit Framework](https://isaac-orbit.github.io/).
 
-**Remark**
+[![IsaacSim](https://img.shields.io/badge/IsaacSim-4.2.0-silver.svg)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
+[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://docs.python.org/3/whatsnew/3.10.html)
+[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
+[![License](https://img.shields.io/badge/license-BSD--3-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-The extension for `Matterport` and `Unreal Engine` meshes with semantic information is currently getting updated to the latest Orbit version and will be available soon. An intermediate solution is given [here](https://github.com/pascal-roth/orbit_envs).
+The ViPlanner Omniverse Extension offers a testing environment for ViPlanner and includes the data collection pipeline.
+Within NVIDIA Isaac Sim as a photorealistic simulator and using [IsaacLab](https://isaac-sim.github.io/IsaacLab/), this extension provides an assessment tool for ViPlanner's performance across diverse environments.
+
 
 ## Installation
 
-To install the ViPlanner extension for Isaac Sim version 2023.1.1, follow these steps:
+To install the ViPlanner extension for Isaac Sim version **4.2.0**, follow these steps:
 
-1. Install Isaac Sim using the [Orbit installation guide](https://isaac-orbit.github.io/orbit/source/setup/installation.html).
-2. Clone the orbit repo, checkout commit `477cd6b3f` and link the viplanner extension. The specific commit is necessary as Orbit is under active development and the extension is not yet compatible with the latest version.
+1. Clone the [IsaacLab](https://github.com/isaac-sim/IsaacLab) repo.
 
-```
-git clone git@github.com:NVIDIA-Omniverse/orbit.git
-cd orbit
-git checkout 477cd6b3f
-cd source/extensions
-ln -s {VIPLANNER_DIR}/omniverse/extension/omni.viplanner .
-```
+    ```
+    git clone git@github.com:isaac-sim/IsaacLab.git
+    ```
 
-3. TEMPORARY: To use Matterport with semantic information within Isaac Sim, a new extension has been developed as part of this work. Currently, all parts are getting updated to the latest Orbit version. A temporary solution that is sufficient for the demo script is available [here](https://github.com/pascal-roth/orbit_envs). Please also clone and link it into orbit.
+    and follow the installation steps given [here](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation)
+    to install both IsaacLab and IsaacSim.
 
-```
-git clone git@github.com:pascal-roth/orbit_envs.git
-cd orbit/source/extension
-ln -s {ORBIT_ENVS}/extensions/omni.isaac.matterport .
-```
+    **IMPORTANT**: The extension is tested with IsaacSim 4.2.0 and IsaacLab 1.2.0 (commit: 0bccd886c19a9891c0b6bdd37e13f338eacc0bba).
+    While it may work with newer versions, it is not guaranteed. If you encounter issues, please switch back to the previous versions. Any
+    PRs with updated versions are welcome.
 
-4. Then run the orbit installer script and additionally install ViPlanner in the Isaac Sim virtual environment.
+3. Link the ViPlanner and Matterport extension to the IsaacLab repo.
 
-```
-./orbit.sh -i -e
-./orbit.sh -p -m pip install -e {VIPLANNER_DIR}
-```
+    ```
+    cd IsaacLab/source/extensions
+    ln -s <path-to-viplanner-repo>/omniverse/extension/omni.viplanner .
+    ln -s <path-to-viplanner-repo>/omniverse/extension/omni.isaac.matterport .
+    ```
+
+4. Install ViPlanner and the extension into the virtual environment of IsaacLab.
+
+    ```
+    cd IsaacLab
+    ./isaaclab.sh -p -m pip install -e <path-to-viplanner-repo>  # this install the ViPlanner package
+    ./isaaclab.sh -i  # this installs the additional extensions
+    ```
 
 **Remark**
-Also in orbit, it is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
+It is necessary to comply with PEP660 for the install. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
 - [pip >= 21.3](https://pip.pypa.io/en/stable/news/#v21-3)
 	```
-  ./orbit.sh -p -m pip install --upgrade pip
+  cd IsaacLab
+  ./isaaclab.sh -p -m pip install --upgrade pip
   ```
 - [setuptools >= 64.0.0](https://github.com/pypa/setuptools/blob/main/CHANGES.rst#v6400)
 	```
-  ./orbit.sh -p -m pip install --upgrade setuptools
+  cd IsaacLab
+  ./isaaclab.sh -p -m pip install --upgrade setuptools
   ```
 
-## Usage
+## Download the Simulation Environments
+
+### Matterport
+To download Matterport datasets, please refer to the [Matterport3D](https://niessner.github.io/Matterport/) website. The dataset should be converted to USD format using Isaac Sim by executing the following steps:
+
+1. Run the `convert_mesh.py` script to convert the `.obj` file (located under `matterport_mesh`) to `USD`. With the recent update of the asset converter script, use the resulting `*_non_metric.usd` file.
+
+   ```
+   # run the converter
+   cd IsaacLab
+   ./isaaclab.sh -p source/standalone/tools/convert_mesh.py matterport_mesh/xxx.obj matterport_mesh/xxx.usd --make-instanceable --collision-approximation convexDecomposition
+   ```
+
+   **IMPORTANT**
+
+   - The conversion will fail if the asset name starts with a number (e.g., `0c334eaabb844eaaad049cbbb2e0a4f2.obj`), because the USD API prohibits this naming as explained [here](https://openusd.org/release/api/group__group__tf___string.html#gaa129b294af3f68d01477d430b70d40c8). This issue is described in more detail [here](https://forums.developer.nvidia.com/t/cant-create-prims-if-name-starts-with-number/249617).
+
+   - Typically, the file should be converted with correct scale and rotation. In the case that you run the demo and the environment is rotated or scaled incorrectly, fix the import setting such as Rotation and Scale. (`Property -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`) and then save the USD.
+
+2. Check that the converted mesh has colliders enabled. This can be done by starting IsaacSim (`./isaaclab.sh -s`), importing the converted usd mesh and visualizing the colliders (go to the "eye" symbol in the
+top left corner, select `Show by Type -> Physics -> Colliders` and set the value to `All` ). The colliders should be visible as pink linkes. In the case that no colliders are presented, select the mesh in the stage,
+go the `Property` section and click `Add -> Physics -> Colliders Preset`. Then save the asset.
+
+### Carla
+We provide an already converted asset of the `Town01` of Carla. It can be downloaded as USD asset: [Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing)
+
+
+## Planer Demo
 
 A demo script is provided to run the planner in three different environments: [Matterport](https://niessner.github.io/Matterport/), [Carla](https://carla.org//), and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/features/environment_setup/assets/usd_assets_environments.html#warehouse).
 In each scenario, the goal is represented as a movable cube within the environment.
@@ -59,32 +99,40 @@ To run the demo, download the model: [[checkpoint](https://drive.google.com/file
 ### Matterport
 [Config](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)
 
-To download Matterport datasets, please refer to the [Matterport3D](https://niessner.github.io/Matterport/) website. The dataset should be converted to USD format using Isaac Sim by executing the following steps:
-1. Import the `.obj` file (located under `matterport_mesh`) into Isaac Sim by going to `File -> Import`.
-2. Fix potential import setting such as Rotation and Scale. (`Property Panel -> Transform -> Rotate:unitsResolve = 0.0; Scale:unitsResolve = [1.0, 1.0, 1.0]`)
-3. Export the scene as USD (`File -> Save as`).
+The demo uses the **2n8kARJN3HM** scene from the Matterport dataset. A preview is available [here](https://aspis.cmpt.sfu.ca/scene-toolkit/scans/matterport3d/houses).
 
 ```
-./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir {MODEL_DIR}
+cd IsaacLab
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene matterport --model_dir <path-to-model-download-dir>
 ```
 
 ### Carla
-[Download USD Link](https://drive.google.com/file/d/1wZVKf2W0bSmP1Wm2w1XgftzSBx0UR1RK/view?usp=sharing)
-
+[Config](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py)
 
 ```
-./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene carla --model_dir {MODEL_DIR}
+cd IsaacLab
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene carla --model_dir <path-to-model-download-dir>
 ```
 
 ### NVIDIA Warehouse
-[Download USD Link](https://drive.google.com/file/d/1QXxuak-1ZmgKkxhE0EGfDydApVr6LrsF/view?usp=sharing) [Config](./extension/omni.viplanner/omni/viplanner/config/warehouse_cfg.py)
+No need to adjust the config, as the asset is directly included in the repo.
+
 ```
-./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir {MODEL_DIR}
+cd IsaacLab
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene warehouse --model_dir <path-to-model-download-dir>
 ```
 
-## Data Collection and Evaluation
+## Data Collection
 
-Script for data collection and evaluation are getting updated to the latest Orbit version and will be available soon. If you are interested in the current state, please contact us.
+The training data is generated from different simulation environments. After they have been downloaded and converted to USD, adjust the paths (marked as `${USER_PATH_TO_USD}`) in the corresponding config files ([Carla](./extension/omni.viplanner/omni/viplanner/config/carla_cfg.py) and [Matterport](./extension/omni.viplanner/omni/viplanner/config/matterport_cfg.py)).
+The rendered viewpoints are collected by executing
+
+```
+cd IsaacLab
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/data_collect.py --scene <matterport/carla/warehouse> --num_samples <how-many-viewpoints>
+```
+
+To test that the data has been correctly extracted, please run the 3D reconstruction and see if the results fits to the simulated environment.
 
 
 ## Beat the Planner
@@ -98,6 +146,6 @@ The depth image is published under the topic ``/beat_the_planner/depth_image`` a
 Before starting the game, make sure a roscore is running. Then the game is started by running the following command:
 
 ```
-./orbit.sh -p {VIPLANNER_DIR}/omniverse/standalone/viplanner_demo.py --scene < warehouse | carla | matterport > --model_dir {MODEL_DIR}  --beat_the_planner
+./isaaclab.sh -p <path-to-viplanner-repo>/omniverse/standalone/viplanner_demo.py --scene < warehouse | carla | matterport > --model_dir {MODEL_DIR}  --beat_the_planner
 ```
 

@@ -9,8 +9,8 @@
 import math
 from dataclasses import MISSING
 
-from omni.isaac.orbit.managers import CommandTermCfg
-from omni.isaac.orbit.utils.configclass import configclass
+from omni.isaac.lab.managers import CommandTermCfg
+from omni.isaac.lab.utils.configclass import configclass
 from typing_extensions import Literal
 
 from .path_follower_command_generator import PathFollowerCommandGenerator
@@ -38,7 +38,7 @@ class PathFollowerCommandGeneratorCfg(CommandTermCfg):
     """Time threshold to switch between the forward and backward drive."""
     maxSpeed: float = 0.75
     """Maximum speed of the robot."""
-    maxAccel: float = 2.5 / 100.0  # 2.5 / 100
+    maxAccel: float = 2.5 / 100.0
     """Maximum acceleration of the robot."""
     joyYaw: float = 1.0
     """TODO: add description"""

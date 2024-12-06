@@ -9,10 +9,10 @@ from __future__ import annotations
 from dataclasses import MISSING
 
 import torch
-from omni.isaac.orbit.envs import RLTaskEnv
-from omni.isaac.orbit.managers.action_manager import ActionTerm, ActionTermCfg
-from omni.isaac.orbit.utils import configclass
-from omni.isaac.orbit.utils.assets import check_file_path, read_file
+from omni.isaac.lab.envs import ManagerBasedRLEnv
+from omni.isaac.lab.managers.action_manager import ActionTerm, ActionTermCfg
+from omni.isaac.lab.utils import configclass
+from omni.isaac.lab.utils.assets import check_file_path, read_file
 
 
 # -- Navigation Action
@@ -20,9 +20,9 @@ class NavigationAction(ActionTerm):
     """Actions to navigate a robot by following some path."""
 
     cfg: NavigationActionCfg
-    _env: RLTaskEnv
+    _env: ManagerBasedRLEnv
 
-    def __init__(self, cfg: NavigationActionCfg, env: RLTaskEnv):
+    def __init__(self, cfg: NavigationActionCfg, env: ManagerBasedRLEnv):
         super().__init__(cfg, env)
 
         # check if policy file exists
