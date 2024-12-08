@@ -6,15 +6,15 @@
   <a href="https://youtu.be/8KO4NoDw6CM">Video</a> •
   <a href="#citing-viplanner">BibTeX</a>
 
-  Click on image for demo video!
+  Click on the image for the demo video!
   [![Demo Video](./assets/crosswalk.jpg)](https://youtu.be/8KO4NoDw6CM)
 
 </p>
 
 ViPlanner is a robust learning-based local path planner based on semantic and depth images.
-Fully trained in simulation, the planner can be applied in dynamic indoor as well outdoor environments.
+Fully trained in simulation, the planner can be applied in dynamic indoor as well as outdoor environments.
 We provide it as an extension for [NVIDIA Isaac-Sim](https://developer.nvidia.com/isaac-sim) within the [IsaacLab](https://isaac-sim.github.io/IsaacLab/) project (details [here](./omniverse/README.md)).
-Furthermore, a ready to use [ROS Noetic](http://wiki.ros.org/noetic) package is available within this repo for direct integration on any robot (tested and developed on ANYmal C and D).
+Furthermore, a ready-to-use [ROS Noetic](http://wiki.ros.org/noetic) package is available within this repo for direct integration on any robot (tested and developed on ANYmal C and D).
 
 **Keywords:** Visual Navigation, Local Planning, Imperative Learning
 
@@ -52,7 +52,7 @@ Furthermore, a ready to use [ROS Noetic](http://wiki.ros.org/noetic) package is 
 
 **Extension**
 
-This work includes the switch from semantic to direct RGB input for the training pipeline, to facilitate further research. For RGB input, an option exist to employ a backbone with mask2former pre-trained weights. For this option, include the github submodule, install the requirements included there and build the necessary cuda operators. These steps are not necessary for the published planner!
+This work includes the switch from semantic to direct RGB input for the training pipeline to facilitate further research. For RGB input, an option exists to employ a backbone with mask2former pre-trained weights. For this option, include the GitHub submodule, install the requirements included there, and build the necessary Cuda operators. These steps are not necessary for the published planner!
 
 ```bash
 pip install git+https://github.com/facebookresearch/detectron2.git
@@ -64,7 +64,7 @@ sh make.sh
 
 **Remark**
 
-Note that for an editable install for packages without setup.py, PEP660 has to be fulfilled. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
+Note that for an editable installation of packages without setup.py, PEP660 has to be fulfilled. This requires the following versions (as described [here](https://stackoverflow.com/questions/69711606/how-to-install-a-package-using-pip-in-editable-mode-with-pyproject-toml) in detail)
 - [pip >= 21.3](https://pip.pypa.io/en/stable/news/#v21-3)
 	```
   python3 -m pip install --upgrade pip
@@ -79,7 +79,7 @@ Note that for an editable install for packages without setup.py, PEP660 has to b
 
 1. Real-World <br>
 
-	ROS-Node is provided to run the planner on the LeggedRobot ANYmal, for details please see [ROS-Node-README](ros/README.md).
+	ROS-Node is provided to run the planner on the LeggedRobot ANYmal; for details, please see [ROS-Node-README](ros/README.md).
 
 2. NVIDIA Isaac-Sim <br>
 
@@ -88,20 +88,20 @@ Note that for an editable install for packages without setup.py, PEP660 has to b
 
 ## Training
 
-Here an overview of the steps involved in training the policy.
+Here is an overview of the steps involved in training the policy.
 For more detailed instructions, please refer to [TRAINING.md](TRAINING.md).
 
 0. Training Data Generation <br>
-Training data is generated from the [Matterport 3D](https://github.com/niessner/Matterport), [Carla](https://carla.org/) and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/tutorial_static_assets.html) using IsaacLab. For detailed instruction on how to install the extension and run the data collection script, please see [here](omniverse/README.md)
+Training data is generated from the [Matterport 3D](https://github.com/niessner/Matterport), [Carla](https://carla.org/) and [NVIDIA Warehouse](https://docs.omniverse.nvidia.com/isaacsim/latest/tutorial_static_assets.html) using IsaacLab. For detailed instructions on how to install the extension and run the data collection script, please see [here](omniverse/README.md)
 
 1. Build Cost-Map <br>
-The first step in training the policy is to build a cost-map from the available depth and semantic data. A cost-map is a representation of the environment where each cell is assigned a cost value indicating its traversability. The cost-map guides the optimization, therefore, is required to be differentiable. Cost-maps are built using the [cost-builder](viplanner/cost_builder.py) with configs [here](viplanner/config/costmap_cfg.py), given a pointcloud of the environment with semantic information (either from simultion or real-world information). The point-cloud of the simulated environments can be generated with the [reconstruction-script](viplanner/depth_reconstruct.py) with config [here](viplanner/config/costmap_cfg.py).
+The first step in training the policy is to build a cost-map from the available depth and semantic data. A cost-map is a representation of the environment where each cell is assigned a cost value indicating its traversability. The cost-map guides the optimization, therefore, it is required to be differentiable. Cost-maps are built using the [cost-builder](viplanner/cost_builder.py) with configs [here](viplanner/config/costmap_cfg.py), given a pointcloud of the environment with semantic information (either from simulation or real-world information). The point-cloud of the simulated environments can be generated with the [reconstruction-script](viplanner/depth_reconstruct.py) with config [here](viplanner/config/costmap_cfg.py).
 
 2. Training <br>
-Once the cost-map is constructed, the next step is to train the policy. The policy is a machine learning model that learns to make decisions based on the depth and semantic measurements. An example training script can be found [here](viplanner/train.py) with configs [here](viplanner/config/learning_cfg.py)
+Once the cost-map is constructed, the next step is to train the policy. The policy is a machine learning model that learns to make decisions based on depth and semantic measurements. An example training script can be found [here](viplanner/train.py) with configs [here](viplanner/config/learning_cfg.py)
 
 3. Evaluation <br>
-Performance assessment can be performed on simulation and real-world data. The policy will be evaluated regarding multiple metrics such as distance to goal, average and maximum cost, path length. In order to let the policy be executed on anymal in simulation, please refer to [Omniverse Extension](./omniverse/README.md)
+Performance assessment can be performed on simulation and real-world data. The policy will be evaluated regarding multiple metrics such as distance to the goal, average and maximum cost, and path length. In order to let the policy be executed on anymal in simulation, please refer to [Omniverse Extension](./omniverse/README.md)
 
 
 ### Model Download
@@ -109,12 +109,13 @@ The latest model is available to download: [[checkpoint](https://drive.google.co
 
 ## <a name="CitingViPlanner"></a>Citing ViPlanner
 ```
-@article{roth2023viplanner,
-  title     ={ViPlanner: Visual Semantic Imperative Learning for Local Navigation},
-  author    ={Pascal Roth and Julian Nubert and Fan Yang and Mayank Mittal and Marco Hutter},
-  journal   = {2024 IEEE International Conference on Robotics and Automation (ICRA)},
-  year      = {2023},
-  month     = {May},
+@inproceedings{roth2024viplanner,
+  title={Viplanner: Visual semantic imperative learning for local navigation},
+  author={Roth, Pascal and Nubert, Julian and Yang, Fan and Mittal, Mayank and Hutter, Marco},
+  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={5243--5249},
+  year={2024},
+  organization={IEEE}
 }
 ```
 
