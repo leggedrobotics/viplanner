@@ -86,7 +86,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         spawn=sim_utils.PinholeCameraCfg(),
         width=1280,
         height=720,
-        data_types=["semantic_segmentation"],
+        data_types=["semantic_segmentation", "rgb"],
         colorize_semantic_segmentation=False,
     )
 

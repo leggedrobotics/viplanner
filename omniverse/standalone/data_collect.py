@@ -97,6 +97,13 @@ def main():
         "semantic_camera": "semantic_segmentation",
     }
 
+    # if also RGB images should be rendered
+    if args_cli.scene == "matterport":
+        scene_cfg.rgb_camera.prim_path = "/World/rgb_camera"
+        cfg.cameras["rgb_camera"] = "rgb"
+    else:
+        cfg.cameras["semantic_camera"] = "rgb"
+
     # Load kit helper
     sim_cfg = sim_utils.SimulationCfg()
     sim = SimulationContext(sim_cfg)
