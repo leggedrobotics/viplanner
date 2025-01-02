@@ -154,9 +154,11 @@ class ViewpointSampling:
 
         # save poses
         filedir = self.cfg.save_path if self.cfg.save_path else self._get_save_filedir()
-        # # create directories
-        for cam_idx, (cam, annotator) in enumerate(self.cfg.cameras.items()):
-            os.makedirs(os.path.join(filedir, annotator), exist_ok=True)
+        # create directories
+        os.makedirs(os.path.join(filedir, "semantics"), exist_ok=True)
+        os.makedirs(os.path.join(filedir, "depth"), exist_ok=True)
+        if "rgb" in self.cfg.cameras.values():
+            os.makedirs(os.path.join(filedir, "rgb"), exist_ok=True)
 
         # save camera configurations
         print(f"[INFO] Saving camera configurations to {filedir}.")
@@ -234,18 +236,22 @@ class ViewpointSampling:
                             output = image_data_np[idx]
 
                         assert cv2.imwrite(
-                            os.path.join(filedir, annotator, f"{image_idx[cam_idx]}".zfill(4) + ".png"),
+                            os.path.join(
+                                filedir,
+                                "semantics" if annotator == "semantic_segmentation" else "rgb",
+                                f"{image_idx[cam_idx]}".zfill(4) + ".png"
+                            ),
                             cv2.cvtColor(output.astype(np.uint8), cv2.COLOR_RGB2BGR),
                         )
                     # depth
                     else:
                         assert cv2.imwrite(
-                            os.path.join(filedir, annotator, f"{image_idx[cam_idx]}".zfill(4) + ".png"),
+                            os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
                             np.uint16(image_data_np[idx] * self.cfg.depth_scale),
                         )
                         # save as npy
                         np.save(
-                            os.path.join(filedir, annotator, f"{image_idx[cam_idx]}".zfill(4) + ".npy"),
+                            os.path.join(filedir, "depth", f"{image_idx[cam_idx]}".zfill(4) + ".npy"),
                             image_data_np[idx] * self.cfg.depth_scale,
                         )
 

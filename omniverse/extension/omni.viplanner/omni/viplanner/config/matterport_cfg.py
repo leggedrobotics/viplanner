@@ -45,7 +45,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             dynamic_friction=1.0,
         ),
         # NOTE: this path should be absolute to load the textures correctly
-        obj_filepath="/home/pascal/Downloads/matterport/matterport.usd",
+        obj_filepath="${USER_PATH_TO_USD}/matterport.usd",
         groundplane=True,
     )
     # robots
@@ -60,7 +60,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         attach_yaw_only=True,
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=True,
-        mesh_prim_paths=["/home/pascal/Downloads/matterport/matterport.ply"],
+        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
     )
     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
     # lights
@@ -110,7 +110,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.PinholeCameraPatternCfg(width=848, height=480),
         debug_vis=False,
         max_distance=10,
-        mesh_prim_paths=["/home/pascal/Downloads/matterport/matterport.ply"],
+        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
         data_types=["distance_to_image_plane"],
     )
     semantic_camera = VIPlannerMatterportRayCasterCameraCfg(
@@ -119,8 +119,10 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.PinholeCameraPatternCfg(width=1280, height=720),
         data_types=["semantic_segmentation"],
         debug_vis=False,
-        mesh_prim_paths=["/home/pascal/Downloads/matterport/matterport.ply"],
+        mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
     )
+    
+    # NOTE: comment the following lines to only render the semantic segmentation and depth images
     rgb_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base/rgb_camera",
         offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),

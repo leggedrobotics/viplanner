@@ -80,6 +80,8 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         height=480,
         data_types=["distance_to_image_plane"],
     )
+
+    # NOTE: remove "rgb" from the data_types to only render the semantic segmentation
     semantic_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base/semantic_camera",
         offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),

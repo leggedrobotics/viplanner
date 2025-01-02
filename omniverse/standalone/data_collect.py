@@ -97,11 +97,11 @@ def main():
         "semantic_camera": "semantic_segmentation",
     }
 
-    # if also RGB images should be rendered
-    if args_cli.scene == "matterport":
+    # adustments if also RGB images should be rendered
+    if args_cli.scene == "matterport" and hasattr(scene_cfg, "rgb_camera"):
         scene_cfg.rgb_camera.prim_path = "/World/rgb_camera"
         cfg.cameras["rgb_camera"] = "rgb"
-    else:
+    elif "rgb" in scene_cfg.semantic_camera.data_types:
         cfg.cameras["semantic_camera"] = "rgb"
 
     # Load kit helper
