@@ -81,9 +81,9 @@ class ViewpointSampling:
             sample_idx_select = torch.randperm(sample_idx.sum())[
                 : min(nbr_samples_per_point, nbr_viewpoints - sample_locations_count)
             ]
-            sample_locations[
-                sample_locations_count : sample_locations_count + sample_idx_select.shape[0]
-            ] = self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
+            sample_locations[sample_locations_count : sample_locations_count + sample_idx_select.shape[0]] = (
+                self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
+            )
             sample_locations_count += sample_idx_select.shape[0]
             curr_point_idx += 1
             # reset point index if all points are sampled
@@ -157,6 +157,8 @@ class ViewpointSampling:
         # create directories
         os.makedirs(os.path.join(filedir, "semantics"), exist_ok=True)
         os.makedirs(os.path.join(filedir, "depth"), exist_ok=True)
+        if "rgb" in self.cfg.cameras.values():
+            os.makedirs(os.path.join(filedir, "rgb"), exist_ok=True)
 
         # save camera configurations
         print(f"[INFO] Saving camera configurations to {filedir}.")
@@ -206,16 +208,18 @@ class ViewpointSampling:
                 # save images
                 for idx in range(samples_idx.shape[0]):
                     # semantic segmentation
-                    if annotator == "semantic_segmentation":
+                    if annotator == "semantic_segmentation" or annotator == "rgb":
                         if image_data_np.shape[-1] == 1:
                             # get info data
                             info = self.scene.sensors[cam].data.info[idx][annotator]["idToLabels"]
 
                             # assign each key a color from the VIPlanner color space
                             info = {
-                                int(k): self.viplanner_sem_meta.class_color["static"]
-                                if v["class"] in ("BACKGROUND", "UNLABELLED")
-                                else self.viplanner_sem_meta.class_color[v["class"]]
+                                int(k): (
+                                    self.viplanner_sem_meta.class_color["static"]
+                                    if v["class"] in ("BACKGROUND", "UNLABELLED")
+                                    else self.viplanner_sem_meta.class_color[v["class"]]
+                                )
                                 for k, v in info.items()
                             }
 
@@ -232,7 +236,11 @@ class ViewpointSampling:
                             output = image_data_np[idx]
 
                         assert cv2.imwrite(
-                            os.path.join(filedir, "semantics", f"{image_idx[cam_idx]}".zfill(4) + ".png"),
+                            os.path.join(
+                                filedir,
+                                "semantics" if annotator == "semantic_segmentation" else "rgb",
+                                f"{image_idx[cam_idx]}".zfill(4) + ".png"
+                            ),
                             cv2.cvtColor(output.astype(np.uint8), cv2.COLOR_RGB2BGR),
                         )
                     # depth

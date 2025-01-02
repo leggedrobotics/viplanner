@@ -124,7 +124,7 @@ The latest model is available to download: [[checkpoint](https://drive.google.co
 This code belongs to Robotic Systems Lab, ETH Zurich.
 All right reserved
 
-**Authors: [Pascal Roth](https://github.com/pascal-roth), [Julian Nubert](https://juliannubert.com/), [Fan Yang](https://github.com/MichaelFYang), [Mayank Mittal](https://mayankm96.github.io/), [Ziqi Fan](https://github.com/fan-ziqi), and [Marco Hutter](https://rsl.ethz.ch/the-lab/people/person-detail.MTIxOTEx.TGlzdC8yNDQxLC0xNDI1MTk1NzM1.html)<br />
+**Authors: [Pascal Roth](https://github.com/pascal-roth), [Julian Nubert](https://juliannubert.com/), [Fan Yang](https://github.com/MichaelFYang), [Mayank Mittal](https://mayankm96.github.io/), and [Marco Hutter](https://rsl.ethz.ch/the-lab/people/person-detail.MTIxOTEx.TGlzdC8yNDQxLC0xNDI1MTk1NzM1.html)<br />
 Maintainer: Pascal Roth, rothpa@ethz.ch**
 
 The ViPlanner package has been tested under ROS Noetic on Ubuntu 20.04.
