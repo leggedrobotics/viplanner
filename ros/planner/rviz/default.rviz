@@ -509,7 +509,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/IsaacLab
+      Class: rviz/Orbit
       Distance: 23.335857391357422
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549

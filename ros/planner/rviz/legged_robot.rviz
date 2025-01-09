@@ -1706,7 +1706,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/IsaacLab
+      Class: rviz/Orbit
       Distance: 19.056943893432617
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -1747,7 +1747,7 @@ Visualization Manager:
         Pitch: 0.8103983402252197
         Target Frame: base
         Yaw: 2.7153992652893066
-      - Class: rviz/IsaacLab
+      - Class: rviz/Orbit
         Distance: 14.963652610778809
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
@@ -1762,7 +1762,7 @@ Visualization Manager:
         Focal Shape Fixed Size: true
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: IsaacLab
+        Name: Orbit
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.9653983116149902
         Target Frame: base
