@@ -1029,7 +1029,7 @@ if __name__ == "__main__":
 
     # model save path
     args.model_save = os.path.join(pack_path, args.model_save)
-    args.m2f_config_path = os.path.join(pack_path, args.m2f_cfg_file)
+    args.m2f_config_path = os.path.join(pack_path, os.path.expandvars(args.m2f_cfg_file))
     args.m2f_model_path = os.path.join(pack_path, args.m2f_model_path)
 
     node = VIPlannerNode(args)
