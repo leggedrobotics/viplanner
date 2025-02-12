@@ -16,7 +16,7 @@ Please refer to [Installation Instructions](./INSTALL.md) where details about th
 
 ## Usage
 
-For the legged platform ANYmal/ similar plaforms, we provide a configuration file based on a mounted RGB-D camera ([Realsense d435i](https://www.intelrealsense.com/depth-camera-d435i/)). The configuration file is located in the [config](./planner/config/) folder. Before running the planner, make sure to adjust the configuration file to your needs. In the case a different camera or significantly different platform is used, please retrain the model.
+For the legged platform ANYmal/ similar platforms, we provide a configuration file based on a mounted RGB-D camera ([Realsense d435i](https://www.intelrealsense.com/depth-camera-d435i/)). The configuration file is located in the [config](./planner/config/) folder. Before running the planner, make sure to adjust the configuration file to your needs. In the case a different camera or significantly different platform is used, please retrain the model.
 
 After launching the ANYmal software stack, run the VIPlanner without visualization:
 
