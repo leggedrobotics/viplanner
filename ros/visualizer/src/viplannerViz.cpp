@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
+ * Copyright (c) 2023-2025, ETH Zurich (Robotics Systems Lab)
  * Author: Pascal Roth
  * All rights reserved.
  *
