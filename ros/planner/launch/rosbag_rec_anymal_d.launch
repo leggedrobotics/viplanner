@@ -1,5 +1,0 @@
-<launch>
-
-    <node pkg="rosbag" type="record" name="rosbag_record" args="record -o $(find viplanner_node)/bag/ /sensors/imu /tf /tf_static /viplanner/timer /viplanner/m2f_timer /wide_angle_camera_front/camera_info /wide_angle_camera_front/image_raw/compressed /viplanner/status /depth_camera_front_upper/depth/camera_info /depth_camera_front_upper/depth/image_rect_raw /viplanner/path /mp_waypoint /joy /compslam_lio/odometry /state_estimator/odometry /state_estimator/pose_in_odom /lidar/point_cloud /viplanner/path_viz /viplanner/sem_image/compressed /depth_camera_front_upper/point_cloud_self_filtered /compslam_lio/full_path /wide_angle_camera_rear/image_color/compressed /wide_angle_camera_rear/camera_info " />
-    <!-- <node type="rviz" name="dvf_planner_rviz" pkg="rviz" args="-d $(find dvf_planner_node)/rviz/default.rviz" respawn="false"/> -->
-</launch>
