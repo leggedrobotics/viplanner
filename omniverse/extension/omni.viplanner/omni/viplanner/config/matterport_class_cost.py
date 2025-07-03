@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-from omni.isaac.lab.utils import configclass
+from isaaclab.utils import configclass
 
 OBSTACLE_COST = 1.0
 TRAVERSABLE_COST = 0.0

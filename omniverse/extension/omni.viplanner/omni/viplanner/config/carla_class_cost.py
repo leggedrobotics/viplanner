@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-from omni.isaac.lab.utils import configclass
+from isaaclab.utils import configclass
 
 OBSTACLE_COST = 2.0
 ROAD_LOSS = 1.5

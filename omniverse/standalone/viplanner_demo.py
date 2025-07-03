@@ -13,7 +13,7 @@ This script demonstrates how to use the rigid objects class.
 import argparse
 
 # omni-isaac-lab
-from omni.isaac.lab.app import AppLauncher
+from isaaclab.app import AppLauncher
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="This script demonstrates how to use the camera sensor.")
@@ -28,16 +28,19 @@ AppLauncher.add_app_launcher_args(parser)
 
 args_cli = parser.parse_args()
 args_cli.enable_cameras = True
-
+args_cli.no_vsync = True
+args_cli.fixed_time_step = True
+args_cli.async_rendering = True
 # launch omniverse app
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
+
 """Rest everything follows."""
-import omni.isaac.core.utils.prims as prim_utils
+import isaacsim.core.utils.prims as prim_utils
 import torch
-from omni.isaac.core.objects import VisualCuboid
-from omni.isaac.lab.envs import ManagerBasedRLEnv
+from isaacsim.core.api.objects import VisualCuboid
+from isaaclab.envs import ManagerBasedRLEnv
 from omni.viplanner.config import (
     ViPlannerCarlaCfg,
     ViPlannerMatterportCfg,
@@ -98,7 +101,7 @@ def main():
     goal_pos = prim_utils.get_prim_at_path("/World/goal").GetAttribute("xformOp:translate")
 
     # pause the simulator
-    # env.sim.pause()
+    #env.sim.pause()
 
     # load viplanner
     viplanner = VIPlannerAlgo(model_dir=args_cli.model_dir, device=env.device)
@@ -112,6 +115,7 @@ def main():
 
     # Simulate physics
     while simulation_app.is_running():
+        print("Cam position:", obs["planner_transform"]["cam_position"])
         with torch.inference_mode():
             # If simulation is paused, then skip.
             if not env.sim.is_playing():
@@ -119,7 +123,16 @@ def main():
                 continue
 
             obs = env.step(action=paths.view(paths.shape[0], -1))[0]
+            robot_pos = env.scene["robot"].data.root_pos_w
+            robot_rot = env.scene["robot"].data.root_quat_w
 
+            cam_offset = torch.tensor([0.510, 0.0, 0.015], device=env.device)
+            cam_position = robot_pos + cam_offset
+            cam_orientation = robot_rot  # 假设相机朝向与 base 保持一致
+
+            # 替换 obs 中的感知参考帧
+            obs["planner_transform"]["cam_position"] = cam_position
+            obs["planner_transform"]["cam_orientation"] = cam_orientation
         # apply planner
         goals = torch.tensor(goal_pos.Get(), device=env.device).repeat(env.num_envs, 1)
         if torch.any(
@@ -141,6 +154,7 @@ def main():
         paths = viplanner.path_transformer(
             paths, obs["planner_transform"]["cam_position"], obs["planner_transform"]["cam_orientation"]
         )
+
 
         # draw path
         viplanner.debug_draw(paths, fear, goals)

@@ -4,15 +4,15 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import omni.isaac.lab.sim as sim_utils
+import isaaclab.sim as sim_utils
 import omni.viplanner.viplanner.mdp as mdp
-from omni.isaac.lab.assets import AssetBaseCfg
-from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
-from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
-from omni.isaac.lab.managers import SceneEntityCfg
-from omni.isaac.lab.scene import InteractiveSceneCfg
-from omni.isaac.lab.sensors import ContactSensorCfg, patterns, CameraCfg
-from omni.isaac.lab.utils import configclass
+from isaaclab.assets import AssetBaseCfg
+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+from isaaclab.managers import ObservationTermCfg as ObsTerm
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.scene import InteractiveSceneCfg
+from isaaclab.sensors import ContactSensorCfg, patterns, CameraCfg
+from isaaclab.utils import configclass
 from omni.isaac.matterport.config import MatterportImporterCfg
 from omni.isaac.matterport.domains import MatterportRayCasterCfg
 from omni.viplanner.utils import VIPlannerMatterportRayCasterCameraCfg
@@ -23,8 +23,7 @@ from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
-
+from isaaclab_assets.robots.anymal import ANYMAL_C_CFG
 ##
 # Scene definition
 ##
