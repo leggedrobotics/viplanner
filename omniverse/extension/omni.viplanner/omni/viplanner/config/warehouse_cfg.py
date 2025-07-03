@@ -6,11 +6,11 @@
 
 import os
 
-import omni.isaac.lab.sim as sim_utils
-from omni.isaac.lab.assets import AssetBaseCfg
-from omni.isaac.lab.scene import InteractiveSceneCfg
-from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.lab.utils import configclass
+import isaaclab.sim as sim_utils
+from isaaclab.assets import AssetBaseCfg
+from isaaclab.scene import InteractiveSceneCfg
+from isaaclab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+from isaaclab.utils import configclass
 from omni.viplanner.utils import UnRealImporterCfg
 
 from ..viplanner import DATA_DIR
@@ -20,8 +20,7 @@ from .base_cfg import ViPlannerBaseCfg
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
-
+from isaaclab_assets.robots.anymal import ANYMAL_C_CFG
 
 ##
 # Scene definition

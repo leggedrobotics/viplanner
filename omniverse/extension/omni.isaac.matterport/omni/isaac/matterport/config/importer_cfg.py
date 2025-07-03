@@ -5,9 +5,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 
-from omni.isaac.core.utils import extensions
-from omni.isaac.lab.terrains import TerrainImporterCfg
-from omni.isaac.lab.utils import configclass
+from isaacsim.core.utils import extensions
+from isaaclab.terrains import TerrainImporterCfg
+from isaaclab.utils import configclass
 from omni.isaac.matterport.domains import MatterportImporter
 from typing_extensions import Literal
 

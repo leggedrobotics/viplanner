@@ -9,10 +9,10 @@ from __future__ import annotations
 from dataclasses import MISSING
 
 import torch
-from omni.isaac.lab.envs import ManagerBasedRLEnv
-from omni.isaac.lab.managers.action_manager import ActionTerm, ActionTermCfg
-from omni.isaac.lab.utils import configclass
-from omni.isaac.lab.utils.assets import check_file_path, read_file
+from isaaclab.envs import ManagerBasedRLEnv
+from isaaclab.managers.action_manager import ActionTerm, ActionTermCfg
+from isaaclab.utils import configclass
+from isaaclab.utils.assets import check_file_path, read_file
 
 
 # -- Navigation Action

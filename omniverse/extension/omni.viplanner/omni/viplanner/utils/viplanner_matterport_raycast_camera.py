@@ -6,8 +6,8 @@
 
 import torch
 import yaml
-from omni.isaac.lab.sensors.ray_caster import RayCasterCameraCfg
-from omni.isaac.lab.utils.configclass import configclass
+from isaaclab.sensors.ray_caster import RayCasterCameraCfg
+from isaaclab.utils.configclass import configclass
 from omni.isaac.matterport.domains import MatterportRayCasterCamera
 from omni.viplanner.viplanner import DATA_DIR
 

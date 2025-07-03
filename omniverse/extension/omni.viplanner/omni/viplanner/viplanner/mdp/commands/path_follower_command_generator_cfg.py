@@ -9,8 +9,8 @@
 import math
 from dataclasses import MISSING
 
-from omni.isaac.lab.managers import CommandTermCfg
-from omni.isaac.lab.utils.configclass import configclass
+from isaaclab.managers import CommandTermCfg
+from isaaclab.utils.configclass import configclass
 from typing_extensions import Literal
 
 from .path_follower_command_generator import PathFollowerCommandGenerator
@@ -46,7 +46,7 @@ class PathFollowerCommandGeneratorCfg(CommandTermCfg):
     """Gain for the yaw rate."""
     stopYawRateGain: float = 7.0  # 3.5
     """"""
-    maxYawRate: float = 90.0 * math.pi / 360
+    maxYawRate: float = 90 * math.pi / 360
     dirDiffThre: float = 0.7
     stopDisThre: float = 0.2
     slowDwnDisThre: float = 0.3

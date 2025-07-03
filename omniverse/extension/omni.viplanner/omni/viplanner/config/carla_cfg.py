@@ -6,18 +6,19 @@
 
 import os
 
-import omni.isaac.lab.sim as sim_utils
-from omni.isaac.lab.assets import AssetBaseCfg
-from omni.isaac.lab.scene import InteractiveSceneCfg
-from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.lab.utils import configclass
+import isaaclab.sim as sim_utils
+from isaaclab.assets import AssetBaseCfg
+from isaaclab.scene import InteractiveSceneCfg
+from isaaclab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+from isaaclab.utils import configclass
 from omni.viplanner.utils import UnRealImporterCfg
 
 ##
 # Pre-defined configs
 ##
 # isort: off
-from omni.isaac.lab_assets.anymal import ANYMAL_C_CFG
+from isaaclab_assets.robots.anymal import ANYMAL_C_CFG
+from isaaclab_assets.robots.fourier import GR1T2_CFG
 from .base_cfg import ViPlannerBaseCfg
 from ..viplanner import DATA_DIR
 
@@ -40,7 +41,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             dynamic_friction=1.0,
         ),
         # NOTE: this path should be absolute to load the textures correctly
-        usd_path="${USER_PATH_TO_USD}/carla.usd",
+        usd_path="/home/fourier/vip_ws/src/viplanner/Carla_USD/carla.usd",
         groundplane=True,
         cw_config_file=os.path.join(DATA_DIR, "town01", "cw_multiply_cfg.yml"),
         sem_mesh_to_class_map=os.path.join(DATA_DIR, "town01", "keyword_mapping.yml"),
@@ -108,13 +109,14 @@ class ViPlannerCarlaCfg(ViPlannerBaseCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Scene settings
-    scene: TerrainSceneCfg = TerrainSceneCfg(num_envs=1, env_spacing=1.0, replicate_physics=False)
+    scene: TerrainSceneCfg = TerrainSceneCfg(num_envs=1, env_spacing=1.0, replicate_physics=True)
 
     def __post_init__(self):
         """Post initialization."""
         super().__post_init__()
         # adapt viewer
         self.viewer.eye = (133, 127.5, 8.5)
+        #self.sim.dt = 1.0 / 10.0
         self.viewer.lookat = (125.5, 120, 1.0)
         # change ANYmal position
         self.scene.robot.init_state.pos = (125.5, 118.5, 0.8)

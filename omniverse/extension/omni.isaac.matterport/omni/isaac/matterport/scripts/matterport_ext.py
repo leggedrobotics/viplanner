@@ -22,8 +22,8 @@ import omni.isaac.core.utils.stage as stage_utils
 
 # isaac-core
 import omni.ui as ui
-from omni.isaac.lab.sensors.ray_caster import RayCasterCameraCfg, patterns
-from omni.isaac.lab.sim import SimulationCfg, SimulationContext
+from isaaclab.sensors.ray_caster import RayCasterCameraCfg, patterns
+from isaaclab.sim import SimulationCfg, SimulationContext
 from omni.isaac.matterport.domains import MatterportImporter
 
 # omni-isaac-ui

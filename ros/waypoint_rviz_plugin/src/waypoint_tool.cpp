@@ -64,7 +64,7 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
   pub_joy_.publish(joy);
 
   geometry_msgs::PointStamped waypoint_odom;
-  waypoint_odom.header.frame_id = "odom";
+  waypoint_odom.header.frame_id = "camera_init";
   waypoint_odom.header.stamp = joy.header.stamp;
   waypoint_odom.point.x = x;
   waypoint_odom.point.y = y;
@@ -76,10 +76,10 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
 
   // Wait for the transform to become available
   try {
-      geometry_msgs::TransformStamped transform = tf_buffer.lookupTransform("map", "base", ros::Time(0));
+      geometry_msgs::TransformStamped transform = tf_buffer.lookupTransform("camera_init", "camera_link", ros::Time(0));
       geometry_msgs::PointStamped waypoint_map;
       tf2::doTransform(waypoint_odom, waypoint_map, transform);
-      waypoint_map.header.frame_id = "map";
+      waypoint_map.header.frame_id = "camera_init";
       waypoint_map.header.stamp = ros::Time::now();
 
       // Print out the transformed point coordinates

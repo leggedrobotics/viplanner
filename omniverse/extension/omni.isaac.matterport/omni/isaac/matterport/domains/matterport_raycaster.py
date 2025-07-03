@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 import trimesh
 import warp as wp
-from omni.isaac.lab.sensors.ray_caster import RayCaster
+from isaaclab.sensors.ray_caster import RayCaster
 from omni.isaac.matterport.domains import DATA_DIR
 
 if TYPE_CHECKING:

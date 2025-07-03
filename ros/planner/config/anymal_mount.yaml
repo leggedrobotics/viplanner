@@ -7,22 +7,22 @@ overlap_ratio_thres:    0.80
 depth_zero_ratio_thres: 0.6
 # network model
 model_save:             models
-m2f_model_path:         models/sem_model.pth
-m2f_cfg_file:           /root/git/mmdetection/configs/mask2former/mask2former_r50_8xb2-lsj-50e_coco-panoptic.py
+m2f_model_path:         /workspace/vip_ws/src/viplanner/ros/planner/models/mask2former_r50_8xb2-lsj-50e_coco-panoptic_20230118_125535-54df384a.pth
+m2f_cfg_file:           /workspace/mmdetection/configs/mask2former/mask2former_r50_8xb2-lsj-50e_coco-panoptic.py
 # ros topics
-depth_topic:            /depth_cam_mounted_front/depth/image_rect_raw
-depth_info_topic:       /depth_cam_mounted_front/depth/camera_info
-rgb_topic:              /depth_cam_mounted_front/color/image_raw/compressed
-rgb_info_topic:         /depth_cam_mounted_front/color/camera_info
-mount_cam_frame:        wide_angle_camera_rear_camera_parent  # mounted camera is not part of the TF tree, specify its frame here
+depth_topic:            /camera/depth/image_rect_raw
+depth_info_topic:       /camera/depth/camera_info
+rgb_topic:              /camera/color/image_raw/compressed
+rgb_info_topic:         /camera/color/camera_info
+mount_cam_frame:        camera_link  # mounted camera is not part of the TF tree, specify its frame here
 goal_topic:             /mp_waypoint
 path_topic:             /viplanner/path
 m2f_timer_topic:        /viplanner/m2f_timer
 depth_uint_type:        True
 compressed:             True
 # frame ids
-robot_id:               base_inverted  # also adjust in path_follower.launch
-world_id:               odom
+robot_id:               camera_link  # also adjust in path_follower.launch 
+world_id:               camera_init
 # fear reaction
 is_fear_act:            False
 buffer_size:            3
