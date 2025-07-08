@@ -621,7 +621,7 @@ class PlannerDataGenerator(Dataset):
         print("DONE!")
         print(
             "[INFO] odom points outside obs inflation :"
-            f" \t{self.nb_odom_points} ({round(self.nb_odom_points/nb_odom_point_prev*100, 2)} %)"
+            f" \t{self.nb_odom_points} ({round(self.nb_odom_points / nb_odom_point_prev * 100, 2)} %)"
         )
 
         return
@@ -1072,16 +1072,16 @@ class PlannerDataGenerator(Dataset):
             f"[INFO] datamix containing {odom.shape[0]} suitable odom-goal"
             " pairs: \n"
             "\t fov               :"
-            f" \t{int(odom.shape[0] * ratio_fov_samples)  } ({round(ratio_fov_samples*100, 2)} %) \n"
+            f" \t{int(odom.shape[0] * ratio_fov_samples)} ({round(ratio_fov_samples * 100, 2)} %) \n"
             "\t front of robot    :"
-            f" \t{int(odom.shape[0] * ratio_front_samples)} ({round(ratio_front_samples*100, 2)} %) \n"
+            f" \t{int(odom.shape[0] * ratio_front_samples)} ({round(ratio_front_samples * 100, 2)} %) \n"
             "\t back of robot     :"
-            f" \t{int(odom.shape[0] * ratio_back_samples) } ({round(ratio_back_samples*100, 2)} %) \n"
+            f" \t{int(odom.shape[0] * ratio_back_samples)} ({round(ratio_back_samples * 100, 2)} %) \n"
             "from"
-            f" {self.odom_used} ({round(self.odom_used/self.nb_odom_points*100, 2)} %)"
+            f" {self.odom_used} ({round(self.odom_used / self.nb_odom_points * 100, 2)} %)"
             " different starting points where \n"
             "\t non-suitable filter:"
-            f" {self.odom_no_suitable_goals} ({round(self.odom_no_suitable_goals/self.nb_odom_points*100, 2)} %)"
+            f" {self.odom_no_suitable_goals} ({round(self.odom_no_suitable_goals / self.nb_odom_points * 100, 2)} %)"
         )
 
         # generate split

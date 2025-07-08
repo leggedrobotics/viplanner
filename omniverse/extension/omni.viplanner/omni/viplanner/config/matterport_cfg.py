@@ -11,7 +11,7 @@ from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
 from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
 from omni.isaac.lab.managers import SceneEntityCfg
 from omni.isaac.lab.scene import InteractiveSceneCfg
-from omni.isaac.lab.sensors import ContactSensorCfg, patterns, CameraCfg
+from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, patterns
 from omni.isaac.lab.utils import configclass
 from omni.isaac.matterport.config import MatterportImporterCfg
 from omni.isaac.matterport.domains import MatterportRayCasterCfg
@@ -121,7 +121,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         debug_vis=False,
         mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
     )
-    
+
     # NOTE: comment the following lines to only render the semantic segmentation and depth images
     rgb_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base/rgb_camera",

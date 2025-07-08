@@ -495,8 +495,8 @@ class Trainer:
             train_loss += loss.item()
             enumerater.set_description(
                 f"Epoch: {epoch} in Env: "
-                f"({env_id+1}/{len(self._cfg.env_list)-1}) "
-                f"- train loss:{round(train_loss/(batch_idx+1), 4)} on"
+                f"({env_id + 1} / {len(self._cfg.env_list) - 1}) "
+                f"- train loss:{round(train_loss / (batch_idx + 1), 4)} on"
                 f" {batch_idx}/{batches}"
             )
         return train_loss / (batch_idx + 1)

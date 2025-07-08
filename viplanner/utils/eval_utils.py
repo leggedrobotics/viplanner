@@ -211,7 +211,7 @@ class BaseEvaluator:
         ax.set_title(
             (
                 "Avg increase of path length is"
-                f" {round(np.mean(self.path_extension), 5)*100:.2f}% for"
+                f" {round(np.mean(self.path_extension), 5) * 100:.2f}% for"
                 " successful paths with tolerance of"
                 f" {self.distance_tolerance}"
             ),
@@ -255,7 +255,7 @@ class BaseEvaluator:
         ax1.set_title(
             (
                 f"With a tolerance of {self.distance_tolerance} are"
-                f" {round(goal_success_mean, 5)*100:.2f} % of goals reached"
+                f" {round(goal_success_mean, 5) * 100:.2f} % of goals reached"
             ),
             fontsize=16,
         )
@@ -416,7 +416,7 @@ class BaseEvaluator:
                 unique_goal_length + bar_pos,
                 mean_path_extension,
                 width=bar_width,
-                label=(f"{model_name} (avg {round(avg_increase, 5)*100:.2f} %))"),
+                label=(f"{model_name} (avg {round(avg_increase, 5) * 100:.2f} %))"),
                 alpha=0.8,
             )  # yerr=std_path_extension,
             # axs_path.plot(goal_length_path_exists, mean_path_extension, label=f'{model_name} ({round(avg_increase, 5)*100:.2f} %))')
@@ -428,7 +428,7 @@ class BaseEvaluator:
                 unique_goal_length + bar_pos,
                 mean_goal_distance,
                 width=bar_width,
-                label=(f"{model_name} (success rate" f" {round(goal_success, 5)*100:.2f} %)"),
+                label=(f"{model_name} (success rate" f" {round(goal_success, 5) * 100:.2f} %)"),
                 alpha=0.8,
             )  # yerr=std_goal_distance,
             # axs_goal.plot(unique_goal_length, mean_goal_distance, label=f'{model_name} ({round(goal_success, 5)*100:.2f} %)')

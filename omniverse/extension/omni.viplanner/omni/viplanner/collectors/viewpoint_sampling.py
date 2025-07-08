@@ -81,9 +81,9 @@ class ViewpointSampling:
             sample_idx_select = torch.randperm(sample_idx.sum())[
                 : min(nbr_samples_per_point, nbr_viewpoints - sample_locations_count)
             ]
-            sample_locations[sample_locations_count : sample_locations_count + sample_idx_select.shape[0]] = (
-                self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
-            )
+            sample_locations[
+                sample_locations_count : sample_locations_count + sample_idx_select.shape[0]
+            ] = self.terrain_analyser.samples[sample_idx][sample_idx_select, :2]
             sample_locations_count += sample_idx_select.shape[0]
             curr_point_idx += 1
             # reset point index if all points are sampled
@@ -239,7 +239,7 @@ class ViewpointSampling:
                             os.path.join(
                                 filedir,
                                 "semantics" if annotator == "semantic_segmentation" else "rgb",
-                                f"{image_idx[cam_idx]}".zfill(4) + ".png"
+                                f"{image_idx[cam_idx]}".zfill(4) + ".png",
                             ),
                             cv2.cvtColor(output.astype(np.uint8), cv2.COLOR_RGB2BGR),
                         )
